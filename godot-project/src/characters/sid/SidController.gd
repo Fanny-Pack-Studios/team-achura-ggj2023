@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-var gravity = 15
+var gravity_vector : Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity_vector")
+var gravity_magnitude : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export var running_speed: float = 4
 @export var walking_speed: float = 2
@@ -25,7 +26,7 @@ var remaining_jump_control = 0
 func _physics_process(delta):
 	process_input()
 	
-	velocity.y -= gravity * delta
+	velocity += gravity_vector * gravity_magnitude * delta
 	
 	if is_on_floor() && Input.is_action_just_pressed("jump"):
 		velocity.y = jump_speed
@@ -61,11 +62,18 @@ func _physics_process(delta):
 		var forward_velocity = get_speed() * -global_transform.basis.z
 		velocity.x = forward_velocity.x
 		velocity.z = forward_velocity.z
+		if animation_state_machine().get_current_node() != "Run":
+			animation_state_machine().travel("Run")
 	else:
+		if animation_state_machine().get_current_node() != "Idle":
+			animation_state_machine().travel("Idle")
 		velocity.x = 0
 		velocity.z = 0
 	
 	move_and_slide()
+
+func animation_state_machine() -> AnimationNodeStateMachinePlayback:
+	return $AnimationTree["parameters/playback"]
 
 func get_speed():
 	return walking_speed if walking else running_speed
@@ -85,9 +93,9 @@ func process_input():
 		
 
 func _ready():
-	set_floor_stop_on_slope_enabled(true)
-	set_up_direction(Vector3.UP)
-	animation_player.playback_default_blend_time = 0.15
+	for anim in ["Idle", "Run"]:
+		animation_player.get_animation(anim).loop_mode = Animation.LOOP_LINEAR
+		
 	DebugOverlay.add_vector(self, "input_direction_3d")
 
 func get_camera_forward() -> Vector3: 

@@ -47,7 +47,7 @@ use_collision = true
 material = ExtResource("4_p8tq7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.186747, 0.982408, 0, -0.982408, 0.186747, 0, 4.60634, 0)
+transform = Transform3D(0.950905, -0.207184, 0.229899, -0.292075, -0.355162, 0.888005, -0.102329, -0.911556, -0.398239, 7.15302, 1.36655, -1.01066)
 light_color = Color(1, 1, 0.894118, 1)
 shadow_enabled = true
 

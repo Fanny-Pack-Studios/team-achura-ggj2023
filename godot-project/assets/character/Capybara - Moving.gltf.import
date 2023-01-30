@@ -1,0 +1,31 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://drus1m6fyhwsa"
+path="res://.godot/imported/Capybara - Moving.gltf-5d73a5568502dec167f10141dfc72951.scn"
+
+[deps]
+
+source_file="res://assets/character/Capybara - Moving.gltf"
+dest_files=["res://.godot/imported/Capybara - Moving.gltf-5d73a5568502dec167f10141dfc72951.scn"]
+
+[params]
+
+nodes/root_type="Spatial"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=0
+meshes/lightmap_texel_size=0.1
+skins/use_named_skins=true
+animation/import=true
+animation/fps=60.0
+animation/trimming=false
+import_script/path=""
+_subresources={}
+meshes/handle_gltf_embedded_images=1

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=2]
+
+[resource]
+resource_name = "Shiny"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_color = Color( 0.54991, 0.147356, 0.522765, 1 )
+roughness = 0.0983607

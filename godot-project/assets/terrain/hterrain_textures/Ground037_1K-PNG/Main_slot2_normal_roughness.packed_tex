@@ -1,0 +1,8 @@
+{
+	"contains_albedo": false,
+	"resolution": 1024,
+	"src": {
+		"a": "res://assets/terrain/hterrain_textures/Rocks006_1K-PNG/Rocks006_1K_Roughness.png",
+		"rgb": "res://assets/terrain/hterrain_textures/Rocks006_1K-PNG/Rocks006_1K_NormalGL.png"
+	}
+}

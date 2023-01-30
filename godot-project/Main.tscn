@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://btndkaubpy51w"]
+[gd_scene load_steps=7 format=3 uid="uid://btndkaubpy51w"]
 
-[ext_resource type="PackedScene" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
+[ext_resource type="PackedScene" uid="uid://dps6wvsckkj11" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
 [ext_resource type="Material" uid="uid://ct4efbks6uwuq" path="res://assets/materials/dummy_floor.tres" id="4_p8tq7"]
 [ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
+ground_color = Color(0.376471, 0.294118, 0.196078, 1)
+
+[sub_resource type="Sky" id="Sky_ecmoy"]
+sky_material = SubResource("PhysicalSkyMaterial_oknpw")
+
+[sub_resource type="Environment" id="Environment_h0cv8"]
+background_color = Color(0, 0.0980392, 0, 1)
+sky = SubResource("Sky_ecmoy")
+ambient_light_source = 3
+ssao_enabled = true
 
 [node name="Main" type="Node3D"]
 
@@ -17,14 +29,17 @@ size = Vector3(9, 1, 9)
 material = ExtResource("4_p8tq7")
 
 [node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
 script = ExtResource("5")
 character_to_follow_path = NodePath("../Sid")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(0.707107, 0.353553, -0.612373, 0, 0.866026, 0.499999, 0.707107, -0.353553, 0.612373, -4.7649, 3.95255, 4.7649)
+transform = Transform3D(1, 0, 0, 0, 1, -5.36442e-07, 0, -5.96046e-08, 1, 0, -4.76837e-07, 14.3313)
 projection = 1
 current = true
+fov = 25.0
 size = 8.0
+far = 300.0
 
 [node name="Floor2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.993399, -0.114712, 0, 0.114712, 0.993399, 0, 0.986447, -4.26106)
@@ -32,5 +47,9 @@ use_collision = true
 material = ExtResource("4_p8tq7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.363147, -0.86934, 0.33522, -0.678288, -5.23335e-08, 0.734796, -0.638788, -0.494215, -0.589663, 13.131, 10.2592, -8.83464)
+transform = Transform3D(1, 0, 0, 0, 0.186747, 0.982408, 0, -0.982408, 0.186747, 0, 4.60634, 0)
+light_color = Color(1, 1, 0.894118, 1)
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h0cv8")

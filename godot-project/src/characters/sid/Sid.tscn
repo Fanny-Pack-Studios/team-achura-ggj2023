@@ -8,11 +8,12 @@ radius = 0.35267
 height = 1.03409
 
 [node name="Sid" type="CharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_l1tjl")
 
 [node name="Player" parent="." instance=ExtResource("2_j5eyj")]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.556285, 0.00893927)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.511881, 0.00893927)
 shape = SubResource("CapsuleShape3D_hafaq")

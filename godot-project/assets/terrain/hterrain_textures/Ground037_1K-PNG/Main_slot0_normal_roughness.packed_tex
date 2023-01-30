@@ -1,8 +1,0 @@
-{
-	"contains_albedo": false,
-	"resolution": 1024,
-	"src": {
-		"a": "res://assets/terrain/hterrain_textures/Ground037_1K-PNG/Ground037_1K_Roughness.png",
-		"rgb": "res://assets/terrain/hterrain_textures/Ground037_1K-PNG/Ground037_1K_NormalGL.png"
-	}
-}

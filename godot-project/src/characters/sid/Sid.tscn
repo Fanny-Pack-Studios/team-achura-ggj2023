@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dps6wvsckkj11"]
+
+[ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
+[ext_resource type="PackedScene" uid="uid://cqw1vdb12iiub" path="res://assets/gltf/Player.gltf" id="2_j5eyj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hafaq"]
+radius = 0.35267
+height = 1.03409
+
+[node name="Sid" type="CharacterBody3D"]
+script = ExtResource("1_l1tjl")
+
+[node name="Player" parent="." instance=ExtResource("2_j5eyj")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.556285, 0.00893927)
+shape = SubResource("CapsuleShape3D_hafaq")

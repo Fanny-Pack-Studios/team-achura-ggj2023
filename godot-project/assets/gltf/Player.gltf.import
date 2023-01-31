@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cqw1vdb12iiub"
+uid="uid://c3fxdt3ca1215"
 path="res://.godot/imported/Player.gltf-2d185ec99b1742f41bdcf9995a72a18e.scn"
 
 [deps]
@@ -30,8 +30,8 @@ import_script/path=""
 _subresources={
 "materials": {
 "seedBoy": {
-"use_external/enabled": false,
-"use_external/path": ""
+"use_external/enabled": true,
+"use_external/path": "res://assets/materials/seedBoy.tres"
 }
 }
 }

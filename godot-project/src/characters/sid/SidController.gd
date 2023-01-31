@@ -1,7 +1,6 @@
-extends CharacterBody3D
+extends Character
 
-var gravity_vector : Vector3 = ProjectSettings.get_setting("physics/3d/default_gravity_vector")
-var gravity_magnitude : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 
 @export var running_speed: float = 4
 @export var walking_speed: float = 2
@@ -23,8 +22,6 @@ var planting: bool = false
 
 func _physics_process(delta):
 	process_input()
-	
-	velocity += gravity_vector * gravity_magnitude * delta
 	
 	var is_cancellable = (can_cancel_plant || animation_state_machine().get_current_play_position() == 1)
 	

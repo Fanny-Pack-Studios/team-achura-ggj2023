@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://btndkaubpy51w"]
+[gd_scene load_steps=8 format=3 uid="uid://btndkaubpy51w"]
 
 [ext_resource type="PackedScene" uid="uid://dps6wvsckkj11" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
-[ext_resource type="Material" uid="uid://jeyup8un1oxn" path="res://assets/materials/ground.tres" id="2_tsr7n"]
+[ext_resource type="PackedScene" uid="uid://dn37q7ppf4y0l" path="res://src/levels/TestLevel.tscn" id="2_jacgm"]
+[ext_resource type="PackedScene" uid="uid://cx4q0xyef4730" path="res://src/characters/Enemies/Ant.tscn" id="4_eq56t"]
 [ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
@@ -21,14 +22,10 @@ ssao_enabled = true
 [node name="Main" type="Node3D"]
 
 [node name="Sid" parent="." instance=ExtResource("1_p3mek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.516771, -1.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 camera_path = NodePath("../CameraPivot/Camera3D")
 
-[node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-use_collision = true
-size = Vector3(9, 1, 9)
-material = ExtResource("2_tsr7n")
+[node name="TestLevel" parent="." instance=ExtResource("2_jacgm")]
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
@@ -50,3 +47,7 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h0cv8")
+
+[node name="Ant" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_eq56t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.94795, 0, -3.00684)
+target = NodePath("../Sid")

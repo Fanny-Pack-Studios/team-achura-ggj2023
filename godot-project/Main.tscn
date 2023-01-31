@@ -1,19 +1,21 @@
 [gd_scene load_steps=7 format=3 uid="uid://btndkaubpy51w"]
 
 [ext_resource type="PackedScene" uid="uid://dps6wvsckkj11" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
-[ext_resource type="Material" uid="uid://ct4efbks6uwuq" path="res://assets/materials/dummy_floor.tres" id="4_p8tq7"]
+[ext_resource type="Material" uid="uid://jeyup8un1oxn" path="res://assets/materials/ground.tres" id="2_tsr7n"]
 [ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
-ground_color = Color(0.376471, 0.294118, 0.196078, 1)
+ground_color = Color(0.278431, 0.301961, 0.113725, 1)
 
 [sub_resource type="Sky" id="Sky_ijkg2"]
 sky_material = SubResource("PhysicalSkyMaterial_oknpw")
 
 [sub_resource type="Environment" id="Environment_h0cv8"]
-background_color = Color(0, 0.0980392, 0, 1)
+background_mode = 1
 sky = SubResource("Sky_ijkg2")
-ambient_light_source = 3
+ambient_light_source = 2
+ambient_light_color = Color(0.294118, 0.203922, 0.152941, 1)
+ambient_light_energy = 2.0
 ssao_enabled = true
 
 [node name="Main" type="Node3D"]
@@ -26,7 +28,7 @@ camera_path = NodePath("../CameraPivot/Camera3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 use_collision = true
 size = Vector3(9, 1, 9)
-material = ExtResource("4_p8tq7")
+material = ExtResource("2_tsr7n")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
@@ -41,14 +43,9 @@ fov = 25.0
 size = 8.0
 far = 300.0
 
-[node name="Floor2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.993399, -0.114712, 0, 0.114712, 0.993399, 0, 0.986447, -4.26106)
-use_collision = true
-material = ExtResource("4_p8tq7")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.950905, -0.207184, 0.229899, -0.292075, -0.355162, 0.888005, -0.102329, -0.911556, -0.398239, 7.15302, 1.36655, -1.01066)
-light_color = Color(1, 1, 0.894118, 1)
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573577, 7.15302, 1.36655, -1.01066)
+light_color = Color(0.960784, 0.941176, 0.847059, 1)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

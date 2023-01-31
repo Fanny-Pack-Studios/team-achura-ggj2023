@@ -7,42 +7,67 @@ var input_direction_3d: Vector3 = Vector3()
 @onready var animation_player = $Player/AnimationPlayer
 
 @export var can_cancel_plant: bool = true
+@export var plant_cancel_time := 0.7
 @export var move_speed := 5.0
 
-var planting: bool = false
+var toggle_planting: bool = false
+
+# Quise usar las constantes pero por alguna razón no andan en el match. Para analizar
+const PLANT_STATE := "Plant"
+const IDLE_STATE := "Idle"
+const RUN_STATE := "Run"
+
+func is_planting_cancellable():
+	return can_cancel_plant and $PlantCancelTimer.time_left > 0
 
 func _physics_process(delta):
 	process_input()
 	
-	var is_cancellable = (can_cancel_plant || animation_state_machine().get_current_play_position() == 1)
-	
-	if is_cancellable && animation_state_machine().get_current_node() == "Plant" && not Input.is_action_pressed("plant"):
-		animation_state_machine().travel("Unplant")
-		planting = false
-	
-	if is_on_floor() && Input.is_action_just_pressed("plant"):
-		animation_state_machine().travel("Plant")
-		velocity.x = 0
-		velocity.z = 0
-		planting = true
-		
-	if animation_state_machine().get_current_play_position() == 1 && planting:
-		print("shooot!")
-	
-	if not planting:
-		if input_direction_3d != Vector3.ZERO:
-			$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
+	match current_state():
+		"Plant":
+			if input_direction_3d != Vector3.ZERO and is_planting_cancellable():
+				$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
+			else:
+				$AccelerationBehaviour.clear_target()
 			
-			change_state("Run")
-		else:
-			$AccelerationBehaviour.clear_target()
+			if toggle_planting:
+				if is_planting_cancellable():
+					set_cancel_planting(true)
+				else:
+					change_state("Idle")
 			
-			change_state("Idle")
+		"Idle": 
+			if toggle_planting:
+				change_state(PLANT_STATE)
+			elif input_direction_3d != Vector3.ZERO:
+				change_state(RUN_STATE)
+				$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
+		"Run":
+			if toggle_planting:
+				change_state(PLANT_STATE)
+			elif input_direction_3d != Vector3.ZERO:
+				$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
+			else:
+				$AccelerationBehaviour.clear_target()
+				change_state(IDLE_STATE)
 	
 	super._physics_process(delta)
 
-func change_state(new_state):
-	if animation_state_machine().get_current_node() != new_state:
+func set_cancel_planting(val: bool):
+	$AnimationTree.set("parameters/conditions/plant_cancel", val)
+
+func current_state():
+	return animation_state_machine().get_current_node()
+	
+func enter_state(new_state: String):
+	match new_state:
+		PLANT_STATE: 
+			set_cancel_planting(false)
+			$PlantCancelTimer.start(plant_cancel_time)
+
+func change_state(new_state: String):
+	if current_state() != new_state:
+		enter_state(new_state)
 		animation_state_machine().travel(new_state)
 	
 func animation_state_machine() -> AnimationNodeStateMachinePlayback:
@@ -58,6 +83,8 @@ func process_input():
 		input_direction_3d = input_direction_3d.rotated(Vector3.UP, camera_forward.signed_angle_to(Vector3.FORWARD, Vector3.DOWN))
 	else:
 		input_direction_3d = Vector3.ZERO
+		
+	toggle_planting = Input.is_action_just_pressed("toggle_planting")
 		
 
 func _ready():

@@ -7,12 +7,12 @@
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
 ground_color = Color(0.376471, 0.294118, 0.196078, 1)
 
-[sub_resource type="Sky" id="Sky_ecmoy"]
+[sub_resource type="Sky" id="Sky_ijkg2"]
 sky_material = SubResource("PhysicalSkyMaterial_oknpw")
 
 [sub_resource type="Environment" id="Environment_h0cv8"]
 background_color = Color(0, 0.0980392, 0, 1)
-sky = SubResource("Sky_ecmoy")
+sky = SubResource("Sky_ijkg2")
 ambient_light_source = 3
 ssao_enabled = true
 

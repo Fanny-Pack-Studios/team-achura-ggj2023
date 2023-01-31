@@ -17,7 +17,7 @@ animation = &"Plant"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_t3s88"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_12god"]
-graph_offset = Vector2(-82.4793, 24.3623)
+graph_offset = Vector2(65.5207, 58.3623)
 nodes/PlantAnim/node = SubResource("AnimationNodeAnimation_i6dth")
 nodes/PlantAnim/position = Vector2(220, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_t3s88")
@@ -28,18 +28,9 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"PlantAnim"]
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0dxl"]
 animation = &"Run"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qi1pm"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mfnxe"]
 animation = &"Plant"
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_qvl7p"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kpr0u"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_qi1pm")
-nodes/Animation/position = Vector2(360, 80)
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_qvl7p")
-nodes/TimeScale/position = Vector2(640, 60)
-nodes/output/position = Vector2(900, 80)
-node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
+play_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xmqer"]
 advance_mode = 2
@@ -53,23 +44,31 @@ xfade_time = 0.1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kapql"]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a82ds"]
-xfade_time = 0.1
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xu8xa"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_17ls5"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5s0rg"]
+switch_mode = 2
 advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dj2tr"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"plant_cancel"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76dc0"]
+xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_d5gfm"]
 states/Idle/node = SubResource("AnimationNodeAnimation_s1alq")
 states/Idle/position = Vector2(348, 78)
 states/Plant/node = SubResource("AnimationNodeBlendTree_12god")
-states/Plant/position = Vector2(348, 240)
+states/Plant/position = Vector2(330, 264)
 states/Run/node = SubResource("AnimationNodeAnimation_m0dxl")
-states/Run/position = Vector2(692, 94)
+states/Run/position = Vector2(672, 57)
 states/Start/position = Vector2(146, 120)
-states/Unplant/node = SubResource("AnimationNodeBlendTree_kpr0u")
-states/Unplant/position = Vector2(472, 163.665)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xmqer"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ggdss"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_aucr0"), "Idle", "Plant", SubResource("AnimationNodeStateMachineTransition_kapql"), "Plant", "Unplant", SubResource("AnimationNodeStateMachineTransition_a82ds"), "Unplant", "Idle", SubResource("AnimationNodeStateMachineTransition_17ls5")]
+states/Unplant/node = SubResource("AnimationNodeAnimation_mfnxe")
+states/Unplant/position = Vector2(430, 145.665)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xmqer"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ggdss"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_aucr0"), "Idle", "Plant", SubResource("AnimationNodeStateMachineTransition_kapql"), "Plant", "Unplant", SubResource("AnimationNodeStateMachineTransition_xu8xa"), "Unplant", "Idle", SubResource("AnimationNodeStateMachineTransition_5s0rg"), "Plant", "Idle", SubResource("AnimationNodeStateMachineTransition_dj2tr"), "Run", "Plant", SubResource("AnimationNodeStateMachineTransition_76dc0")]
 graph_offset = Vector2(0, 29.6652)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_gr8s3"]
@@ -107,10 +106,14 @@ tree_root = SubResource("AnimationNodeStateMachine_d5gfm")
 anim_player = NodePath("../Player/AnimationPlayer")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_gr8s3")
+parameters/conditions/plant_cancel = false
 parameters/Plant/TimeScale/scale = 1.0
-parameters/Unplant/TimeScale/scale = -1.0
 
 [node name="AccelerationBehaviour" type="Node" parent="."]
 script = ExtResource("3_4ta14")
+
+[node name="PlantCancelTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
 
 [editable path="Player"]

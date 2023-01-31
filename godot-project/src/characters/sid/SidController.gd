@@ -18,6 +18,12 @@ var input_direction_3d: Vector3 = Vector3()
 
 @onready var animation_player = $Player/AnimationPlayer
 
+@onready var plant_time = $PlantTime
+@export var plant_control_time: float = 0.5
+@export var unplant_control_time: float = 0.5
+var planting: bool = false
+var can_unplant: bool = true
+
 @export var jump_control_time: float = 0.2
 var remaining_jump_control = 0
 
@@ -27,6 +33,16 @@ func _physics_process(delta):
 	process_input()
 	
 	velocity += gravity_vector * gravity_magnitude * delta
+	
+	if animation_state_machine().get_current_node() == "Plant" && not Input.is_action_pressed("plant"):
+		animation_state_machine().travel("Idle")
+		planting = false
+	
+	if is_on_floor() && Input.is_action_just_pressed("plant"):
+		animation_state_machine().travel("Plant")
+		velocity.x = 0
+		velocity.z = 0
+		planting = true
 	
 	if is_on_floor() && Input.is_action_just_pressed("jump"):
 		velocity.y = jump_speed
@@ -38,37 +54,38 @@ func _physics_process(delta):
 		if Input.is_action_pressed("jump"): 
 			velocity.y = jump_speed
 	
-	if input_direction_3d != Vector3.ZERO:
-		var target_quat = Quaternion(Basis(input_direction_3d.rotated(Vector3.UP, -PI/2), Vector3.UP, -input_direction_3d))
-		var current_quat = Quaternion(transform.basis.orthonormalized())
-		
-		var angleDiff = target_quat.angle_to(current_quat)
-	
-		var max_delta_rotation = turn_speed * delta
-		
-		if(max_delta_rotation >= angleDiff):
-			current_quat = target_quat
-		else:
-			var weight = max_delta_rotation / angleDiff
+	if not planting:
+		if input_direction_3d != Vector3.ZERO:
+			var target_quat = Quaternion(Basis(input_direction_3d.rotated(Vector3.UP, -PI/2), Vector3.UP, -input_direction_3d))
+			var current_quat = Quaternion(transform.basis.orthonormalized())
 			
-			current_quat = current_quat.slerp(target_quat, weight)
-			
-		var scale = transform.basis.get_scale()
+			var angleDiff = target_quat.angle_to(current_quat)
 		
-		transform.basis = Basis(current_quat).scaled(scale) 
+			var max_delta_rotation = turn_speed * delta
+			
+			if(max_delta_rotation >= angleDiff):
+				current_quat = target_quat
+			else:
+				var weight = max_delta_rotation / angleDiff
+				
+				current_quat = current_quat.slerp(target_quat, weight)
+				
+			var scale = transform.basis.get_scale()
+			
+			transform.basis = Basis(current_quat).scaled(scale) 
 
-		#transform.basis = Basis(current_front_vector.rotated(Vector3.UP, -PI/2), Vector3.UP, -current_front_vector)
-		
-		var forward_velocity = get_speed() * -global_transform.basis.z
-		velocity.x = forward_velocity.x
-		velocity.z = forward_velocity.z
-		if animation_state_machine().get_current_node() != "Run":
-			animation_state_machine().travel("Run")
-	else:
-		if animation_state_machine().get_current_node() != "Idle":
-			animation_state_machine().travel("Idle")
-		velocity.x = 0
-		velocity.z = 0
+			#transform.basis = Basis(current_front_vector.rotated(Vector3.UP, -PI/2), Vector3.UP, -current_front_vector)
+			
+			var forward_velocity = get_speed() * -global_transform.basis.z
+			velocity.x = forward_velocity.x
+			velocity.z = forward_velocity.z
+			if animation_state_machine().get_current_node() != "Run":
+				animation_state_machine().travel("Run")
+		else:
+			if animation_state_machine().get_current_node() != "Idle":
+				animation_state_machine().travel("Idle")
+			velocity.x = 0
+			velocity.z = 0
 	
 	move_and_slide()
 
@@ -101,4 +118,3 @@ func _ready():
 func get_camera_forward() -> Vector3: 
 	var zbasis = camera.global_transform.basis.z
 	return -Vector3(zbasis.x, 0, zbasis.z).normalized()
-

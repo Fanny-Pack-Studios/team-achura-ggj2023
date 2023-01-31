@@ -18,24 +18,18 @@ var input_direction_3d: Vector3 = Vector3()
 
 @onready var animation_player = $Player/AnimationPlayer
 
-@onready var plant_time = $PlantTime
-@export var plant_control_time: float = 0.5
-@export var unplant_control_time: float = 0.5
+@export var can_cancel_plant: bool = true
 var planting: bool = false
-var can_unplant: bool = true
-
-@export var jump_control_time: float = 0.2
-var remaining_jump_control = 0
-
-@export var jump_speed: float = 4.5
 
 func _physics_process(delta):
 	process_input()
 	
 	velocity += gravity_vector * gravity_magnitude * delta
 	
-	if animation_state_machine().get_current_node() == "Plant" && not Input.is_action_pressed("plant"):
-		animation_state_machine().travel("Idle")
+	var is_cancellable = (can_cancel_plant || animation_state_machine().get_current_play_position() == 1)
+	
+	if is_cancellable && animation_state_machine().get_current_node() == "Plant" && not Input.is_action_pressed("plant"):
+		animation_state_machine().travel("Unplant")
 		planting = false
 	
 	if is_on_floor() && Input.is_action_just_pressed("plant"):
@@ -43,16 +37,9 @@ func _physics_process(delta):
 		velocity.x = 0
 		velocity.z = 0
 		planting = true
-	
-	if is_on_floor() && Input.is_action_just_pressed("jump"):
-		velocity.y = jump_speed
-		remaining_jump_control = jump_control_time
-		animation_player.play("Jumping")
 		
-	if remaining_jump_control > 0:
-		remaining_jump_control -= delta
-		if Input.is_action_pressed("jump"): 
-			velocity.y = jump_speed
+	if animation_state_machine().get_current_play_position() == 1 && planting:
+		print("shooot!")
 	
 	if not planting:
 		if input_direction_3d != Vector3.ZERO:

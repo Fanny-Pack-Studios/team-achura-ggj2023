@@ -1,4 +1,4 @@
 extends Node
 
-var player_bullet_layer: int = 2
+var player_bullet_layer: int = 3
 

@@ -76,27 +76,34 @@ graph_offset = Vector2(0, 29.6652)
 
 [node name="Sid" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+collision_layer = 2
+collision_mask = 25
 script = ExtResource("1_l1tjl")
 
 [node name="Player" parent="." instance=ExtResource("2_j5eyj")]
 
 [node name="Skeleton3D" parent="Player/Sid_Bones" index="0"]
-bones/0/rotation = Quaternion(0.213548, 1.18314e-07, -1.45842e-08, 0.976933)
-bones/1/rotation = Quaternion(0.121371, 1.79472e-10, 1.55237e-09, 0.992607)
+bones/0/position = Vector3(0, -0.483455, 2.52576e-15)
+bones/0/rotation = Quaternion(-0.0493588, 1.18011e-07, 1.68633e-08, 0.998781)
+bones/1/rotation = Quaternion(0.00655444, -2.57574e-14, 1.56271e-09, 0.999979)
 bones/1/scale = Vector3(1, 1, 1)
-bones/2/rotation = Quaternion(-0.439215, 0.0447972, -0.262066, 0.85814)
-bones/3/rotation = Quaternion(0.967772, -0.181691, -0.111354, 0.134184)
-bones/3/scale = Vector3(1, 0.999999, 1)
-bones/4/rotation = Quaternion(-0.409353, 0.187939, -0.0904796, 0.888213)
-bones/5/rotation = Quaternion(0.417015, -0.0016602, 0.0035304, 0.908891)
-bones/6/rotation = Quaternion(0.651654, -0.00313992, -0.00759095, 0.758472)
-bones/7/rotation = Quaternion(0.967772, 0.181692, 0.111354, 0.134184)
+bones/2/rotation = Quaternion(-0.204056, -0.0240203, -0.26478, 0.942165)
+bones/3/position = Vector3(-0.0939119, -0.0509714, 0.0147648)
+bones/3/rotation = Quaternion(0.975244, -0.11775, -0.0114032, -0.186825)
+bones/3/scale = Vector3(0.999999, 1, 1)
+bones/4/rotation = Quaternion(-0.387016, 0.187148, -0.0803682, 0.899297)
+bones/5/rotation = Quaternion(0.402589, -0.00437243, 0.00927994, 0.915324)
+bones/6/rotation = Quaternion(0.601635, -0.10585, 0.107882, 0.784342)
+bones/7/position = Vector3(0.0939119, -0.0509713, 0.0147649)
+bones/7/rotation = Quaternion(0.975244, 0.11775, 0.0114043, -0.186825)
 bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(-0.409354, -0.187939, 0.0904804, 0.888213)
-bones/9/rotation = Quaternion(0.417015, 0.00165996, -0.00353045, 0.908891)
-bones/10/rotation = Quaternion(0.651654, 0.00313943, 0.00759105, 0.758472)
-bones/11/position = Vector3(-0.323884, -0.135873, -0.663551)
-bones/13/position = Vector3(0.323884, -0.135873, -0.663551)
+bones/8/rotation = Quaternion(-0.387016, -0.187148, 0.0803684, 0.899297)
+bones/9/rotation = Quaternion(0.402588, 0.00437238, -0.00928034, 0.915324)
+bones/10/rotation = Quaternion(0.601635, 0.10585, -0.107882, 0.784342)
+bones/11/position = Vector3(-0.123884, -0.619328, -0.663551)
+bones/12/position = Vector3(-0.123884, -0.705081, 0.014986)
+bones/13/position = Vector3(0.123884, -0.619328, -0.663551)
+bones/14/position = Vector3(0.123884, -0.705081, 0.014986)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67311e-10, 0.450725, 0.0108531)

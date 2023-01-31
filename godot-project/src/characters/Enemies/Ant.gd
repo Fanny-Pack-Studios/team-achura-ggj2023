@@ -10,7 +10,9 @@ func _target_position() -> Vector3:
 func _physics_process(delta):
 	super._physics_process(delta)
 	if is_instance_valid(target):
-		$AccelerationBehaviour.towards_target(_target_position())
+		$AccelerationBehaviour.towards_target(_target_position(), move_speed)
+	else:
+		$AccelerationBehaviour.clear_target()
 
 
 func look_at_quat(quat):

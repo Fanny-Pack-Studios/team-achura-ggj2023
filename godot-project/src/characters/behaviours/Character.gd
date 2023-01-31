@@ -8,6 +8,7 @@ var gravity_vector : Vector3 = ProjectSettings.get_setting("physics/3d/default_g
 var gravity_magnitude : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var moving := true
+
 func _physics_process(delta):
 	if affected_by_gravity:
 		velocity += gravity_vector * gravity_magnitude * delta

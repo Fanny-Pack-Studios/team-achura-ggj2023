@@ -1,23 +1,14 @@
 extends Character
 
-
-
-@export var running_speed: float = 4
-@export var walking_speed: float = 2
-
-var walking: bool = false
-
-@export var camera_path: NodePath
-
-@onready var camera: Camera3D = get_node_or_null(camera_path)
+@export var camera: Camera3D
 
 var input_direction_3d: Vector3 = Vector3()
-
-@export var turn_speed: float = 5 * PI
 
 @onready var animation_player = $Player/AnimationPlayer
 
 @export var can_cancel_plant: bool = true
+@export var move_speed := 5.0
+
 var planting: bool = false
 
 func _physics_process(delta):
@@ -40,44 +31,22 @@ func _physics_process(delta):
 	
 	if not planting:
 		if input_direction_3d != Vector3.ZERO:
-			var target_quat = Quaternion(Basis(input_direction_3d.rotated(Vector3.UP, -PI/2), Vector3.UP, -input_direction_3d))
-			var current_quat = Quaternion(transform.basis.orthonormalized())
+			$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
 			
-			var angleDiff = target_quat.angle_to(current_quat)
-		
-			var max_delta_rotation = turn_speed * delta
-			
-			if(max_delta_rotation >= angleDiff):
-				current_quat = target_quat
-			else:
-				var weight = max_delta_rotation / angleDiff
-				
-				current_quat = current_quat.slerp(target_quat, weight)
-				
-			var scale = transform.basis.get_scale()
-			
-			transform.basis = Basis(current_quat).scaled(scale) 
-
-			#transform.basis = Basis(current_front_vector.rotated(Vector3.UP, -PI/2), Vector3.UP, -current_front_vector)
-			
-			var forward_velocity = get_speed() * -global_transform.basis.z
-			velocity.x = forward_velocity.x
-			velocity.z = forward_velocity.z
-			if animation_state_machine().get_current_node() != "Run":
-				animation_state_machine().travel("Run")
+			change_state("Run")
 		else:
-			if animation_state_machine().get_current_node() != "Idle":
-				animation_state_machine().travel("Idle")
-			velocity.x = 0
-			velocity.z = 0
+			$AccelerationBehaviour.clear_target()
+			
+			change_state("Idle")
 	
-	move_and_slide()
+	super._physics_process(delta)
 
+func change_state(new_state):
+	if animation_state_machine().get_current_node() != new_state:
+		animation_state_machine().travel(new_state)
+	
 func animation_state_machine() -> AnimationNodeStateMachinePlayback:
 	return $AnimationTree["parameters/playback"]
-
-func get_speed():
-	return walking_speed if walking else running_speed
 
 func process_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
@@ -89,8 +58,6 @@ func process_input():
 		input_direction_3d = input_direction_3d.rotated(Vector3.UP, camera_forward.signed_angle_to(Vector3.FORWARD, Vector3.DOWN))
 	else:
 		input_direction_3d = Vector3.ZERO
-		
-	walking = Input.is_action_pressed("walking")
 		
 
 func _ready():

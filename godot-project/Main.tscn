@@ -21,9 +21,9 @@ ssao_enabled = true
 
 [node name="Main" type="Node3D"]
 
-[node name="Sid" parent="." instance=ExtResource("1_p3mek")]
+[node name="Sid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_p3mek")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-camera_path = NodePath("../CameraPivot/Camera3D")
+camera = NodePath("../CameraPivot/Camera3D")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_jacgm")]
 

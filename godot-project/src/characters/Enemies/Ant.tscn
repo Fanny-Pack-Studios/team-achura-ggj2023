@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7jcsey26mn01"]
+[gd_scene load_steps=8 format=3 uid="uid://7jcsey26mn01"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
 [ext_resource type="Script" path="res://src/characters/Enemies/Ant.gd" id="1_gucpg"]
@@ -11,6 +11,9 @@ radius = 0.55293
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_51fhh"]
 radius = 0.397783
 height = 1.75078
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4ny10"]
+radius = 0.3
 
 [node name="Ant" type="CharacterBody3D"]
 collision_layer = 4
@@ -26,6 +29,7 @@ accelerate_forward = true
 
 [node name="AttackingBehaviour" type="Node" parent="."]
 script = ExtResource("4_404x4")
+attack_wait_time = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
@@ -38,6 +42,14 @@ collision_mask = 6
 [node name="HurtAreaCollision" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
 shape = SubResource("CapsuleShape3D_51fhh")
+
+[node name="AttackArea" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -1.1)
+shape = SubResource("SphereShape3D_4ny10")
 
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
 [connection signal="body_entered" from="HurtArea" to="." method="_on_hurt_area_body_entered"]

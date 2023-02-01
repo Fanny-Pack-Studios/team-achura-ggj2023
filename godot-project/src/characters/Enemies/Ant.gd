@@ -6,7 +6,7 @@ extends Character
 
 @export var health: int = 5
 
-@export var attack_range: float = 5
+@export var attack_range: float = 1.2
 
 func _target_position() -> Vector3:
 	return target.position
@@ -42,3 +42,5 @@ func die():
 
 func _on_attacking_behaviour_attack():
 	print("Enemy attack!")
+	if $AttackArea.overlaps_body(target):
+		print("Damage!")

@@ -43,5 +43,5 @@ func die():
 	queue_free()
 
 func _on_attacking_behaviour_attack():
-	if $AttackArea.overlaps_body(target):
+g	if $AttackArea.overlaps_body(target):
 		target.get_damaged(20)

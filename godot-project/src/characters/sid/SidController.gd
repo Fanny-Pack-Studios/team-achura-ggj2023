@@ -111,6 +111,7 @@ func get_camera_forward() -> Vector3:
 	
 func get_damaged(amount):
 	$HealthBehaviour.get_damaged(amount)
+	$EffectsAnimationPlayer.play("Hurt")
 
 func _on_hurt_box_area_entered(area):
 	get_damaged(area.get_damage())

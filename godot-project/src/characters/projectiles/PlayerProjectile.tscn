@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://civk2k8b3y7jh"]
 
-[ext_resource type="Script" path="res://src/characters/projectiles/PlayerProjectile.gd" id="1_8056c"]
+[ext_resource type="Script" path="res://src/characters/projectiles/Projectile.gd" id="1_1cy83"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_1l8aw"]
 height = 1.2
@@ -18,7 +18,7 @@ emission_energy_multiplier = 0.3
 radius = 0.2
 
 [node name="PlayerProjectile" type="Node3D"]
-script = ExtResource("1_8056c")
+script = ExtResource("1_1cy83")
 
 [node name="EnemyColliderArea" type="Area3D" parent="."]
 collision_layer = 4

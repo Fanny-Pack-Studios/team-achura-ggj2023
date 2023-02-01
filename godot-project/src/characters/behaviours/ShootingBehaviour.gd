@@ -4,7 +4,6 @@ extends Node
 signal shoot
 
 @export var shoot_wait_time :float = 2
-@export var turn_speed := PI
 
 var shooting :bool = false
 var time :float = 0

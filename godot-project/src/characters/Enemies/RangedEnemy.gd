@@ -29,18 +29,18 @@ func _physics_process(delta):
 func look_at_quat(quat):
 	var scale = global_transform.basis.get_scale()
 	global_transform.basis = Basis(quat).scaled(scale)
-
-func _on_hurt_area_body_entered(body):
-	if body.get_collision_layer() == Global.player_bullet_layer:
-		get_damaged(body.get_power())
 		
-func get_damaged(power):
-	health -= power
-	if health <= 0:
-		die()
-		
+func get_damaged(amount):
+	$HealthBehaviour.get_damaged(amount)
+	
 func die():
 	queue_free()
 
 func _on_attacking_behaviour_attack():
 	$ShootingProjectileBehaviour.shoot()
+
+func _on_hurt_area_damaged(amount):
+	get_damaged(amount)
+
+func _on_health_behaviour_no_health():
+	die()

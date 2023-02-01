@@ -18,8 +18,8 @@ albedo_color = Color(0.780392, 0, 0, 1)
 script = ExtResource("1_ptd0w")
 
 [node name="HitBox3D" type="Area3D" parent="."]
-collision_layer = 16
-collision_mask = 7
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("2_28kd8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox3D"]
@@ -38,3 +38,5 @@ radius = 0.2
 height = 0.5
 cone = true
 material = SubResource("StandardMaterial3D_ny15i")
+
+[connection signal="area_entered" from="HitBox3D" to="HitBox3D" method="_on_area_entered"]

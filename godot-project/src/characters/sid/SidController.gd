@@ -113,8 +113,8 @@ func get_damaged(amount):
 	$HealthBehaviour.get_damaged(amount)
 	$EffectsAnimationPlayer.play("Hurt")
 
-func _on_hurt_box_area_entered(area):
-	get_damaged(area.get_damage())
-
 func _on_health_behaviour_no_health():
 	queue_free()
+
+func _on_hurt_box_damaged(amount):
+	get_damaged(amount)

@@ -4,11 +4,7 @@ extends Character
 
 @export var target: Node3D
 
-@export var health: int = 5
-
 @export var attack_range: float = 1.2
-
-@export var melee_attack_damage:= 20
 
 func _target_position() -> Vector3:
 	return target.position
@@ -29,19 +25,18 @@ func _physics_process(delta):
 func look_at_quat(quat):
 	var scale = global_transform.basis.get_scale()
 	global_transform.basis = Basis(quat).scaled(scale)
-
-func _on_hurt_area_body_entered(body):
-	if body.get_collision_layer() == Global.player_bullet_layer:
-		get_damaged(body.get_power())
 		
-func get_damaged(power):
-	health -= power
-	if health <= 0:
-		die()
+func get_damaged(amount):
+	$HealthBehaviour.get_damaged(amount)
 		
 func die():
 	queue_free()
 
 func _on_attacking_behaviour_attack():
-g	if $AttackArea.overlaps_body(target):
-		target.get_damaged(20)
+	$AttackArea.trigger()
+
+func _on_hurt_area_damaged(amount):
+	get_damaged(amount)
+
+func _on_health_behaviour_no_health():
+	die()

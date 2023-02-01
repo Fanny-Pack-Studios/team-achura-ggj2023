@@ -71,6 +71,7 @@ animation_tree = NodePath("../AnimationTree")
 script = ExtResource("4_urt0h")
 ProjectileScene = ExtResource("5_5l420")
 spawn_point = NodePath("../ProjectileSpawnPosition")
+cooldown_time = 0.2
 
 [node name="ProjectileSpawnPosition" type="Node3D" parent="."]
 transform = Transform3D(0.996281, 0, 0.0861646, 0, 1, 0, -0.0861646, 0, 0.996281, 0, 1.306, -1.38862)

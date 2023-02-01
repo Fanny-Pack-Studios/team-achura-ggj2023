@@ -20,7 +20,7 @@ class Vector:
 		node.draw_line(start, end, color, width)
 		node.draw_circle(end, width * 2, color)
 		
-func _process(delta):
+func _process(_delta):
 	if not visible:
 		return
 	queue_redraw()
@@ -30,7 +30,7 @@ func _draw():
 	for vector in vectors:
 		vector.draw(self, camera)
 
-func add_vector(object, property, scale, width, color):
-	vectors.append(Vector.new(object, property, scale, width, color))
+func add_vector(object, property, a_scale, width, color):
+	vectors.append(Vector.new(object, property, a_scale, width, color))
 
 var vectors = []  # Array to hold all registered values.

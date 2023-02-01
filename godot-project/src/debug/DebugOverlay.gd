@@ -7,5 +7,5 @@ func _input(event):
 		for n in get_children():
 			n.visible = not n.visible
 			
-func add_vector(object, property, color = Color(0,1,0, 0.8), scale = 1, width = 4):
-	draw.add_vector(object, property, scale, width, color)
+func add_vector(object, property, color = Color(0,1,0, 0.8), a_scale = 1, width = 4):
+	draw.add_vector(object, property, a_scale, width, color)

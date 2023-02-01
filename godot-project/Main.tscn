@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://btndkaubpy51w"]
 
-[ext_resource type="PackedScene" uid="uid://dps6wvsckkj11" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
+[ext_resource type="PackedScene" uid="uid://ot005o7ult6h" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
 [ext_resource type="PackedScene" uid="uid://dn37q7ppf4y0l" path="res://src/levels/TestLevel.tscn" id="2_jacgm"]
 [ext_resource type="PackedScene" uid="uid://cx4q0xyef4730" path="res://src/characters/Enemies/Ant.tscn" id="4_eq56t"]
 [ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]

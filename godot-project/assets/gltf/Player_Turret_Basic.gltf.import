@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d4ct68vy525gm"
-path="res://.godot/imported/Player.gltf-2d185ec99b1742f41bdcf9995a72a18e.scn"
+uid="uid://ctcxwbkadnets"
+path="res://.godot/imported/Player_Turret_Basic.gltf-997c1885981d06fb96ef9e36112da2f0.scn"
 
 [deps]
 
-source_file="res://assets/gltf/Player.gltf"
-dest_files=["res://.godot/imported/Player.gltf-2d185ec99b1742f41bdcf9995a72a18e.scn"]
+source_file="res://assets/gltf/Player_Turret_Basic.gltf"
+dest_files=["res://.godot/imported/Player_Turret_Basic.gltf-997c1885981d06fb96ef9e36112da2f0.scn"]
 
 [params]
 
@@ -29,9 +29,9 @@ animation/trimming=false
 import_script/path=""
 _subresources={
 "materials": {
-"seedBoy": {
+"turretBasic.001": {
 "use_external/enabled": true,
-"use_external/path": "res://assets/materials/imported/seedBoy.tres"
+"use_external/path": "res://assets/materials/imported/turretBasic.001.tres"
 }
 }
 }

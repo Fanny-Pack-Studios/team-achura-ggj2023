@@ -8,6 +8,7 @@ var input_direction_3d: Vector3 = Vector3()
 
 @export var can_cancel_plant: bool = true
 @export var plant_cancel_time := 0.7
+@export var time_frozen_when_unplanting := 0.5
 @export var move_speed := 5.0
 
 var toggle_planting: bool = false
@@ -17,6 +18,10 @@ const PLANT_STATE = &"Plant"
 const IDLE_STATE = &"Idle"
 const RUN_STATE = &"Run"
 const UNPLANT_STATE = &"Unplant"
+#NO SE USA POR AHORA, PERO PODRÍA VOLVEr
+const DEACTIVATING_STATE = &"Deactivating"
+
+const states_that_allow_movement = [IDLE_STATE, RUN_STATE]
 
 func is_planting_cancellable():
 	return can_cancel_plant and $PlantCancelTimer.time_left > 0
@@ -27,8 +32,16 @@ func _physics_process(delta):
 	
 	super._physics_process(delta)
 
-func process_state(delta):
-	if input_direction_3d != Vector3.ZERO and (is_planting_cancellable() || current_state() != PLANT_STATE):
+func allows_movement():
+	return current_state() in states_that_allow_movement || (
+		is_planting_cancellable() and current_state() == PLANT_STATE
+	) || (
+		$UnplantAllowMovementTimer.time_left <= 0 and current_state() == UNPLANT_STATE
+	) 
+		
+
+func process_state(_delta):
+	if input_direction_3d != Vector3.ZERO and allows_movement():
 		$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
 	else:
 		$AccelerationBehaviour.clear_target()
@@ -39,6 +52,7 @@ func process_state(delta):
 				if is_planting_cancellable():
 					change_state(IDLE_STATE)
 				else:
+					$Turrets.deactivate()
 					change_state(UNPLANT_STATE)
 		IDLE_STATE: 
 			if toggle_planting:
@@ -58,6 +72,13 @@ func enter_state(new_state: StringName):
 	match new_state:
 		PLANT_STATE: 
 			$PlantCancelTimer.start(plant_cancel_time)
+			
+			await $PlantCancelTimer.timeout
+			
+			$Turrets.activate(Turrets.TurretType.BasicTurret)
+		UNPLANT_STATE:
+			$UnplantAllowMovementTimer.start(time_frozen_when_unplanting)
+			
 
 func change_state(new_state: StringName):
 	if current_state() != new_state:

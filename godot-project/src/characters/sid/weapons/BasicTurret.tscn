@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://geu5ddn58kxh"]
+[gd_scene load_steps=18 format=3 uid="uid://geu5ddn58kxh"]
 
 [ext_resource type="Script" path="res://src/characters/sid/weapons/BasicTurret.gd" id="1_ohob3"]
 [ext_resource type="PackedScene" uid="uid://ctcxwbkadnets" path="res://assets/gltf/Player_Turret_Basic.gltf" id="2_ox1r3"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AnimationStateMachineBehaviour.gd" id="3_gny4u"]
+[ext_resource type="Script" path="res://src/characters/behaviours/ShootingProjectileBehaviour.gd" id="4_urt0h"]
+[ext_resource type="PackedScene" uid="uid://civk2k8b3y7jh" path="res://src/characters/projectiles/PlayerProjectile.tscn" id="5_5l420"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cbsye"]
 animation = &"turretBasic_Aim"
@@ -32,6 +34,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xu4ag"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_or32g"]
+xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_84vy7"]
 states/Aim/node = SubResource("AnimationNodeAnimation_cbsye")
@@ -60,3 +63,13 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_j862k")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("3_gny4u")
 animation_tree = NodePath("../AnimationTree")
+
+[node name="ShootingProjectileBehaviour" type="Node" parent="." node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("4_urt0h")
+ProjectileScene = ExtResource("5_5l420")
+spawn_point = NodePath("../ProjectileSpawnPosition")
+
+[node name="ProjectileSpawnPosition" type="Node3D" parent="."]
+transform = Transform3D(0.996281, 0, 0.0861646, 0, 1, 0, -0.0861646, 0, 0.996281, 0, 1.306, -1.38862)
+
+[connection signal="just_shot" from="ShootingProjectileBehaviour" to="." method="_on_shooting_projectile_behaviour_just_shot"]

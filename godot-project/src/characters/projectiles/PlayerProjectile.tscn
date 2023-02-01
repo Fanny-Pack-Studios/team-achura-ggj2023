@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://civk2k8b3y7jh"]
+
+[ext_resource type="Script" path="res://src/characters/projectiles/PlayerProjectile.gd" id="1_8056c"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1l8aw"]
+height = 1.2
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8s55x"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.447059, 0.6, 0.0901961, 1)
+emission_enabled = true
+emission = Color(0.968627, 0.952941, 0, 1)
+emission_energy_multiplier = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dduxg"]
+radius = 0.2
+
+[node name="PlayerProjectile" type="Node3D"]
+script = ExtResource("1_8056c")
+
+[node name="EnemyColliderArea" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 24
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyColliderArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.428211, 0)
+shape = SubResource("CylinderShape3D_1l8aw")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material_override = SubResource("StandardMaterial3D_8s55x")
+radius = 0.2
+
+[node name="TerrainColliderArea" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainColliderArea"]
+shape = SubResource("SphereShape3D_dduxg")

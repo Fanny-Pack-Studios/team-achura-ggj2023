@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://ot005o7ult6h"]
+[gd_scene load_steps=28 format=3 uid="uid://ot005o7ult6h"]
 
 [ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
 [ext_resource type="PackedScene" uid="uid://d4ct68vy525gm" path="res://assets/gltf/Player.gltf" id="2_j5eyj"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="3_4ta14"]
 [ext_resource type="Script" path="res://src/characters/sid/weapons/Turrets.gd" id="4_tvbpj"]
 [ext_resource type="PackedScene" uid="uid://geu5ddn58kxh" path="res://src/characters/sid/weapons/BasicTurret.tscn" id="5_6pylk"]
+[ext_resource type="Script" path="res://src/characters/behaviours/AnimationStateMachineBehaviour.gd" id="6_2iqsm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hafaq"]
 radius = 0.245524
@@ -70,6 +71,9 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cx4t1"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ftjvt"]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_d5gfm"]
 states/Deactivating/node = SubResource("AnimationNodeBlendTree_pcshj")
 states/Deactivating/position = Vector2(916, 259.665)
@@ -81,9 +85,9 @@ states/Run/node = SubResource("AnimationNodeAnimation_m0dxl")
 states/Run/position = Vector2(791, 100)
 states/Start/position = Vector2(146, 120)
 states/Unplant/node = SubResource("AnimationNodeAnimation_tlngf")
-states/Unplant/position = Vector2(417, 173.665)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xmqer"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ggdss"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_aucr0"), "Idle", "Plant", SubResource("AnimationNodeStateMachineTransition_kapql"), "Plant", "Idle", SubResource("AnimationNodeStateMachineTransition_dj2tr"), "Run", "Plant", SubResource("AnimationNodeStateMachineTransition_76dc0"), "Unplant", "Idle", SubResource("AnimationNodeStateMachineTransition_g3cch"), "Plant", "Unplant", SubResource("AnimationNodeStateMachineTransition_cx4t1")]
-graph_offset = Vector2(0, 29.6652)
+states/Unplant/position = Vector2(414, 215.665)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xmqer"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ggdss"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_aucr0"), "Idle", "Plant", SubResource("AnimationNodeStateMachineTransition_kapql"), "Plant", "Idle", SubResource("AnimationNodeStateMachineTransition_dj2tr"), "Run", "Plant", SubResource("AnimationNodeStateMachineTransition_76dc0"), "Unplant", "Idle", SubResource("AnimationNodeStateMachineTransition_g3cch"), "Plant", "Unplant", SubResource("AnimationNodeStateMachineTransition_cx4t1"), "Unplant", "Run", SubResource("AnimationNodeStateMachineTransition_ftjvt")]
+graph_offset = Vector2(-83, 13.6652)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_gr8s3"]
 
@@ -115,10 +119,15 @@ process_callback = 0
 one_shot = true
 
 [node name="UnplantAllowMovementTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.8
+one_shot = true
 
 [node name="Turrets" type="Node3D" parent="."]
 script = ExtResource("4_tvbpj")
 
 [node name="BasicTurret" parent="Turrets" instance=ExtResource("5_6pylk")]
 visible = false
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("6_2iqsm")
+animation_tree = NodePath("../AnimationTree")

@@ -8,17 +8,16 @@ var input_direction_3d: Vector3 = Vector3()
 
 @export var can_cancel_plant: bool = true
 @export var plant_cancel_time := 0.7
-@export var time_frozen_when_unplanting := 0.5
+@export var time_frozen_when_unplanting := 0.9
 @export var move_speed := 5.0
 
 var toggle_planting: bool = false
 
-# Quise usar las constantes pero por alguna razón no andan en el match. Para analizar
 const PLANT_STATE = &"Plant"
 const IDLE_STATE = &"Idle"
 const RUN_STATE = &"Run"
 const UNPLANT_STATE = &"Unplant"
-#NO SE USA POR AHORA, PERO PODRÍA VOLVEr
+#NO SE USA POR AHORA, PERO PODRÍA VOLVER
 const DEACTIVATING_STATE = &"Deactivating"
 
 const states_that_allow_movement = [IDLE_STATE, RUN_STATE]
@@ -28,25 +27,28 @@ func is_planting_cancellable():
 
 func _physics_process(delta):
 	process_input()
-	process_state(delta)
+	process_state($StateMachine.current_state())
 	
 	super._physics_process(delta)
 
-func allows_movement():
-	return current_state() in states_that_allow_movement || (
-		is_planting_cancellable() and current_state() == PLANT_STATE
+func allows_movement(state: StringName):
+	return state in states_that_allow_movement || (
+		is_planting_cancellable() and state == PLANT_STATE
 	) || (
-		$UnplantAllowMovementTimer.time_left <= 0 and current_state() == UNPLANT_STATE
+		$UnplantAllowMovementTimer.time_left <= 0 and state == UNPLANT_STATE
 	) 
 		
 
-func process_state(_delta):
-	if input_direction_3d != Vector3.ZERO and allows_movement():
+func change_state(new_state: StringName):
+	$StateMachine.change_state(new_state, self.enter_state)
+
+func process_state(state):
+	if input_direction_3d != Vector3.ZERO and allows_movement(state):
 		$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
 	else:
 		$AccelerationBehaviour.clear_target()
 	
-	match current_state():
+	match state:
 		PLANT_STATE:
 			if toggle_planting:
 				if is_planting_cancellable():
@@ -64,10 +66,10 @@ func process_state(_delta):
 				change_state(PLANT_STATE)
 			elif input_direction_3d == Vector3.ZERO:
 				change_state(IDLE_STATE)
+		UNPLANT_STATE:
+			if $UnplantAllowMovementTimer.time_left <= 0 and input_direction_3d != Vector3.ZERO:
+				change_state(RUN_STATE)
 
-func current_state():
-	return animation_state_machine().get_current_node()
-	
 func enter_state(new_state: StringName):
 	match new_state:
 		PLANT_STATE: 
@@ -79,14 +81,6 @@ func enter_state(new_state: StringName):
 		UNPLANT_STATE:
 			$UnplantAllowMovementTimer.start(time_frozen_when_unplanting)
 			
-
-func change_state(new_state: StringName):
-	if current_state() != new_state:
-		enter_state(new_state)
-		animation_state_machine().travel(new_state)
-	
-func animation_state_machine() -> AnimationNodeStateMachinePlayback:
-	return $AnimationTree["parameters/playback"]
 
 func process_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")

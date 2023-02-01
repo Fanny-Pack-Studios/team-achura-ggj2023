@@ -1,25 +1,24 @@
 extends Turret
 
-var target_direction: Vector3 = Vector3.ZERO
+const GROW_STATE = &"Grow"
+const AIM_STATE = &"Aim"
+const DIE_STATE = &"Die"
+const SHOOT_STATE = &"Shoot"
+
+func _ready():
+	$Player_Turret_Basic/AnimationPlayer.get_animation("turretBasic_Aim").loop_mode = Animation.LOOP_LINEAR
+
+func animation_tree_state_machine():
+	return $AnimationTree
 
 func activation():
-	process_input()
-	
 	look_at(self.global_position + target_direction)
+		
+	$StateMachine.change_state(GROW_STATE)
 	
-	$Player_Turret_Basic/AnimationPlayer.play("turretBasic_Grow")
+	await $AnimationTree.animation_finished
 	
 func deactivation():
-	$Player_Turret_Basic/AnimationPlayer.play("turretBasic_Die")
+	$StateMachine.change_state(DIE_STATE)
 	
-	await $Player_Turret_Basic/AnimationPlayer.animation_finished
-
-func turret_process(_delta):
-	process_input()
-	if target_direction != Vector3.ZERO:
-		look_at(self.global_position + target_direction)
-	
-func process_input():
-	var mouse_position = InputUtils.get_mouse_position_on_same_plane(self)
-	
-	target_direction = (mouse_position - global_position).normalized()
+	await $AnimationTree.animation_finished

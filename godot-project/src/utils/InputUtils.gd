@@ -1,7 +1,7 @@
 class_name InputUtils
 extends Object
 
-static func get_mouse_position_on_same_plane(node: Node3D, a_viewport: Viewport = null):
+static func get_mouse_position_on_same_plane(node: Node3D, a_viewport = null):
 	var viewport = a_viewport if a_viewport else node.get_viewport()
 	var mouse_position = viewport.get_mouse_position()
 	

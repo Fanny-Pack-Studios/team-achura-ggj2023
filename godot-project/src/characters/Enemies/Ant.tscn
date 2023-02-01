@@ -16,7 +16,7 @@ height = 1.75078
 radius = 0.3
 
 [node name="Ant" type="CharacterBody3D"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 7
 script = ExtResource("1_gucpg")
 
@@ -36,15 +36,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
 shape = SubResource("SphereShape3D_v2rnu")
 
 [node name="HurtArea" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 6
+collision_layer = 0
+collision_mask = 4
 
 [node name="HurtAreaCollision" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
 shape = SubResource("CapsuleShape3D_51fhh")
 
 [node name="AttackArea" type="Area3D" parent="."]
-collision_layer = 16
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]

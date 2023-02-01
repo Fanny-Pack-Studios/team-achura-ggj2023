@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ot005o7ult6h"]
+[gd_scene load_steps=30 format=3 uid="uid://dps6wvsckkj11"]
 
 [ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
 [ext_resource type="PackedScene" uid="uid://d4ct68vy525gm" path="res://assets/gltf/Player.gltf" id="2_j5eyj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/characters/sid/weapons/Turrets.gd" id="4_tvbpj"]
 [ext_resource type="PackedScene" uid="uid://geu5ddn58kxh" path="res://src/characters/sid/weapons/BasicTurret.tscn" id="5_6pylk"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AnimationStateMachineBehaviour.gd" id="6_2iqsm"]
+[ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="7_yjpoe"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hafaq"]
 radius = 0.245524
@@ -91,10 +92,13 @@ graph_offset = Vector2(-83, 13.6652)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_gr8s3"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cli8c"]
+radius = 0.224088
+height = 0.733386
+
 [node name="Sid" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
-collision_mask = 25
 script = ExtResource("1_l1tjl")
 
 [node name="Player" parent="." instance=ExtResource("2_j5eyj")]
@@ -131,3 +135,17 @@ visible = false
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("6_2iqsm")
 animation_tree = NodePath("../AnimationTree")
+
+[node name="HealthBehaviour" type="Node" parent="."]
+script = ExtResource("7_yjpoe")
+
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 24
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.366501, 0)
+shape = SubResource("CapsuleShape3D_cli8c")
+
+[connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://nkm8dvj477w3"]
+
+[ext_resource type="Script" path="res://src/characters/Enemies/EnemyBullet.gd" id="1_ptd0w"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/AreaDamage.gd" id="2_28kd8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pt2ei"]
+height = 0.331796
+radius = 0.119303
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0gtvp"]
+radius = 0.100996
+height = 0.427461
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny15i"]
+albedo_color = Color(0.780392, 0, 0, 1)
+
+[node name="EnemyBullet" type="Node3D"]
+script = ExtResource("1_ptd0w")
+
+[node name="HitBox3D" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 7
+script = ExtResource("2_28kd8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox3D"]
+shape = SubResource("CylinderShape3D_pt2ei")
+
+[node name="TerrainArea3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0533835, 0)
+shape = SubResource("CapsuleShape3D_0gtvp")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+radius = 0.2
+height = 0.5
+cone = true
+material = SubResource("StandardMaterial3D_ny15i")

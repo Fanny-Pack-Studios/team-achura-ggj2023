@@ -16,8 +16,8 @@ func _ready():
 func shoot():
 	if cooldown_timer.is_stopped():
 		var projectile = ProjectileScene.instantiate()
+		projectile.direction = MathUtils.forward(get_parent().global_transform)
 		get_tree().root.add_child(projectile)
 		projectile.global_position = spawn_point.global_position
-		projectile.direction = MathUtils.forward(get_parent().global_transform)
 		cooldown_timer.start(cooldown_time)
 		emit_signal("just_shot")

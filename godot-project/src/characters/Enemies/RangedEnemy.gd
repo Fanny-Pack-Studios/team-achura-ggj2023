@@ -1,14 +1,14 @@
 extends Character
 
-@export var move_speed := 3.0
+@export var move_speed := 2.0
 
 @export var target: Node3D
 
 @export var health: int = 5
 
-@export var attack_range: float = 1.2
+@export var attack_range: float = 3
 
-@export var melee_attack_damage:= 20
+@export var bullet_scene: PackedScene
 
 func _target_position() -> Vector3:
 	return target.position
@@ -43,5 +43,4 @@ func die():
 	queue_free()
 
 func _on_attacking_behaviour_attack():
-	if $AttackArea.overlaps_body(target):
-		target.get_damaged(20)
+	$ShootingProjectileBehaviour.shoot()

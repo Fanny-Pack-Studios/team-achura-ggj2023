@@ -10,6 +10,7 @@ var input_direction_3d: Vector3 = Vector3()
 @export var plant_cancel_time := 0.7
 @export var time_frozen_when_unplanting := 0.9
 @export var move_speed := 5.0
+@export var health := 100
 
 var toggle_planting: bool = false
 
@@ -107,3 +108,12 @@ func _ready():
 func get_camera_forward() -> Vector3: 
 	var zbasis = camera.global_transform.basis.z
 	return -Vector3(zbasis.x, 0, zbasis.z).normalized()
+	
+func get_damaged(amount):
+	$HealthBehaviour.get_damaged(amount)
+
+func _on_hurt_box_area_entered(area):
+	get_damaged(area.get_damage())
+
+func _on_health_behaviour_no_health():
+	queue_free()

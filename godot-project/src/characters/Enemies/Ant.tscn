@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx4q0xyef4730"]
+[gd_scene load_steps=7 format=3 uid="uid://7jcsey26mn01"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
 [ext_resource type="Script" path="res://src/characters/Enemies/Ant.gd" id="1_gucpg"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="2_p71vt"]
-[ext_resource type="Script" path="res://src/characters/behaviours/ShootingBehaviour.gd" id="4_8dqjg"]
+[ext_resource type="Script" path="res://src/characters/behaviours/AttackingBehaviour.gd" id="4_404x4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v2rnu"]
 radius = 0.55293
@@ -24,8 +24,8 @@ script = ExtResource("2_p71vt")
 turn_speed = 1.5
 accelerate_forward = true
 
-[node name="ShootingBehaviour" type="Node" parent="."]
-script = ExtResource("4_8dqjg")
+[node name="AttackingBehaviour" type="Node" parent="."]
+script = ExtResource("4_404x4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
@@ -39,5 +39,5 @@ collision_mask = 6
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
 shape = SubResource("CapsuleShape3D_51fhh")
 
-[connection signal="shoot" from="ShootingBehaviour" to="." method="_on_shooting_behaviour_shoot"]
+[connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
 [connection signal="body_entered" from="HurtArea" to="." method="_on_hurt_area_body_entered"]

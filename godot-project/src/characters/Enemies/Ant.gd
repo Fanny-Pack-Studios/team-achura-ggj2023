@@ -6,13 +6,21 @@ extends Character
 
 @export var health: int = 5
 
+@export var attack_range: float = 5
+
 func _target_position() -> Vector3:
 	return target.position
 
 func _physics_process(delta):
 	super._physics_process(delta)
 	if is_instance_valid(target):
-		$AccelerationBehaviour.towards_target(_target_position(), move_speed)
+		if not $ShootingBehaviour.is_shooting():
+			if _target_position().distance_to(position) < attack_range:
+				$ShootingBehaviour.start_shooting()
+			else:
+				$AccelerationBehaviour.towards_target(_target_position(), move_speed)
+		else:
+			$AccelerationBehaviour.towards_target(_target_position(), 0)
 	else:
 		$AccelerationBehaviour.clear_target()
 
@@ -31,4 +39,6 @@ func get_damaged(power):
 		
 func die():
 	queue_free()
-	
+
+func _on_shooting_behaviour_shoot():
+	print("Enemy shoot!")

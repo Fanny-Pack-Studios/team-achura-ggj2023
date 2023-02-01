@@ -84,10 +84,11 @@ toggle_planting={
 
 [layer_names]
 
-3d_physics/layer_1="Player"
-3d_physics/layer_2="PlayerBullets"
-3d_physics/layer_3="Enemies"
-3d_physics/layer_4="Enemybullets"
+3d_physics/layer_1="Terrain"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="PlayerBullets"
+3d_physics/layer_4="Enemies"
+3d_physics/layer_5="EnemyBullets"
 
 [physics]
 

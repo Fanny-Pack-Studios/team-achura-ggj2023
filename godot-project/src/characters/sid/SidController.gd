@@ -13,59 +13,53 @@ var input_direction_3d: Vector3 = Vector3()
 var toggle_planting: bool = false
 
 # Quise usar las constantes pero por alguna razón no andan en el match. Para analizar
-const PLANT_STATE := "Plant"
-const IDLE_STATE := "Idle"
-const RUN_STATE := "Run"
+const PLANT_STATE = &"Plant"
+const IDLE_STATE = &"Idle"
+const RUN_STATE = &"Run"
+const UNPLANT_STATE = &"Unplant"
 
 func is_planting_cancellable():
 	return can_cancel_plant and $PlantCancelTimer.time_left > 0
 
 func _physics_process(delta):
 	process_input()
+	process_state(delta)
+	
+	super._physics_process(delta)
+
+func process_state(delta):
+	if input_direction_3d != Vector3.ZERO and (is_planting_cancellable() || current_state() != PLANT_STATE):
+		$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
+	else:
+		$AccelerationBehaviour.clear_target()
 	
 	match current_state():
-		"Plant":
-			if input_direction_3d != Vector3.ZERO and is_planting_cancellable():
-				$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
-			else:
-				$AccelerationBehaviour.clear_target()
-			
+		PLANT_STATE:
 			if toggle_planting:
 				if is_planting_cancellable():
-					set_cancel_planting(true)
+					change_state(IDLE_STATE)
 				else:
-					change_state("Idle")
-			
-		"Idle": 
+					change_state(UNPLANT_STATE)
+		IDLE_STATE: 
 			if toggle_planting:
 				change_state(PLANT_STATE)
 			elif input_direction_3d != Vector3.ZERO:
 				change_state(RUN_STATE)
-				$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
-		"Run":
+		RUN_STATE:
 			if toggle_planting:
 				change_state(PLANT_STATE)
-			elif input_direction_3d != Vector3.ZERO:
-				$AccelerationBehaviour.towards_direction(input_direction_3d, move_speed)
-			else:
-				$AccelerationBehaviour.clear_target()
+			elif input_direction_3d == Vector3.ZERO:
 				change_state(IDLE_STATE)
-	
-	super._physics_process(delta)
-
-func set_cancel_planting(val: bool):
-	$AnimationTree.set("parameters/conditions/plant_cancel", val)
 
 func current_state():
 	return animation_state_machine().get_current_node()
 	
-func enter_state(new_state: String):
+func enter_state(new_state: StringName):
 	match new_state:
 		PLANT_STATE: 
-			set_cancel_planting(false)
 			$PlantCancelTimer.start(plant_cancel_time)
 
-func change_state(new_state: String):
+func change_state(new_state: StringName):
 	if current_state() != new_state:
 		enter_state(new_state)
 		animation_state_machine().travel(new_state)

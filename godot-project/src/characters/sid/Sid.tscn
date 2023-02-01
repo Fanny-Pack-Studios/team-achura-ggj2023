@@ -52,8 +52,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dj2tr"]
 xfade_time = 0.1
-advance_mode = 2
-advance_condition = &"plant_cancel"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_76dc0"]
 xfade_time = 0.1
@@ -106,7 +104,6 @@ tree_root = SubResource("AnimationNodeStateMachine_d5gfm")
 anim_player = NodePath("../Player/AnimationPlayer")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_gr8s3")
-parameters/conditions/plant_cancel = false
 parameters/Plant/TimeScale/scale = 1.0
 
 [node name="AccelerationBehaviour" type="Node" parent="."]

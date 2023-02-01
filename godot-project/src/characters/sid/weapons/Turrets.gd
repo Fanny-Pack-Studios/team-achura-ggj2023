@@ -12,5 +12,5 @@ func activate(type: TurretType):
 	await current_turret.activate()
 	
 func deactivate():
-	if current_turret and current_turret.active:
+	if current_turret:
 		await current_turret.deactivate()

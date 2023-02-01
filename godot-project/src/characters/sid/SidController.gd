@@ -77,7 +77,9 @@ func enter_state(new_state: StringName):
 			
 			await $PlantCancelTimer.timeout
 			
-			$Turrets.activate(Turrets.TurretType.BasicTurret)
+			if $StateMachine.current_state() == PLANT_STATE:
+				$Turrets.activate(Turrets.TurretType.BasicTurret)
+			
 		UNPLANT_STATE:
 			$UnplantAllowMovementTimer.start(time_frozen_when_unplanting)
 			

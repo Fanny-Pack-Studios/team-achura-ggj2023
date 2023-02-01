@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://geu5ddn58kxh"]
+[gd_scene load_steps=19 format=3 uid="uid://geu5ddn58kxh"]
 
 [ext_resource type="Script" path="res://src/characters/sid/weapons/BasicTurret.gd" id="1_ohob3"]
 [ext_resource type="PackedScene" uid="uid://ctcxwbkadnets" path="res://assets/gltf/Player_Turret_Basic.gltf" id="2_ox1r3"]
@@ -36,16 +36,19 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_or32g"]
 xfade_time = 0.1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hriax"]
+xfade_time = 0.1
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_84vy7"]
 states/Aim/node = SubResource("AnimationNodeAnimation_cbsye")
-states/Aim/position = Vector2(536, 44)
+states/Aim/position = Vector2(488, 140)
 states/Die/node = SubResource("AnimationNodeAnimation_twdbo")
 states/Die/position = Vector2(769, 66)
 states/Grow/node = SubResource("AnimationNodeAnimation_mr0s5")
 states/Grow/position = Vector2(349, 66)
 states/Shoot/node = SubResource("AnimationNodeAnimation_c0qcu")
-states/Shoot/position = Vector2(507, 254)
-transitions = ["Start", "Grow", SubResource("AnimationNodeStateMachineTransition_40lhf"), "Grow", "Aim", SubResource("AnimationNodeStateMachineTransition_7mwot"), "Aim", "Shoot", SubResource("AnimationNodeStateMachineTransition_2051n"), "Shoot", "Aim", SubResource("AnimationNodeStateMachineTransition_6mdhv"), "Aim", "Die", SubResource("AnimationNodeStateMachineTransition_xu4ag"), "Shoot", "Die", SubResource("AnimationNodeStateMachineTransition_or32g")]
+states/Shoot/position = Vector2(506, 254)
+transitions = ["Start", "Grow", SubResource("AnimationNodeStateMachineTransition_40lhf"), "Grow", "Aim", SubResource("AnimationNodeStateMachineTransition_7mwot"), "Aim", "Shoot", SubResource("AnimationNodeStateMachineTransition_2051n"), "Shoot", "Aim", SubResource("AnimationNodeStateMachineTransition_6mdhv"), "Aim", "Die", SubResource("AnimationNodeStateMachineTransition_xu4ag"), "Shoot", "Die", SubResource("AnimationNodeStateMachineTransition_or32g"), "Grow", "Die", SubResource("AnimationNodeStateMachineTransition_hriax")]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_j862k"]
 

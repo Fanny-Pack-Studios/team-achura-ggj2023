@@ -20,13 +20,12 @@ func activation():
 		
 	$StateMachine.change_state(GROW_STATE)
 	
-	await $AnimationTree.animation_finished
+	return await $AnimationTree.animation_finished == "turretBasic_Grow"
 	
 func deactivation():
 	$StateMachine.change_state(DIE_STATE)
 	
-	await $AnimationTree.animation_finished
-
+	return await $AnimationTree.animation_finished == "turretBasic_Die"
 
 func _on_shooting_projectile_behaviour_just_shot():
 	$StateMachine.change_state(SHOOT_STATE, func(a):pass, true)

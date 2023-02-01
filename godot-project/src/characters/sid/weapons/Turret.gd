@@ -5,6 +5,9 @@ extends Node3D
 var active: bool = false
 var target_direction: Vector3 = Vector3.ZERO
 
+var deactivating = false
+var activating = false
+
 enum LookAtTargetMode {
 	ALWAYS,
 	ONLY_WHEN_ACTIVE,
@@ -40,12 +43,19 @@ func deactivation():
 	pass
 
 func activate():
+	if activating:
+		return
+	activating = true
 	visible = true
-	await activation()
-	active = true
+	active = await activation()
+	activating = false
 
 func deactivate():
+	if deactivating:
+		return
+	deactivating = true
 	active = false
 	await deactivation()
 	visible = false
+	deactivating = false
 	

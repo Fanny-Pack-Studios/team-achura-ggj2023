@@ -1,6 +1,6 @@
 extends Node
 
-signal damaged
+signal damaged(amount, hitbox)
 
-func get_damaged(amount):
-	emit_signal("damaged", amount)
+func get_damaged(amount, hitbox):
+	emit_signal("damaged", amount, hitbox)

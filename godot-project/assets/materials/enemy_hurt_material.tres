@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://co7rtkg6tjvqu"]
+
+[ext_resource type="Shader" uid="uid://caqli7de8ty18" path="res://assets/shaders/enemy_hurt_shader.tres" id="1_co0cd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_co0cd")
+shader_parameter/albedo = Color(1, 0, 0, 1)

@@ -35,6 +35,8 @@ func look_at_quat(quat):
 		
 func get_damaged(amount):
 	$HealthBehaviour.get_damaged(amount)
+	$EffectsAnimationPlayer.stop()
+	$EffectsAnimationPlayer.play("Hurt")
 	
 func die():
 	queue_free()
@@ -42,8 +44,10 @@ func die():
 func _on_attacking_behaviour_attack():
 	$ShootingProjectileBehaviour.shoot()
 
-func _on_hurt_area_damaged(amount):
+func _on_hurt_area_damaged(amount, hitbox: Hitbox):
 	get_damaged(amount)
+	for effect in hitbox.effects:
+		effect.apply_on_character(self)
 
 func _on_health_behaviour_no_health():
 	die()

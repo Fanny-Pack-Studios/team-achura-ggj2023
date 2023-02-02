@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ugahxfhixjgf"]
+[gd_scene load_steps=7 format=3 uid="uid://ugahxfhixjgf"]
 
 [ext_resource type="PackedScene" uid="uid://dgfgyxgiu6l52" path="res://src/characters/projectiles/DefaultProjectile.tscn" id="1_wfdic"]
 [ext_resource type="PackedScene" uid="uid://bmpkcfgwip320" path="res://src/characters/projectiles/PlayerProjectileExplosion.tscn" id="2_it8a4"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/effects/KnockbackEffect.gd" id="3_1jiud"]
 [ext_resource type="Material" uid="uid://dc028kkveat7g" path="res://assets/materials/PlayerProjectile.tres" id="3_uikgq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dg3kn"]
@@ -20,6 +21,10 @@ collision_mask = 24
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.830034, 0)
 shape = SubResource("CylinderShape3D_dg3kn")
+
+[node name="KnockbackEffect" type="Node3D" parent="Hitbox" index="1"]
+script = ExtResource("3_1jiud")
+strength = 20.0
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." index="1"]
 material_override = ExtResource("3_uikgq")

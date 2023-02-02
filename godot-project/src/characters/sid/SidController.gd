@@ -111,10 +111,11 @@ func get_camera_forward() -> Vector3:
 	
 func get_damaged(amount):
 	$HealthBehaviour.get_damaged(amount)
+	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
 
 func _on_health_behaviour_no_health():
 	queue_free()
 
-func _on_hurt_box_damaged(amount):
+func _on_hurt_box_damaged(amount, hitbox):
 	get_damaged(amount)

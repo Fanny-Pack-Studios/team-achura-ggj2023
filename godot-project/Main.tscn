@@ -33,20 +33,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 camera = NodePath("../CameraPivot/Camera3D")
 
 [node name="Skeleton3D" parent="Sid/Player/Sid_Bones" index="0"]
-bones/0/rotation = Quaternion(0.213548, 1.18314e-07, -1.45842e-08, 0.976933)
-bones/1/rotation = Quaternion(0.121371, 1.79441e-10, 1.55238e-09, 0.992607)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/rotation = Quaternion(-0.439215, 0.0447971, -0.262066, 0.85814)
-bones/3/rotation = Quaternion(0.967772, -0.181691, -0.111354, 0.134184)
-bones/3/scale = Vector3(1, 0.999999, 1)
-bones/4/rotation = Quaternion(-0.409353, 0.187939, -0.0904795, 0.888213)
-bones/5/rotation = Quaternion(0.417014, -0.00166016, 0.00353049, 0.908891)
-bones/6/rotation = Quaternion(0.651654, -0.00314008, -0.007591, 0.758472)
-bones/7/rotation = Quaternion(0.967772, 0.181692, 0.111354, 0.134184)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(-0.409355, -0.187939, 0.0904807, 0.888212)
-bones/9/rotation = Quaternion(0.417016, 0.00165981, -0.00353002, 0.908891)
-bones/10/rotation = Quaternion(0.651654, 0.00313883, 0.00759076, 0.758472)
+bones/0/position = Vector3(-0.0129006, -0.0182293, -6.6902e-05)
+bones/0/rotation = Quaternion(0.213373, -0.00864407, 0.0395452, 0.976132)
+bones/0/scale = Vector3(0.973008, 0.887483, 0.973009)
+bones/1/rotation = Quaternion(0.121693, -0.0103857, 0.0864504, 0.988741)
+bones/1/scale = Vector3(1.03255, 1.11752, 1.03414)
+bones/2/rotation = Quaternion(-0.285681, 0.173369, 0.173443, 0.926416)
+bones/3/rotation = Quaternion(0.956863, -0.269923, -0.0844692, 0.0664823)
+bones/3/scale = Vector3(1.0573, 1.09932, 1.02867)
+bones/4/rotation = Quaternion(-0.585394, 0.196338, -0.183558, 0.7649)
+bones/5/rotation = Quaternion(0.516194, 0.0281222, -0.0575606, 0.854072)
+bones/6/rotation = Quaternion(0.661902, 0.112818, 0.0513424, 0.739271)
+bones/7/rotation = Quaternion(0.972841, 0.188594, 0.0880895, 0.101259)
+bones/7/scale = Vector3(1.04339, 1.11064, 1.0306)
+bones/8/rotation = Quaternion(-0.453205, -0.189502, 0.111191, 0.863904)
+bones/9/rotation = Quaternion(0.444373, -0.00413421, 0.00875856, 0.89579)
+bones/10/rotation = Quaternion(0.64016, 0.0119675, 0.0182573, 0.767932)
 bones/11/position = Vector3(-0.323884, -0.135873, -0.663551)
 bones/13/position = Vector3(0.323884, -0.135873, -0.663551)
 
@@ -54,24 +56,24 @@ bones/13/position = Vector3(0.323884, -0.135873, -0.663551)
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_tfxly")
 
 [node name="Skeleton3D" parent="Sid/Turrets/BasicTurret/Player_Turret_Basic/turretBasic_Bones" index="0"]
-bones/1/position = Vector3(0, 0.333739, -3.65158e-09)
-bones/1/rotation = Quaternion(-0.179354, 0, 0, 0.983785)
-bones/2/rotation = Quaternion(0.350777, 0.232473, -0.00984656, 0.907092)
-bones/3/rotation = Quaternion(0.128887, 0.054953, 0.170941, 0.975268)
-bones/4/rotation = Quaternion(0.205975, 0.153497, -0.104126, 0.960818)
-bones/5/position = Vector3(0.160537, 0.457409, 0.259931)
+bones/1/position = Vector3(0, 0.428869, -3.72529e-09)
+bones/1/rotation = Quaternion(-0.0864738, 0, 0, 0.996254)
+bones/2/rotation = Quaternion(0.251332, 0.230071, -0.0347559, 0.939517)
+bones/3/rotation = Quaternion(0.0144897, 0.0444863, 0.113966, 0.992382)
+bones/4/rotation = Quaternion(0.249657, 0.163867, -0.0688664, 0.951881)
+bones/5/position = Vector3(0.135971, 0.457281, 0.268308)
 bones/5/rotation = Quaternion(0.817644, 0.395174, 0.188665, -0.373767)
 bones/6/rotation = Quaternion(-0.305192, 0.601287, -0.18407, 0.715143)
-bones/7/rotation = Quaternion(0.0990472, -0.038855, 0.148431, 0.983183)
+bones/7/rotation = Quaternion(0.115783, -0.0354085, 0.202145, 0.971843)
 bones/8/rotation = Quaternion(0.0524188, 0.0731783, -0.199221, 0.975812)
 bones/9/rotation = Quaternion(-0.377688, -0.447962, 0.549716, 0.595394)
 bones/10/rotation = Quaternion(-0.689918, -0.177227, -0.00530799, 0.701838)
-bones/11/position = Vector3(1.18331e-07, 0.385038, 0.00368341)
+bones/11/position = Vector3(0.00103776, 0.386897, 0.00150351)
 bones/11/rotation = Quaternion(-0.214601, -0.332733, 0.209991, 0.893945)
-bones/12/rotation = Quaternion(-0.683758, 1.79348e-08, -4.61019e-09, 0.729709)
-bones/13/rotation = Quaternion(-0.200931, 0.1176, -0.0345943, 0.971906)
-bones/14/position = Vector3(0.512139, 1.12055, -0.488952)
-bones/14/rotation = Quaternion(0.52403, 0.0585332, 0.0219132, -0.849403)
+bones/12/rotation = Quaternion(-0.605623, 1.17678e-08, -1.15236e-08, 0.795751)
+bones/13/rotation = Quaternion(-0.296952, 0.120455, -0.0226773, 0.946993)
+bones/14/position = Vector3(0.501656, 1.18726, -0.524212)
+bones/14/rotation = Quaternion(0.547618, 0.059124, 0.020265, -0.834391)
 
 [node name="AnimationTree" parent="Sid/Turrets/BasicTurret" index="1"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ywtw8")
@@ -100,15 +102,13 @@ target = NodePath("../Sid")
 
 [node name="HUD" parent="." instance=ExtResource("6_m7xdt")]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("7_l6xcd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20882, 0, -2.50305)
-
-[connection signal="current_changed" from="Sid/HealthBehaviour" to="HUD" method="set_current_hp"]
-[connection signal="damaged" from="Sid/HealthBehaviour" to="HUD" method="damaged"]
-[connection signal="healed" from="Sid/HealthBehaviour" to="HUD" method="healed"]
-[connection signal="max_changed" from="Sid/HealthBehaviour" to="HUD" method="set_max_hp"]
+[connection signal="current_changed" from="Sid/HealthBehaviour" to="HUD/HPBar" method="set_current_hp"]
+[connection signal="damaged" from="Sid/HealthBehaviour" to="HUD/HPBar" method="damaged"]
+[connection signal="healed" from="Sid/HealthBehaviour" to="HUD/HPBar" method="healed"]
+[connection signal="max_changed" from="Sid/HealthBehaviour" to="HUD/HPBar" method="set_max_hp"]
 
 [editable path="Sid"]
 [editable path="Sid/Player"]
 [editable path="Sid/Turrets/BasicTurret"]
 [editable path="Sid/Turrets/BasicTurret/Player_Turret_Basic"]
+[editable path="HUD"]

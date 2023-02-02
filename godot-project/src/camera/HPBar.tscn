@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2a5kks26507x"]
+
+[ext_resource type="Script" path="res://src/camera/HPBar.gd" id="1_lb6aa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2mkwp"]
+font_size = 28
+
+[node name="HPBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lb6aa")
+
+[node name="HPBarRed" type="ColorRect" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 528.0
+offset_bottom = 80.0
+color = Color(0.733333, 0, 0, 1)
+
+[node name="HPBarGreen" type="ColorRect" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 528.0
+offset_bottom = 80.0
+color = Color(0, 0.72549, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 41.0
+offset_right = 177.0
+offset_bottom = 81.0
+text = "123 / 123"
+label_settings = SubResource("LabelSettings_2mkwp")
+vertical_alignment = 1

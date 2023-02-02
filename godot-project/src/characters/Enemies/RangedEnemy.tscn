@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://be8v1c686rjqf"]
+[gd_scene load_steps=16 format=3 uid="uid://be8v1c686rjqf"]
 
 [ext_resource type="Script" path="res://src/characters/Enemies/RangedEnemy.gd" id="1_nwbmc"]
 [ext_resource type="PackedScene" uid="uid://bow024vtgyl7c" path="res://src/characters/Enemies/EnemyBullet.tscn" id="2_igqmj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="7_goap5"]
 [ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="8_scyix"]
 [ext_resource type="PackedScene" uid="uid://p4vkilwto0u7" path="res://src/characters/Enemies/EnemiesEffectAnimationPlayer.tscn" id="11_w35pu"]
+[ext_resource type="PackedScene" uid="uid://c2lu4g4enrlv7" path="res://src/camera/EnemyHPBar.tscn" id="12_o5moy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fbi50"]
 render_priority = 0
@@ -75,8 +76,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, -0.9)
 
 [node name="EffectsAnimationPlayer" parent="." instance=ExtResource("11_w35pu")]
 
+[node name="EnemyHPBar" parent="." instance=ExtResource("12_o5moy")]
+
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
+[connection signal="current_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_current_hp"]
+[connection signal="damaged" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="damaged"]
+[connection signal="healed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="healed"]
+[connection signal="max_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_max_hp"]
 [connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
 [connection signal="damaged" from="HurtArea" to="." method="_on_hurt_area_damaged"]
 
 [editable path="Bug"]
+[editable path="EnemyHPBar"]

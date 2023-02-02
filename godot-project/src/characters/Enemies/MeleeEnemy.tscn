@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7w7tvfjmemgc"]
+[gd_scene load_steps=15 format=3 uid="uid://c7w7tvfjmemgc"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
 [ext_resource type="Script" path="res://src/characters/Enemies/MeleeEnemy.gd" id="1_gucpg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://src/characters/hithurtboxes/MeleeAreaDamage.gd" id="5_goyin"]
 [ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="6_r8cxf"]
 [ext_resource type="PackedScene" uid="uid://p4vkilwto0u7" path="res://src/characters/Enemies/EnemiesEffectAnimationPlayer.tscn" id="10_dl6rm"]
+[ext_resource type="PackedScene" uid="uid://c2lu4g4enrlv7" path="res://src/camera/EnemyHPBar.tscn" id="11_to3id"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v2rnu"]
 radius = 0.55293
@@ -72,8 +73,15 @@ shape = SubResource("SphereShape3D_4ny10")
 
 [node name="EffectsAnimationPlayer" parent="." instance=ExtResource("10_dl6rm")]
 
+[node name="EnemyHPBar" parent="." instance=ExtResource("11_to3id")]
+
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
+[connection signal="current_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_current_hp"]
+[connection signal="damaged" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="damaged"]
+[connection signal="healed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="healed"]
+[connection signal="max_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_max_hp"]
 [connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
 [connection signal="damaged" from="HurtArea" to="." method="_on_hurt_area_damaged"]
 
 [editable path="Bug"]
+[editable path="EnemyHPBar"]

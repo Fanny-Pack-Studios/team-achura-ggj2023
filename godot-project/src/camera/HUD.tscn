@@ -1,32 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1f4gg5is27aq"]
+[gd_scene load_steps=2 format=3 uid="uid://c1f4gg5is27aq"]
 
-[ext_resource type="Script" path="res://src/camera/HUD.gd" id="1_4vnrj"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_rkgrg"]
-font_size = 28
+[ext_resource type="PackedScene" uid="uid://b2a5kks26507x" path="res://src/camera/HPBar.tscn" id="1_7onyw"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_4vnrj")
 
-[node name="HPBarRed" type="ColorRect" parent="."]
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 528.0
-offset_bottom = 80.0
-color = Color(0.733333, 0, 0, 1)
-
-[node name="HPBarGreen" type="ColorRect" parent="."]
-offset_left = 40.0
-offset_top = 40.0
-offset_right = 528.0
-offset_bottom = 80.0
-color = Color(0, 0.72549, 0, 1)
-
-[node name="Label" type="Label" parent="."]
-offset_left = 48.0
-offset_top = 41.0
-offset_right = 177.0
-offset_bottom = 81.0
-text = "123 / 123"
-label_settings = SubResource("LabelSettings_rkgrg")
-vertical_alignment = 1
+[node name="HPBar" parent="." instance=ExtResource("1_7onyw")]

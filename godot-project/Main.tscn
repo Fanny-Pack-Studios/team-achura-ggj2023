@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://btndkaubpy51w"]
+[gd_scene load_steps=9 format=3 uid="uid://ds625tns8g6a"]
 
 [ext_resource type="PackedScene" uid="uid://ot005o7ult6h" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
 [ext_resource type="PackedScene" uid="uid://dn37q7ppf4y0l" path="res://src/levels/TestLevel.tscn" id="2_jacgm"]
-[ext_resource type="PackedScene" uid="uid://7jcsey26mn01" path="res://src/characters/Enemies/Ant.tscn" id="4_eq56t"]
+[ext_resource type="PackedScene" uid="uid://c7w7tvfjmemgc" path="res://src/characters/Enemies/MeleeEnemy.tscn" id="4_eq56t"]
 [ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://e68r607ja7aj" path="res://src/characters/Enemies/RangedEnemy.tscn" id="5_7l4mq"]
 
@@ -49,9 +49,11 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h0cv8")
 
-[node name="Ant" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_eq56t")]
+[node name="MeleeEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_eq56t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.94795, 0, -3.00684)
 target = NodePath("../Sid")
+aggro_range = 10.0
+size = 0.45
 
 [node name="RangedEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_7l4mq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.64364, 0, 4.43549)

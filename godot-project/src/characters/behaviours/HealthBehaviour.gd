@@ -17,6 +17,9 @@ func set_current_health(h):
 	
 func set_max_health(h):
 	max_health = h
+	
+func get_max_health():
+	return max_health
 
 func get_damaged(amount):
 	current_health -= amount

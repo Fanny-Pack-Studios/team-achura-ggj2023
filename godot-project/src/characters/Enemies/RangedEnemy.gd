@@ -7,6 +7,7 @@ extends Character
 @export var health: int = 5
 
 @export var attack_range: float = 3
+@export var aggro_range: float = 7
 
 @export var bullet_scene: PackedScene
 
@@ -19,8 +20,10 @@ func _physics_process(delta):
 		if not $AttackingBehaviour.is_attacking():
 			if _target_position().distance_to(position) < attack_range:
 				$AttackingBehaviour.start_attacking()
-			else:
+			elif _target_position().distance_to(position) < aggro_range:
 				$AccelerationBehaviour.towards_target(_target_position(), move_speed)
+			else:
+				$AccelerationBehaviour.clear_target()
 		else:
 			$AccelerationBehaviour.towards_target(_target_position(), 0)
 	else:

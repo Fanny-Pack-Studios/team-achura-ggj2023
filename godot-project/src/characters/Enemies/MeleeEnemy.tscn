@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://7jcsey26mn01"]
+[gd_scene load_steps=11 format=3 uid="uid://c7w7tvfjmemgc"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
-[ext_resource type="Script" path="res://src/characters/Enemies/Ant.gd" id="1_gucpg"]
+[ext_resource type="Script" path="res://src/characters/Enemies/MeleeEnemy.gd" id="1_gucpg"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="2_p71vt"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AttackingBehaviour.gd" id="4_404x4"]
 [ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="5_5c4bi"]
@@ -18,7 +18,7 @@ height = 1.75078
 [sub_resource type="SphereShape3D" id="SphereShape3D_4ny10"]
 radius = 0.3
 
-[node name="Ant" type="CharacterBody3D"]
+[node name="MeleeEnemy" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 7
 script = ExtResource("1_gucpg")

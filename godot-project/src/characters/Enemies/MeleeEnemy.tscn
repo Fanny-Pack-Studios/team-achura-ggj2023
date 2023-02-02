@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7w7tvfjmemgc"]
+[gd_scene load_steps=16 format=3 uid="uid://c7w7tvfjmemgc"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
 [ext_resource type="Script" path="res://src/characters/Enemies/MeleeEnemy.gd" id="1_gucpg"]
@@ -22,8 +22,11 @@ height = 1.75078
 [sub_resource type="SphereShape3D" id="SphereShape3D_4ny10"]
 radius = 0.3
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_kukrd"]
+radius = 11.0838
+
 [node name="MeleeEnemy" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_gucpg")
 
@@ -74,6 +77,16 @@ shape = SubResource("SphereShape3D_4ny10")
 [node name="EffectsAnimationPlayer" parent="." instance=ExtResource("10_dl6rm")]
 
 [node name="EnemyHPBar" parent="." instance=ExtResource("11_to3id")]
+
+[node name="IdleTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.769249, 0, -1.83481)
+
+[node name="AlertRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AlertRange"]
+shape = SubResource("SphereShape3D_kukrd")
 
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
 [connection signal="current_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_current_hp"]

@@ -8,6 +8,7 @@ extends Character
 
 @export var attack_range: float = 3
 @export var aggro_range: float = 7
+@export var aggroed_range: float = 20
 
 @export var bullet_scene: PackedScene
 
@@ -17,13 +18,16 @@ func _target_position() -> Vector3:
 func _physics_process(delta):
 	super._physics_process(delta)
 	if is_instance_valid(target):
+		$AccelerationBehaviour.turn_speed = PI
 		if not $AttackingBehaviour.is_attacking():
 			if _target_position().distance_to(position) < attack_range:
 				$AttackingBehaviour.start_attacking()
 			elif _target_position().distance_to(position) < aggro_range:
 				$AccelerationBehaviour.towards_target(_target_position(), move_speed)
 			else:
-				$AccelerationBehaviour.clear_target()
+				var new_direction = global_position.direction_to($IdleTarget.global_position)
+				$AccelerationBehaviour.turn_speed = PI/5
+				$AccelerationBehaviour.towards_direction(new_direction, move_speed / 2)
 		else:
 			$AccelerationBehaviour.towards_target(_target_position(), 0)
 	else:
@@ -36,6 +40,15 @@ func look_at_quat(quat):
 func get_damaged(amount):
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
+	aggro()
+	alert_allies()
+
+func alert_allies():
+	for enemy in $AlertRange.get_overlapping_bodies():
+		enemy.aggro()
+
+func aggro():
+	aggro_range = aggroed_range
 	
 func die():
 	queue_free()

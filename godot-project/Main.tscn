@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ot005o7ult6h" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
 [ext_resource type="PackedScene" uid="uid://dn37q7ppf4y0l" path="res://src/levels/TestLevel.tscn" id="2_jacgm"]
+[ext_resource type="PackedScene" uid="uid://ccinnq50c16ld" path="res://src/camera/CameraPivot.tscn" id="3_ug72s"]
 [ext_resource type="PackedScene" uid="uid://c7w7tvfjmemgc" path="res://src/characters/Enemies/MeleeEnemy.tscn" id="4_eq56t"]
-[ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://be8v1c686rjqf" path="res://src/characters/Enemies/RangedEnemy.tscn" id="5_7l4mq"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
@@ -28,18 +28,7 @@ camera = NodePath("../CameraPivot/Camera3D")
 
 [node name="TestLevel" parent="." instance=ExtResource("2_jacgm")]
 
-[node name="CameraPivot" type="Node3D" parent="."]
-transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
-script = ExtResource("5")
-character_to_follow_path = NodePath("../Sid")
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, -5.36442e-07, 0, -5.96046e-08, 1, 0, -4.76837e-07, 14.3313)
-projection = 1
-current = true
-fov = 25.0
-size = 8.0
-far = 300.0
+[node name="CameraPivot" parent="." instance=ExtResource("3_ug72s")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573577, 7.15302, 1.36655, -1.01066)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccinnq50c16ld"]
+
+[ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="1_xn1w2"]
+
+[node name="CameraPivot" type="Node3D"]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 0, 0, 0)
+script = ExtResource("1_xn1w2")
+character_to_follow_path = NodePath("../Sid")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -5.36442e-07, 0, -5.96046e-08, 1, 0, -4.76837e-07, 14.3313)
+projection = 1
+current = true
+fov = 25.0
+size = 10.0
+far = 300.0

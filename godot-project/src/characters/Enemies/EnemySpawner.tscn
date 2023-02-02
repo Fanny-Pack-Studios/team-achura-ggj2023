@@ -1,0 +1,116 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1dhg42pqbuwe"]
+
+[ext_resource type="Script" path="res://src/characters/Enemies/EnemySpawner.gd" id="1_8bosb"]
+[ext_resource type="PackedScene" uid="uid://brjrur8t8pm6f" path="res://assets/gltf/BugNest.gltf" id="2_y4d5x"]
+[ext_resource type="Material" uid="uid://co7rtkg6tjvqu" path="res://assets/materials/enemy_hurt_material.tres" id="3_1nvdf"]
+[ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="4_6mrhr"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="5_5ko7g"]
+
+[sub_resource type="Animation" id="Animation_nc38b"]
+resource_name = "Hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BugNest/Cube:instance_shader_parameters/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BugNest/Cube:instance_shader_parameters/grow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.1, 0.01]
+}
+
+[sub_resource type="Animation" id="Animation_hycfw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BugNest/Cube:instance_shader_parameters/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BugNest/Cube:instance_shader_parameters/grow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.01]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yp7j1"]
+_data = {
+"Hurt": SubResource("Animation_nc38b"),
+"RESET": SubResource("Animation_hycfw")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r3brc"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1byy6"]
+height = 1.0
+radius = 0.95
+
+[node name="EnemySpawner" type="Node3D"]
+script = ExtResource("1_8bosb")
+
+[node name="BugNest" parent="." instance=ExtResource("2_y4d5x")]
+
+[node name="Cube" parent="BugNest" index="0"]
+material_overlay = ExtResource("3_1nvdf")
+instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/grow = 0.01
+
+[node name="HealthBehaviour" type="Node" parent="."]
+script = ExtResource("4_6mrhr")
+
+[node name="EffectsAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yp7j1")
+}
+
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_5ko7g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_r3brc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 27
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_1byy6")
+
+[connection signal="damaged" from="HealthBehaviour" to="." method="_on_health_behaviour_damaged"]
+[connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
+
+[editable path="BugNest"]

@@ -34,7 +34,6 @@ func look_at_quat(quat):
 	global_transform.basis = Basis(quat).scaled(scale)
 		
 func get_damaged(amount):
-	$HealthBehaviour.get_damaged(amount)
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
 	

@@ -1,11 +1,11 @@
 class_name HealthBehaviour
 extends Node
 
-signal damaged
+signal damaged(amount)
 signal no_health
-signal healed
-signal current_changed
-signal max_changed
+signal healed(amount)
+signal current_changed(amount)
+signal max_changed(amount)
 
 @export var max_health:= 100
 

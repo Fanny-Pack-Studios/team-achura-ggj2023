@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7w7tvfjmemgc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7w7tvfjmemgc"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
 [ext_resource type="Script" path="res://src/characters/Enemies/MeleeEnemy.gd" id="1_gucpg"]
@@ -12,18 +12,21 @@
 [ext_resource type="PackedScene" uid="uid://p4vkilwto0u7" path="res://src/characters/Enemies/EnemiesEffectAnimationPlayer.tscn" id="10_dl6rm"]
 [ext_resource type="PackedScene" uid="uid://c2lu4g4enrlv7" path="res://src/camera/EnemyHPBar.tscn" id="11_to3id"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_v2rnu"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_kd8y0"]
 radius = 0.55293
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_51fhh"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhxrw"]
 radius = 0.397783
 height = 1.75078
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4ny10"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_r5b0u"]
 radius = 0.3
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_kukrd"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_68iy4"]
 radius = 11.0838
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_821bx"]
+radius = 5.0
 
 [node name="MeleeEnemy" type="CharacterBody3D"]
 collision_layer = 8
@@ -53,7 +56,7 @@ max_health = 50
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
-shape = SubResource("SphereShape3D_v2rnu")
+shape = SubResource("SphereShape3D_kd8y0")
 
 [node name="HurtArea" type="Area3D" parent="."]
 collision_layer = 8
@@ -62,7 +65,7 @@ script = ExtResource("6_r8cxf")
 
 [node name="HurtAreaCollision" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
-shape = SubResource("CapsuleShape3D_51fhh")
+shape = SubResource("CapsuleShape3D_bhxrw")
 
 [node name="AttackArea" type="Area3D" parent="."]
 collision_layer = 0
@@ -72,7 +75,7 @@ damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -1.1)
-shape = SubResource("SphereShape3D_4ny10")
+shape = SubResource("SphereShape3D_r5b0u")
 
 [node name="EffectsAnimationPlayer" parent="." instance=ExtResource("10_dl6rm")]
 
@@ -86,7 +89,13 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AlertRange"]
-shape = SubResource("SphereShape3D_kukrd")
+shape = SubResource("SphereShape3D_68iy4")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.30238)
+shape = SubResource("SphereShape3D_821bx")
 
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
 [connection signal="current_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_current_hp"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1dhg42pqbuwe"]
+[gd_scene load_steps=12 format=3 uid="uid://d1dhg42pqbuwe"]
 
 [ext_resource type="Script" path="res://src/characters/Enemies/EnemySpawner.gd" id="1_8bosb"]
 [ext_resource type="PackedScene" uid="uid://brjrur8t8pm6f" path="res://assets/gltf/BugNest.gltf" id="2_y4d5x"]
 [ext_resource type="Material" uid="uid://co7rtkg6tjvqu" path="res://assets/materials/enemy_hurt_material.tres" id="3_1nvdf"]
 [ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="4_6mrhr"]
 [ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="5_5ko7g"]
+[ext_resource type="PackedScene" uid="uid://c2lu4g4enrlv7" path="res://src/camera/EnemyHPBar.tscn" id="6_xp5vm"]
 
 [sub_resource type="Animation" id="Animation_nc38b"]
 resource_name = "Hurt"
@@ -110,7 +111,19 @@ collision_mask = 27
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CylinderShape3D_1byy6")
 
+[node name="EnemyHPBar" parent="." instance=ExtResource("6_xp5vm")]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="current_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_current_hp"]
 [connection signal="damaged" from="HealthBehaviour" to="." method="_on_health_behaviour_damaged"]
+[connection signal="damaged" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="damaged"]
+[connection signal="healed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="healed"]
+[connection signal="max_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_max_hp"]
 [connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 
 [editable path="BugNest"]
+[editable path="EnemyHPBar"]

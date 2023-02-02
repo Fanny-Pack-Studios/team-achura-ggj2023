@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2lu4g4enrlv7"]
+
+[ext_resource type="Script" path="res://src/camera/ControlFollowParent.gd" id="1_p8t7v"]
+[ext_resource type="PackedScene" uid="uid://b2a5kks26507x" path="res://src/camera/HPBar.tscn" id="2_2nf7o"]
+
+[node name="EnemyHPBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_p8t7v")
+
+[node name="HPBar" parent="." instance=ExtResource("2_2nf7o")]
+layout_mode = 1
+offset_left = -275.0
+offset_right = -275.0

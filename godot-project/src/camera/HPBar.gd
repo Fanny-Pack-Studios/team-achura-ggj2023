@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 var current_HP
 var max_HP

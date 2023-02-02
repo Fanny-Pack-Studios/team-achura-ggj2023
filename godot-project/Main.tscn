@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dn37q7ppf4y0l" path="res://src/levels/TestLevel.tscn" id="2_jacgm"]
 [ext_resource type="PackedScene" uid="uid://c7w7tvfjmemgc" path="res://src/characters/Enemies/MeleeEnemy.tscn" id="4_eq56t"]
 [ext_resource type="Script" path="res://src/camera/CameraPivot.gd" id="5"]
-[ext_resource type="PackedScene" uid="uid://e68r607ja7aj" path="res://src/characters/Enemies/RangedEnemy.tscn" id="5_7l4mq"]
+[ext_resource type="PackedScene" uid="uid://be8v1c686rjqf" path="res://src/characters/Enemies/RangedEnemy.tscn" id="5_7l4mq"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
 ground_color = Color(0.278431, 0.301961, 0.113725, 1)

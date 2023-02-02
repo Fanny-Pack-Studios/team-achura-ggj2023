@@ -1,10 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://geu5ddn58kxh"]
+[gd_scene load_steps=19 format=3 uid="uid://b5n48bbkeutcw"]
 
 [ext_resource type="Script" path="res://src/characters/sid/weapons/BasicTurret.gd" id="1_ohob3"]
 [ext_resource type="PackedScene" uid="uid://ctcxwbkadnets" path="res://assets/gltf/Player_Turret_Basic.gltf" id="2_ox1r3"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AnimationStateMachineBehaviour.gd" id="3_gny4u"]
 [ext_resource type="Script" path="res://src/characters/behaviours/ShootingProjectileBehaviour.gd" id="4_urt0h"]
-[ext_resource type="PackedScene" uid="uid://civk2k8b3y7jh" path="res://src/characters/projectiles/PlayerProjectile.tscn" id="5_5l420"]
+[ext_resource type="PackedScene" uid="uid://ugahxfhixjgf" path="res://src/characters/projectiles/PlayerProjectile.tscn" id="5_5l420"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cbsye"]
 animation = &"turretBasic_Aim"
@@ -74,6 +74,6 @@ spawn_point = NodePath("../ProjectileSpawnPosition")
 cooldown_time = 0.2
 
 [node name="ProjectileSpawnPosition" type="Node3D" parent="."]
-transform = Transform3D(0.996281, 0, 0.0861646, 0, 1, 0, -0.0861646, 0, 0.996281, 0, 1.306, -1.38862)
+transform = Transform3D(0.996281, 0, 0.0861646, 0, 1, 0, -0.0861646, 0, 0.996281, 0, 1.306, -0.713695)
 
 [connection signal="just_shot" from="ShootingProjectileBehaviour" to="." method="_on_shooting_projectile_behaviour_just_shot"]

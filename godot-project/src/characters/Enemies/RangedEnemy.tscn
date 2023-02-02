@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://e68r607ja7aj"]
+[gd_scene load_steps=11 format=3 uid="uid://be8v1c686rjqf"]
 
 [ext_resource type="Script" path="res://src/characters/Enemies/RangedEnemy.gd" id="1_nwbmc"]
-[ext_resource type="PackedScene" uid="uid://nkm8dvj477w3" path="res://src/characters/Enemies/EnemyBullet.tscn" id="2_igqmj"]
+[ext_resource type="PackedScene" uid="uid://bow024vtgyl7c" path="res://src/characters/Enemies/EnemyBullet.tscn" id="2_igqmj"]
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="2_nlxk1"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="3_orm7m"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AttackingBehaviour.gd" id="4_qttoi"]
@@ -20,6 +20,7 @@ height = 1.75078
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_nwbmc")
+bullet_scene = ExtResource("2_igqmj")
 
 [node name="Bug" parent="." instance=ExtResource("2_nlxk1")]
 

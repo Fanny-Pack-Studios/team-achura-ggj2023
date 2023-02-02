@@ -1,15 +1,22 @@
 extends Character
 
-@export var move_speed := 2.0
+@export var move_speed := 3.0
 
 @export var target: Node3D
 
-@export var health: int = 5
+@export var aggro_range: float = 5
 
-@export var attack_range: float = 3
-@export var aggro_range: float = 7
+@export var size: float = 1
 
-@export var bullet_scene: PackedScene
+var attack_range: float = 1.1
+
+func _ready():
+	scale = Vector3(size, size, size)
+	attack_range = attack_range * size
+	move_speed = move_speed / size
+	$HealthBehaviour.set_max_health($HealthBehaviour.get_max_health() * size)
+	$HealthBehaviour.set_current_health($HealthBehaviour.get_max_health())
+	$AttackArea.damage = $AttackArea.damage * (size/2)
 
 func _target_position() -> Vector3:
 	return target.position
@@ -37,12 +44,12 @@ func get_damaged(amount):
 	$HealthBehaviour.get_damaged(amount)
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
-	
+		
 func die():
 	queue_free()
 
 func _on_attacking_behaviour_attack():
-	$ShootingProjectileBehaviour.shoot()
+	$AttackArea.trigger()
 
 func _on_hurt_area_damaged(amount, hitbox: Hitbox):
 	get_damaged(amount)

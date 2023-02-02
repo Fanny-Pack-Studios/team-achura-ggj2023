@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://7jcsey26mn01"]
+[gd_scene load_steps=14 format=3 uid="uid://c7w7tvfjmemgc"]
 
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="1_604sy"]
-[ext_resource type="Script" path="res://src/characters/Enemies/Ant.gd" id="1_gucpg"]
+[ext_resource type="Script" path="res://src/characters/Enemies/MeleeEnemy.gd" id="1_gucpg"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="2_p71vt"]
+[ext_resource type="Material" uid="uid://cxarkxqegk51v" path="res://assets/materials/melee_enemy.tres" id="3_ev8se"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AttackingBehaviour.gd" id="4_404x4"]
+[ext_resource type="Material" uid="uid://co7rtkg6tjvqu" path="res://assets/materials/enemy_hurt_material.tres" id="4_wusrm"]
+[ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="5_5c4bi"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/MeleeAreaDamage.gd" id="5_goyin"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="6_r8cxf"]
+[ext_resource type="PackedScene" uid="uid://p4vkilwto0u7" path="res://src/characters/Enemies/EnemiesEffectAnimationPlayer.tscn" id="10_dl6rm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v2rnu"]
 radius = 0.55293
@@ -15,12 +21,18 @@ height = 1.75078
 [sub_resource type="SphereShape3D" id="SphereShape3D_4ny10"]
 radius = 0.3
 
-[node name="Ant" type="CharacterBody3D"]
+[node name="MeleeEnemy" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 7
 script = ExtResource("1_gucpg")
 
 [node name="Bug" parent="." instance=ExtResource("1_604sy")]
+
+[node name="Sphere" parent="Bug" index="0"]
+material_override = ExtResource("3_ev8se")
+material_overlay = ExtResource("4_wusrm")
+instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/grow = 0.01
 
 [node name="AccelerationBehaviour" type="Node" parent="."]
 script = ExtResource("2_p71vt")
@@ -31,13 +43,18 @@ accelerate_forward = true
 script = ExtResource("4_404x4")
 attack_wait_time = 0.5
 
+[node name="HealthBehaviour" type="Node" parent="."]
+script = ExtResource("5_5c4bi")
+max_health = 50
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
 shape = SubResource("SphereShape3D_v2rnu")
 
 [node name="HurtArea" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("6_r8cxf")
 
 [node name="HurtAreaCollision" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
@@ -46,10 +63,17 @@ shape = SubResource("CapsuleShape3D_51fhh")
 [node name="AttackArea" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
+script = ExtResource("5_goyin")
+damage = 20
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, -1.1)
 shape = SubResource("SphereShape3D_4ny10")
 
+[node name="EffectsAnimationPlayer" parent="." instance=ExtResource("10_dl6rm")]
+
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
-[connection signal="body_entered" from="HurtArea" to="." method="_on_hurt_area_body_entered"]
+[connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
+[connection signal="damaged" from="HurtArea" to="." method="_on_hurt_area_damaged"]
+
+[editable path="Bug"]

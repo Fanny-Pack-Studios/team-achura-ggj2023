@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgfgyxgiu6l52"]
+
+[ext_resource type="Script" path="res://src/characters/projectiles/Projectile.gd" id="1_foj3j"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/AreaDamage.gd" id="3_0id6f"]
+
+[node name="Projectile" type="Node3D"]
+script = ExtResource("1_foj3j")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_0id6f")
+
+[node name="TerrainColliderArea" type="Area3D" parent="."]
+collision_layer = 0
+
+[connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]
+[connection signal="impact" from="Hitbox" to="." method="impact_damageable"]
+[connection signal="body_entered" from="TerrainColliderArea" to="." method="impact_terrain"]

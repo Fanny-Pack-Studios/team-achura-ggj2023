@@ -1,11 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://e68r607ja7aj"]
+[gd_scene load_steps=15 format=3 uid="uid://be8v1c686rjqf"]
 
 [ext_resource type="Script" path="res://src/characters/Enemies/RangedEnemy.gd" id="1_nwbmc"]
-[ext_resource type="PackedScene" uid="uid://nkm8dvj477w3" path="res://src/characters/Enemies/EnemyBullet.tscn" id="2_igqmj"]
+[ext_resource type="PackedScene" uid="uid://bow024vtgyl7c" path="res://src/characters/Enemies/EnemyBullet.tscn" id="2_igqmj"]
 [ext_resource type="PackedScene" uid="uid://b5gq8poi61am2" path="res://assets/gltf/Bug.gltf" id="2_nlxk1"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="3_orm7m"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AttackingBehaviour.gd" id="4_qttoi"]
+[ext_resource type="Material" uid="uid://djgb6qf1umosy" path="res://assets/materials/ranged_enemy.tres" id="4_yajuh"]
+[ext_resource type="Shader" uid="uid://caqli7de8ty18" path="res://assets/shaders/enemy_hurt_shader.tres" id="5_8rpfn"]
 [ext_resource type="Script" path="res://src/characters/behaviours/ShootingProjectileBehaviour.gd" id="5_i42qq"]
+[ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="7_goap5"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="8_scyix"]
+[ext_resource type="PackedScene" uid="uid://p4vkilwto0u7" path="res://src/characters/Enemies/EnemiesEffectAnimationPlayer.tscn" id="11_w35pu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fbi50"]
+render_priority = 0
+shader = ExtResource("5_8rpfn")
+shader_parameter/albedo = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v2rnu"]
 radius = 0.55293
@@ -18,8 +28,15 @@ height = 1.75078
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_nwbmc")
+bullet_scene = ExtResource("2_igqmj")
 
 [node name="Bug" parent="." instance=ExtResource("2_nlxk1")]
+
+[node name="Sphere" parent="Bug" index="0"]
+material_override = ExtResource("4_yajuh")
+material_overlay = SubResource("ShaderMaterial_fbi50")
+instance_shader_parameters/alpha = 0.0
+instance_shader_parameters/grow = 0.01
 
 [node name="AccelerationBehaviour" type="Node" parent="."]
 script = ExtResource("3_orm7m")
@@ -36,13 +53,18 @@ script = ExtResource("5_i42qq")
 ProjectileScene = ExtResource("2_igqmj")
 spawn_point = NodePath("../BulletSpawnPoint")
 
+[node name="HealthBehaviour" type="Node" parent="."]
+script = ExtResource("7_goap5")
+max_health = 30
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
 shape = SubResource("SphereShape3D_v2rnu")
 
 [node name="HurtArea" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 6
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("8_scyix")
 
 [node name="HurtAreaCollision" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
@@ -51,5 +73,10 @@ shape = SubResource("CapsuleShape3D_51fhh")
 [node name="BulletSpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, -0.9)
 
+[node name="EffectsAnimationPlayer" parent="." instance=ExtResource("11_w35pu")]
+
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
-[connection signal="body_entered" from="HurtArea" to="." method="_on_hurt_area_body_entered"]
+[connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
+[connection signal="damaged" from="HurtArea" to="." method="_on_hurt_area_damaged"]
+
+[editable path="Bug"]

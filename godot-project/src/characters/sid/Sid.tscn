@@ -1,14 +1,15 @@
-[gd_scene load_steps=33 format=3 uid="uid://ot005o7ult6h"]
+[gd_scene load_steps=34 format=3 uid="uid://ot005o7ult6h"]
 
 [ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
 [ext_resource type="PackedScene" uid="uid://d4ct68vy525gm" path="res://assets/gltf/Player.gltf" id="2_j5eyj"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="3_4ta14"]
 [ext_resource type="Material" uid="uid://cl106x56rtaqm" path="res://assets/materials/player_hurt_material.tres" id="3_h2ssy"]
 [ext_resource type="Script" path="res://src/characters/sid/weapons/Turrets.gd" id="4_tvbpj"]
-[ext_resource type="PackedScene" uid="uid://geu5ddn58kxh" path="res://src/characters/sid/weapons/BasicTurret.tscn" id="5_6pylk"]
+[ext_resource type="PackedScene" uid="uid://b5n48bbkeutcw" path="res://src/characters/sid/weapons/BasicTurret.tscn" id="5_6pylk"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AnimationStateMachineBehaviour.gd" id="6_2iqsm"]
 [ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="7_yjpoe"]
 [ext_resource type="AnimationLibrary" uid="uid://bhwhnbqnb61dv" path="res://src/characters/sid/animations/effects.tres" id="9_6j72g"]
+[ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="9_837bo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hafaq"]
 radius = 0.245524
@@ -183,6 +184,9 @@ material_overlay = ExtResource("3_h2ssy")
 [node name="AnimationTree" parent="Turrets/BasicTurret" index="1"]
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_xckjw")
 
+[node name="ShootingProjectileBehaviour" parent="Turrets/BasicTurret" index="3"]
+cooldown_time = 0.1
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("6_2iqsm")
 animation_tree = NodePath("../AnimationTree")
@@ -192,7 +196,8 @@ script = ExtResource("7_yjpoe")
 
 [node name="HurtBox" type="Area3D" parent="."]
 collision_layer = 2
-collision_mask = 24
+collision_mask = 0
+script = ExtResource("9_837bo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.366501, 0)
@@ -204,7 +209,7 @@ libraries = {
 }
 
 [connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
-[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
 
 [editable path="Player"]
 [editable path="Turrets/BasicTurret"]

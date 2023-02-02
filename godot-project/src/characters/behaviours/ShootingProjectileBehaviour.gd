@@ -12,6 +12,7 @@ signal just_shot
 func _ready():
 	cooldown_timer = Timer.new()
 	cooldown_timer.one_shot = true
+	add_child(cooldown_timer)
 
 func shoot():
 	if cooldown_timer.is_stopped():

@@ -1,40 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://nkm8dvj477w3"]
+[gd_scene load_steps=6 format=3 uid="uid://bow024vtgyl7c"]
 
-[ext_resource type="Script" path="res://src/characters/Enemies/EnemyBullet.gd" id="1_ptd0w"]
-[ext_resource type="Script" path="res://src/characters/hithurtboxes/AreaDamage.gd" id="2_28kd8"]
+[ext_resource type="PackedScene" uid="uid://dgfgyxgiu6l52" path="res://src/characters/projectiles/DefaultProjectile.tscn" id="1_78op2"]
+[ext_resource type="PackedScene" uid="uid://4hqwvbc6y5f1" path="res://src/characters/Enemies/EnemyProjectileExplosion.tscn" id="2_ithwg"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_pt2ei"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ip6mb"]
 height = 0.331796
-radius = 0.119303
+radius = 0.163649
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0gtvp"]
-radius = 0.100996
-height = 0.427461
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qo30j"]
+radius = 0.241969
+height = 0.586616
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ny15i"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rj1mn"]
 albedo_color = Color(0.780392, 0, 0, 1)
 
-[node name="EnemyBullet" type="Node3D"]
-script = ExtResource("1_ptd0w")
+[node name="Projectile" instance=ExtResource("1_78op2")]
+ExplosionScene = ExtResource("2_ithwg")
 
-[node name="HitBox3D" type="Area3D" parent="."]
+[node name="Hitbox" parent="." index="0"]
 collision_layer = 16
-collision_mask = 7
-script = ExtResource("2_28kd8")
+collision_mask = 6
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox3D"]
-shape = SubResource("CylinderShape3D_pt2ei")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.0830658)
+shape = SubResource("CylinderShape3D_ip6mb")
 
-[node name="TerrainArea3D" type="Area3D" parent="."]
-collision_layer = 0
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainColliderArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.00575067, 0.0803766)
+shape = SubResource("CapsuleShape3D_qo30j")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0533835, 0)
-shape = SubResource("CapsuleShape3D_0gtvp")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 radius = 0.2
 height = 0.5
 cone = true
-material = SubResource("StandardMaterial3D_ny15i")
+material = SubResource("StandardMaterial3D_rj1mn")

@@ -4,19 +4,27 @@ extends Node
 signal damaged
 signal no_health
 signal healed
+signal current_changed
+signal max_changed
 
 @export var max_health:= 100
 
 var current_health
 
 func _ready():
-	current_health = max_health
+	set_max_health(max_health)
+	set_current_health(max_health)
 	
 func set_current_health(h):
 	current_health = h
+	emit_signal("current_changed" , current_health)
 	
 func set_max_health(h):
 	max_health = h
+	emit_signal("max_changed" , max_health)
+	
+func get_max_health():
+	return max_health
 
 func get_damaged(amount):
 	current_health -= amount

@@ -1,6 +1,6 @@
 [gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://bhwhnbqnb61dv"]
 
-[sub_resource type="Animation" id="Animation_cqnia"]
+[sub_resource type="Animation" id="Animation_4fb2x"]
 resource_name = "Hurt"
 length = 0.4
 tracks/0/type = "value"
@@ -28,7 +28,7 @@ tracks/1/keys = {
 "values": [0.1, 0.01]
 }
 
-[sub_resource type="Animation" id="Animation_en4gi"]
+[sub_resource type="Animation" id="Animation_kpqfg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,6 +57,6 @@ tracks/1/keys = {
 
 [resource]
 _data = {
-"Hurt": SubResource("Animation_cqnia"),
-"RESET": SubResource("Animation_en4gi")
+"Hurt": SubResource("Animation_4fb2x"),
+"RESET": SubResource("Animation_kpqfg")
 }

@@ -29,3 +29,4 @@ func deactivation():
 
 func _on_shooting_projectile_behaviour_just_shot():
 	$StateMachine.change_state(SHOOT_STATE, func(a):pass, true)
+	$ProjectileSpawnPosition/ShotSound.play()

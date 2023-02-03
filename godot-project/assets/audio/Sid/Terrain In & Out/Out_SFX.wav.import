@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://du8fieqebhvpi"
+path="res://.godot/imported/Out_SFX.wav-d8b471496ed8097cb77f626b650337ab.sample"
+
+[deps]
+
+source_file="res://assets/audio/Sid/Terrain In & Out/Out_SFX.wav"
+dest_files=["res://.godot/imported/Out_SFX.wav-d8b471496ed8097cb77f626b650337ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

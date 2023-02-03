@@ -25,7 +25,11 @@ func activation():
 func deactivation():
 	$StateMachine.change_state(DIE_STATE)
 	
-	return await $AnimationTree.animation_finished == "turretBasic_Die"
+	var finished_animation = await $AnimationTree.animation_finished
+	if finished_animation == "turretBasic_Die":
+		return
+	else:
+		return await $AnimationTree.animation_finished
 
 func _on_shooting_projectile_behaviour_just_shot():
 	$StateMachine.change_state(SHOOT_STATE, func(a):pass, true)

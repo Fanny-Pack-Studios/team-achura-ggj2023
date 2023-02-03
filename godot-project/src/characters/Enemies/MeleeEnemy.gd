@@ -16,6 +16,8 @@ var attack_trigger_delay := 0.53
 
 var reference_move_speed = 8
 
+var dying: bool = false
+
 func _ready():
 	scale = Vector3(size, size, size)
 	attack_range = attack_range * size
@@ -31,6 +33,8 @@ func _target_position() -> Vector3:
 	return target.position
 
 func _physics_process(delta):
+	if dying: 
+		return
 	super._physics_process(delta)
 	var current_speed = move_speed
 	if is_instance_valid(target):
@@ -70,12 +74,15 @@ func aggro():
 	aggro_range = aggroed_range
 		
 func die():
-	for node in [$AccelerationBehaviour, $AttackingBehaviour, $HealthBehaviour, $HurtArea, $AttackArea, $AlertRange]:
-		queue_free()
-	$StateMachine.change_state("die")
-	$EffectsAnimationPlayer.play("die")
+	dying = true
+	for node in [$EnemyHPBar, $AccelerationBehaviour, $AttackingBehaviour, $HealthBehaviour, $HurtArea, $AttackArea, $AlertRange]:
+		node.queue_free()
+	$StateMachine.change_state("Die")
+	$EffectsAnimationPlayer.queue("die")
+
 	while await $EffectsAnimationPlayer.animation_finished != "die":
 		pass
+		
 	queue_free()
 
 func _on_attacking_behaviour_attack():

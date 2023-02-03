@@ -8,10 +8,10 @@ extends Area3D
 signal damaged(amount, hitbox)
 
 func get_damaged(amount, hitbox):
+	emit_signal("damaged", amount, hitbox)
+	
 	if healthBehaviour:
 		healthBehaviour.get_damaged(amount)
-		
-	emit_signal("damaged", amount, hitbox)
 	
 func aggro():
 	pass

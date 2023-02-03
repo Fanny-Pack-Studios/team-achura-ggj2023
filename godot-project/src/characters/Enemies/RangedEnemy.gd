@@ -4,7 +4,7 @@ extends Character
 
 @export var health: int = 5
 
-@export var attack_range: float = 3
+@export var attack_range: float = 5
 @export var aggro_range: float = 7
 @export var aggroed_range: float = 20
 

@@ -1,6 +1,6 @@
 extends Node
 
-@export var fade_time = 1.0
+@export var fade_time = 1
 
 @onready var current: AudioStreamPlayer = $Sid
 
@@ -17,19 +17,19 @@ func change_music(to: String):
 	
 	if stream is AudioStreamPlayer and stream != current:
 		stream.play(current.get_playback_position())
-		fade_out(current)
 		fade_in(stream)
+		fade_out(current)
 		current = stream
 		
 func fade_out(track: AudioStreamPlayer):
 	print("Fading out ", track)
-	fade_with("fade_out_tween", track, -80.0)
+	fade_with("fade_out_tween", track, -20.0)
 	await fade_out_tween.finished
 	print("Fade out finished")
 	track.stop()
 	
 func fade_in(track: AudioStreamPlayer):
-	fade_with("fade_out_tween", track, 0)
+	fade_with("fade_in_tween", track, 0)
 	
 func fade_with(fader_property: String, track: AudioStreamPlayer, to: float):
 	var fader = get(fader_property)
@@ -39,6 +39,7 @@ func fade_with(fader_property: String, track: AudioStreamPlayer, to: float):
 		
 	fader = get_tree().create_tween()
 	print("Calling tween with ", track, to)
-	fader.tween_property(track, "volume_db", to, fade_time).from_current()
 
+	fader.tween_property(track, "volume_db", to, fade_time).from_current()
+	
 	set(fader_property, fader)

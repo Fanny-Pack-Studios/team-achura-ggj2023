@@ -79,7 +79,7 @@ func die():
 func _on_attacking_behaviour_attack():
 	$StateMachine.change_state("Shoot")
 	await get_tree().create_timer(shoot_trigger_delay).timeout
-	if $StateMachine.current_state() == "Shoot":
+	if $StateMachine.current_state() == "Shoot" and is_instance_valid(get_node_or_null("ShootingProjectileBehaviour")):
 		$ShootingProjectileBehaviour.shoot()
 	
 

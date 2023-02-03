@@ -89,7 +89,7 @@ func die():
 func _on_attacking_behaviour_attack():
 	$StateMachine.change_state("Attack")
 	await get_tree().create_timer(attack_trigger_delay).timeout
-	if $StateMachine.current_state() == "Attack":
+	if $StateMachine.current_state() == "Attack" and is_instance_valid(get_node_or_null("AttackArea")):
 		$AttackArea.trigger()
 
 func _on_hurt_area_damaged(amount, hitbox: Hitbox):

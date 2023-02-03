@@ -12,6 +12,10 @@ extends Character
 
 var target: Node3D
 
+var dying: bool = false
+
+var shoot_trigger_delay = 1
+
 func _ready():
 	target = Global.get_player()
 
@@ -19,6 +23,9 @@ func _target_position() -> Vector3:
 	return target.position
 
 func _physics_process(delta):
+	if dying:
+		return
+		
 	super._physics_process(delta)
 	if is_instance_valid(target):
 		$AccelerationBehaviour.turn_speed = PI
@@ -27,14 +34,18 @@ func _physics_process(delta):
 				$AttackingBehaviour.start_attacking()
 			elif _target_position().distance_to(position) < aggro_range:
 				$AccelerationBehaviour.towards_target(_target_position(), move_speed)
+				$StateMachine.change_state("Move")
 			else:
 				var new_direction = global_position.direction_to($IdleTarget.global_position)
 				$AccelerationBehaviour.turn_speed = PI/5
 				$AccelerationBehaviour.towards_direction(new_direction, move_speed / 2)
+				$StateMachine.change_state("Move")
 		else:
 			$AccelerationBehaviour.towards_target(_target_position(), 0)
+			$StateMachine.change_state("Idle")
 	else:
 		$AccelerationBehaviour.clear_target()
+		$StateMachine.change_state("Idle")
 
 func look_at_quat(quat):
 	var scale = global_transform.basis.get_scale()
@@ -54,10 +65,23 @@ func aggro():
 	aggro_range = aggroed_range
 	
 func die():
+	dying = true
+	for node in [$EnemyHPBar, $AccelerationBehaviour, $AttackingBehaviour, $HealthBehaviour, $HurtArea, $AlertRange, $ShootingProjectileBehaviour]:
+		node.queue_free()
+	$StateMachine.change_state("Die")
+	$EffectsAnimationPlayer.queue("Die")
+
+	while await $EffectsAnimationPlayer.animation_finished != "Die":
+		pass
+		
 	queue_free()
 
 func _on_attacking_behaviour_attack():
-	$ShootingProjectileBehaviour.shoot()
+	$StateMachine.change_state("Shoot")
+	await get_tree().create_timer(shoot_trigger_delay).timeout
+	if $StateMachine.current_state() == "Shoot":
+		$ShootingProjectileBehaviour.shoot()
+	
 
 func _on_hurt_area_damaged(amount, hitbox: Hitbox):
 	get_damaged(amount)

@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://csdnouknym7tg"]
+
+[ext_resource type="Texture2D" uid="uid://0wfmtl6rdnq3" path="res://assets/gltf/antWings_Albedo-antWings_Opacity.png" id="1_hlicx"]
+[ext_resource type="Texture2D" uid="uid://dhkypkk6la0o3" path="res://assets/gltf/antWings_Emissive.png" id="2_nml8r"]
+[ext_resource type="Texture2D" uid="uid://b0n6aelstnpg2" path="res://assets/gltf/antWings_Metallic-antWings_Roughness.png" id="3_m853k"]
+[ext_resource type="Texture2D" uid="uid://oydf8ar2gep" path="res://assets/gltf/antWings_Normal.png" id="4_j78hd"]
+
+[resource]
+resource_name = "antWings"
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_hlicx")
+metallic = 1.0
+metallic_texture = ExtResource("3_m853k")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_m853k")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_texture = ExtResource("2_nml8r")
+normal_enabled = true
+normal_texture = ExtResource("4_j78hd")

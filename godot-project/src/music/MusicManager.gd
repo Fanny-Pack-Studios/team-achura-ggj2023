@@ -21,14 +21,14 @@ func change_music(to: String):
 		current = stream
 		
 func fade_out(track: AudioStreamPlayer):
-	fade_with("fade_out_tween", track, -20.0)
+	fade_with("fade_out_tween", track, -40.0, Tween.EASE_IN)
 	await fade_out_tween.finished
 	track.stop()
 	
 func fade_in(track: AudioStreamPlayer):
-	fade_with("fade_in_tween", track, 0)
+	fade_with("fade_in_tween", track, 0, Tween.EASE_OUT)
 	
-func fade_with(fader_property: String, track: AudioStreamPlayer, to: float):
+func fade_with(fader_property: String, track: AudioStreamPlayer, to: float, easing):
 	var fader = get(fader_property)
 	
 	if fader:
@@ -36,6 +36,6 @@ func fade_with(fader_property: String, track: AudioStreamPlayer, to: float):
 		
 	fader = get_tree().create_tween()
 
-	fader.tween_property(track, "volume_db", to, fade_time).from_current()
+	fader.tween_property(track, "volume_db", to, fade_time).set_trans(Tween.TRANS_EXPO).set_ease(easing)
 	
 	set(fader_property, fader)

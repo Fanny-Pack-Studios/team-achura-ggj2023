@@ -9,7 +9,12 @@ extends Character
 
 var target: Node3D
 
-var attack_range: float = 1.1
+var attack_range: float = 2.0
+
+#TODO: Ver cómo meter esto en la animación?
+var attack_trigger_delay := 0.53
+
+var reference_move_speed = 8
 
 func _ready():
 	scale = Vector3(size, size, size)
@@ -27,6 +32,7 @@ func _target_position() -> Vector3:
 
 func _physics_process(delta):
 	super._physics_process(delta)
+	var current_speed = move_speed
 	if is_instance_valid(target):
 		$AccelerationBehaviour.turn_speed = PI
 		if not $AttackingBehaviour.is_attacking():
@@ -34,19 +40,22 @@ func _physics_process(delta):
 				$AttackingBehaviour.start_attacking()
 			elif _target_position().distance_to(position) < aggro_range:
 				$AccelerationBehaviour.towards_target(_target_position(), move_speed)
+				$StateMachine.change_state("Walk")
 			else:
 				var new_direction = global_position.direction_to($IdleTarget.global_position)
 				$AccelerationBehaviour.turn_speed = PI/5
+				current_speed = move_speed / 2
 				$AccelerationBehaviour.towards_direction(new_direction, move_speed / 2)
+				$StateMachine.change_state("Walk")
 		else:
 			$AccelerationBehaviour.towards_target(_target_position(), 0)
+			$StateMachine.change_state("Idle")
 	else:
 		$AccelerationBehaviour.clear_target()
+		$StateMachine.change_state("Idle")
 
-func look_at_quat(quat):
-	var scale = global_transform.basis.get_scale()
-	global_transform.basis = Basis(quat).scaled(scale)
-		
+	$AnimationTree.set("parameters/Walk/WalkSpeed/scale", current_speed / reference_move_speed)
+
 func get_damaged(amount):
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
@@ -61,10 +70,19 @@ func aggro():
 	aggro_range = aggroed_range
 		
 func die():
+	for node in [$AccelerationBehaviour, $AttackingBehaviour, $HealthBehaviour, $HurtArea, $AttackArea, $AlertRange]:
+		queue_free()
+	$StateMachine.change_state("die")
+	$EffectsAnimationPlayer.play("die")
+	while await $EffectsAnimationPlayer.animation_finished != "die":
+		pass
 	queue_free()
 
 func _on_attacking_behaviour_attack():
-	$AttackArea.trigger()
+	$StateMachine.change_state("Attack")
+	await get_tree().create_timer(attack_trigger_delay).timeout
+	if $StateMachine.current_state() == "Attack":
+		$AttackArea.trigger()
 
 func _on_hurt_area_damaged(amount, hitbox: Hitbox):
 	get_damaged(amount)

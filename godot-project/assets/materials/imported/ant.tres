@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://d0g36v4ltkrti"]
+
+[ext_resource type="Texture2D" uid="uid://bg34g08nic8ct" path="res://assets/gltf/ant_Albedo.png" id="1_1a4i6"]
+[ext_resource type="Texture2D" uid="uid://g1f7qx6tl5ts" path="res://assets/gltf/ant_Emissive.png" id="2_osr2o"]
+[ext_resource type="Texture2D" uid="uid://dablsnm2jjge0" path="res://assets/gltf/ant_Metallic-ant_Roughness.png" id="3_aor1h"]
+[ext_resource type="Texture2D" uid="uid://bnpk32v4ljxnn" path="res://assets/gltf/ant_Normal.png" id="4_t5ong"]
+
+[resource]
+resource_name = "ant"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_1a4i6")
+metallic = 1.0
+metallic_texture = ExtResource("3_aor1h")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_aor1h")
+roughness_texture_channel = 1
+emission_enabled = true
+emission_texture = ExtResource("2_osr2o")
+normal_enabled = true
+normal_texture = ExtResource("4_t5ong")

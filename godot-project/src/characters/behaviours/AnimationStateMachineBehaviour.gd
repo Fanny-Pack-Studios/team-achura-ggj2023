@@ -1,7 +1,7 @@
 class_name AnimationStateMachineBehaviour
 extends Node
 
-@export var animation_tree = $"../AnimationTree"
+@onready @export var animation_tree = $"../AnimationTree"
 
 func current_state():
 	return animation_state_machine().get_current_node()

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ibr1ug68gum0"]
+
+[ext_resource type="AudioStream" uid="uid://3000ir7xrjtl" path="res://assets/audio/Music/Sid_music_120.wav" id="1_5gfno"]
+[ext_resource type="Script" path="res://src/music/MusicManager.gd" id="1_5i01w"]
+[ext_resource type="AudioStream" uid="uid://ck1v77o3bpskd" path="res://assets/audio/Music/Turret_music_120.wav" id="2_cgent"]
+
+[node name="MusicManager" type="Node"]
+script = ExtResource("1_5i01w")
+
+[node name="Sid" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_5gfno")
+volume_db = -80.0
+bus = &"Music"
+
+[node name="Turret" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_cgent")
+volume_db = -80.0
+bus = &"Music"

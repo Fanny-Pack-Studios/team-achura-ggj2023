@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 
 DebugOverlay="*res://src/debug/DebugOverlay.tscn"
 Global="*res://src/utils/Global.gd"
+MusicManager="*res://src/music/MusicManager.tscn"
 
 [debug]
 

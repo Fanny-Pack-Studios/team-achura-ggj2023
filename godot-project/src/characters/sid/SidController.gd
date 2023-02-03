@@ -23,6 +23,9 @@ const DEACTIVATING_STATE = &"Deactivating"
 
 const states_that_allow_movement = [IDLE_STATE, RUN_STATE]
 
+signal planted
+signal unplanted
+
 func is_planting_cancellable():
 	return can_cancel_plant and $PlantCancelTimer.time_left > 0
 
@@ -79,10 +82,12 @@ func enter_state(new_state: StringName):
 			await $PlantCancelTimer.timeout
 			
 			if $StateMachine.current_state() == PLANT_STATE:
+				emit_signal("planted")
 				$Turrets.activate(Turrets.TurretType.BasicTurret)
 			
 		UNPLANT_STATE:
 			$UnplantAllowMovementTimer.start(time_frozen_when_unplanting)
+			emit_signal("unplanted")
 			
 
 func process_input():

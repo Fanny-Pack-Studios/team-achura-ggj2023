@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://ot005o7ult6h"]
 
 [ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
-[ext_resource type="PackedScene" uid="uid://d4ct68vy525gm" path="res://assets/gltf/Player.gltf" id="2_j5eyj"]
+[ext_resource type="PackedScene" uid="uid://cst2y8ls6oyxp" path="res://assets/gltf/Player.gltf" id="2_j5eyj"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="3_4ta14"]
 [ext_resource type="Material" uid="uid://cl106x56rtaqm" path="res://assets/materials/player_hurt_material.tres" id="3_h2ssy"]
 [ext_resource type="Script" path="res://src/characters/sid/weapons/Turrets.gd" id="4_tvbpj"]
@@ -109,22 +109,29 @@ script = ExtResource("1_l1tjl")
 [node name="Player" parent="." instance=ExtResource("2_j5eyj")]
 
 [node name="Skeleton3D" parent="Player/Sid_Bones" index="0"]
-bones/0/rotation = Quaternion(0.213548, 1.18314e-07, -1.45842e-08, 0.976933)
-bones/1/rotation = Quaternion(0.121371, 1.79441e-10, 1.55238e-09, 0.992607)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/rotation = Quaternion(-0.439215, 0.0447971, -0.262066, 0.85814)
-bones/3/rotation = Quaternion(0.967772, -0.181691, -0.111354, 0.134184)
-bones/3/scale = Vector3(1, 0.999999, 1)
-bones/4/rotation = Quaternion(-0.409353, 0.187939, -0.0904795, 0.888213)
-bones/5/rotation = Quaternion(0.417014, -0.00166016, 0.00353049, 0.908891)
-bones/6/rotation = Quaternion(0.651654, -0.00314008, -0.007591, 0.758472)
-bones/7/rotation = Quaternion(0.967772, 0.181692, 0.111354, 0.134184)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(-0.409355, -0.187939, 0.0904807, 0.888212)
-bones/9/rotation = Quaternion(0.417016, 0.00165981, -0.00353002, 0.908891)
-bones/10/rotation = Quaternion(0.651654, 0.00313883, 0.00759076, 0.758472)
+bones/0/position = Vector3(0.000170996, -0.00170505, 0.0037904)
+bones/0/rotation = Quaternion(0.213548, 0.0001042, -0.000476142, 0.976933)
+bones/0/scale = Vector3(0.903344, 0.957416, 0.903345)
+bones/1/position = Vector3(-3.9968e-09, 0.506874, 0.0167638)
+bones/1/rotation = Quaternion(0.120128, 0.0161607, -0.131343, 0.983899)
+bones/1/scale = Vector3(1.10309, 1.05238, 1.1035)
+bones/2/rotation = Quaternion(-0.27329, 0.20501, 0.254241, 0.90479)
+bones/3/position = Vector3(-0.0939119, -0.0509713, 0.0147648)
+bones/3/rotation = Quaternion(0.965602, -0.195691, -0.110655, 0.130668)
+bones/3/scale = Vector3(1.09696, 1.05793, 1.10431)
+bones/4/rotation = Quaternion(-0.378601, 0.186875, -0.0766947, 0.903248)
+bones/5/rotation = Quaternion(0.396969, -0.00533199, 0.01129, 0.917747)
+bones/6/rotation = Quaternion(0.643937, -0.0369196, -0.032374, 0.763501)
+bones/7/position = Vector3(0.0939119, -0.0509713, 0.0147649)
+bones/7/rotation = Quaternion(0.965536, 0.196716, 0.110359, 0.129857)
+bones/7/scale = Vector3(1.09689, 1.05796, 1.10435)
+bones/8/rotation = Quaternion(-0.381322, -0.186952, 0.0778539, 0.901987)
+bones/9/rotation = Quaternion(0.39883, 0.00503429, -0.0106731, 0.916949)
+bones/10/rotation = Quaternion(0.644068, 0.0354585, 0.031058, 0.763515)
 bones/11/position = Vector3(-0.323884, -0.135873, -0.663551)
-bones/13/position = Vector3(0.323884, -0.135873, -0.663551)
+bones/12/position = Vector3(-0.123884, -0.221625, 0.014986)
+bones/13/position = Vector3(0.323546, -0.135873, -0.663551)
+bones/14/position = Vector3(0.123884, -0.221625, 0.014986)
 
 [node name="Player2" parent="Player/Sid_Bones/Skeleton3D" index="0"]
 material_overlay = ExtResource("3_h2ssy")

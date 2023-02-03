@@ -57,6 +57,7 @@ func process_state(state):
 			if toggle_planting:
 				if is_planting_cancellable():
 					change_state(IDLE_STATE)
+					$Sounds/Plant.stop()
 				else:
 					$Turrets.deactivate()
 					change_state(UNPLANT_STATE)
@@ -79,6 +80,8 @@ func enter_state(new_state: StringName):
 		PLANT_STATE: 
 			$PlantCancelTimer.start(plant_cancel_time)
 			
+			$Sounds/Plant.play()
+			
 			await $PlantCancelTimer.timeout
 			
 			if $StateMachine.current_state() == PLANT_STATE:
@@ -86,6 +89,8 @@ func enter_state(new_state: StringName):
 				$Turrets.activate(Turrets.TurretType.BasicTurret)
 			
 		UNPLANT_STATE:
+			$Sounds/Unplant.play()
+			
 			$UnplantAllowMovementTimer.start(time_frozen_when_unplanting)
 			emit_signal("unplanted")
 			

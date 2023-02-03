@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ot005o7ult6h"]
+[gd_scene load_steps=36 format=3 uid="uid://ot005o7ult6h"]
 
 [ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
 [ext_resource type="PackedScene" uid="uid://gtl1gkkdci18" path="res://src/characters/sid/SidAppearance.tscn" id="2_feyuo"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://src/characters/behaviours/HealthBehaviour.gd" id="7_yjpoe"]
 [ext_resource type="AnimationLibrary" uid="uid://bhwhnbqnb61dv" path="res://src/characters/sid/animations/effects.tres" id="9_6j72g"]
 [ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="9_837bo"]
+[ext_resource type="AudioStream" uid="uid://bacnjwu34n06y" path="res://assets/audio/Sid/Terrain In & Out/In_SFX.wav" id="11_6w0kc"]
+[ext_resource type="AudioStream" uid="uid://du8fieqebhvpi" path="res://assets/audio/Sid/Terrain In & Out/Out_SFX.wav" id="12_amnpy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hafaq"]
 radius = 0.245524
@@ -109,22 +111,22 @@ script = ExtResource("1_l1tjl")
 [node name="Player" parent="." instance=ExtResource("2_feyuo")]
 
 [node name="Skeleton3D" parent="Player/Sid_Bones" index="0"]
-bones/0/position = Vector3(-0.0136698, -0.0197596, -0.00047348)
-bones/0/rotation = Quaternion(0.213349, -0.00919653, 0.0420726, 0.976026)
-bones/0/scale = Vector3(0.980914, 0.883059, 0.980914)
-bones/1/rotation = Quaternion(0.121868, -0.0120701, 0.101062, 0.987314)
-bones/1/scale = Vector3(1.0272, 1.12022, 1.02699)
-bones/2/rotation = Quaternion(-0.286879, 0.170223, 0.165505, 0.92808)
-bones/3/rotation = Quaternion(0.95596, -0.274299, -0.0826777, 0.0637563)
-bones/3/scale = Vector3(1.05472, 1.10039, 1.02058)
-bones/4/rotation = Quaternion(-0.596907, 0.197382, -0.190966, 0.75384)
-bones/5/rotation = Quaternion(0.521189, 0.0310346, -0.0631356, 0.850537)
-bones/6/rotation = Quaternion(0.664326, 0.125207, 0.0571821, 0.734659)
-bones/7/rotation = Quaternion(0.973247, 0.188992, 0.0862614, 0.0981442)
-bones/7/scale = Vector3(1.03759, 1.11453, 1.02263)
-bones/8/rotation = Quaternion(-0.461884, -0.18986, 0.115489, 0.85865)
-bones/9/rotation = Quaternion(0.449537, -0.00540226, 0.011423, 0.893172)
-bones/10/rotation = Quaternion(0.640364, 0.00743434, 0.0158757, 0.767871)
+bones/0/position = Vector3(-0.000366162, -1.9605e-06, 1.15148e-06)
+bones/0/rotation = Quaternion(0.213548, -0.000241356, 0.00110468, 0.976932)
+bones/0/scale = Vector3(1.01653, 0.920883, 1.01653)
+bones/1/rotation = Quaternion(0.12187, -0.000507863, 0.00417216, 0.992537)
+bones/1/scale = Vector3(0.983795, 1.08034, 0.989981)
+bones/2/rotation = Quaternion(-0.438927, 0.0446502, -0.262245, 0.85824)
+bones/3/rotation = Quaternion(0.968464, -0.165365, -0.114993, 0.146657)
+bones/3/scale = Vector3(0.997018, 1.06809, 0.990069)
+bones/4/rotation = Quaternion(-0.371989, 0.186649, -0.0738147, 0.906277)
+bones/5/rotation = Quaternion(0.39255, -0.00608326, 0.0128613, 0.919621)
+bones/6/rotation = Quaternion(0.648496, -0.0153161, -0.0129571, 0.760954)
+bones/7/rotation = Quaternion(0.968626, 0.162692, 0.115164, 0.148433)
+bones/7/scale = Vector3(0.996869, 1.06816, 0.990155)
+bones/8/rotation = Quaternion(-0.365959, -0.186429, 0.0711869, 0.908983)
+bones/9/rotation = Quaternion(0.388547, 0.00676868, -0.014298, 0.921293)
+bones/10/rotation = Quaternion(0.648209, 0.0188863, 0.0154319, 0.761072)
 bones/12/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 bones/14/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 
@@ -215,6 +217,16 @@ shape = SubResource("CapsuleShape3D_cli8c")
 libraries = {
 "": ExtResource("9_6j72g")
 }
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Plant" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("11_6w0kc")
+bus = &"Sound"
+
+[node name="Unplant" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("12_amnpy")
+bus = &"Sound"
 
 [connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
 [connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]

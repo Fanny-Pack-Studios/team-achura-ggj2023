@@ -123,6 +123,7 @@ func get_damaged(amount):
 	$HealthBehaviour.get_damaged(amount)
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
+	$Sounds/Hurt.play()
 
 func _on_health_behaviour_no_health():
 	queue_free()

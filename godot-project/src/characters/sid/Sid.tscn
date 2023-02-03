@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ot005o7ult6h"]
+[gd_scene load_steps=37 format=3 uid="uid://ot005o7ult6h"]
 
 [ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
 [ext_resource type="PackedScene" uid="uid://gtl1gkkdci18" path="res://src/characters/sid/SidAppearance.tscn" id="2_feyuo"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/characters/hithurtboxes/HurtBox.gd" id="9_837bo"]
 [ext_resource type="AudioStream" uid="uid://bacnjwu34n06y" path="res://assets/audio/Sid/Terrain In & Out/In_SFX.wav" id="11_6w0kc"]
 [ext_resource type="AudioStream" uid="uid://du8fieqebhvpi" path="res://assets/audio/Sid/Terrain In & Out/Out_SFX.wav" id="12_amnpy"]
+[ext_resource type="AudioStream" uid="uid://dyi4wrvyiwcsr" path="res://assets/audio/Sid/Hurt/ESM_Princess_Hero_Vocal_Painful_Human_Wound_1_Female_Voice_Girl_Teen_Vocalization.wav" id="13_rysnd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hafaq"]
 radius = 0.245524
@@ -111,22 +112,22 @@ script = ExtResource("1_l1tjl")
 [node name="Player" parent="." instance=ExtResource("2_feyuo")]
 
 [node name="Skeleton3D" parent="Player/Sid_Bones" index="0"]
-bones/0/position = Vector3(-0.0268571, -0.0364455, -0.00430451)
-bones/0/rotation = Quaternion(0.212704, -0.0189667, 0.0867689, 0.973072)
-bones/0/scale = Vector3(1.06069, 0.873918, 1.06069)
-bones/1/rotation = Quaternion(0.121402, -0.0387005, 0.347197, 0.929095)
-bones/1/scale = Vector3(1.02729, 1.05917, 0.955921)
-bones/2/rotation = Quaternion(-0.317525, 0.0586687, -0.120014, 0.938793)
-bones/3/rotation = Quaternion(0.9394, -0.334186, -0.06337, 0.0428013)
-bones/3/scale = Vector3(1.02829, 1.06971, 0.943065)
-bones/4/rotation = Quaternion(-0.714683, 0.20945, -0.275398, 0.607878)
-bones/5/rotation = Quaternion(0.567869, 0.0682718, -0.131543, 0.809667)
-bones/6/rotation = Quaternion(0.692516, 0.281574, 0.123847, 0.652533)
-bones/7/rotation = Quaternion(0.979394, 0.177015, 0.0678236, 0.0696719)
-bones/7/scale = Vector3(0.970875, 1.12012, 0.945205)
-bones/8/rotation = Quaternion(-0.523755, -0.192279, 0.147255, 0.816717)
-bones/9/rotation = Quaternion(0.485609, -0.0151578, 0.0317609, 0.873468)
-bones/10/rotation = Quaternion(0.638865, -0.0167757, 0.00541299, 0.769117)
+bones/0/position = Vector3(-0.00322754, -1.72808e-05, 1.01498e-05)
+bones/0/rotation = Quaternion(0.213537, -0.00212832, 0.00973712, 0.976884)
+bones/0/scale = Vector3(1.01208, 0.942184, 1.01208)
+bones/1/rotation = Quaternion(0.121625, -0.00447555, 0.0367671, 0.991885)
+bones/1/scale = Vector3(0.988533, 1.05745, 0.992557)
+bones/2/rotation = Quaternion(-0.436677, 0.0435014, -0.263644, 0.859019)
+bones/3/rotation = Quaternion(0.967455, -0.180186, -0.113423, 0.136742)
+bones/3/scale = Vector3(0.998504, 1.04848, 0.99219)
+bones/4/rotation = Quaternion(-0.40431, 0.187895, -0.0884284, 0.890735)
+bones/5/rotation = Quaternion(0.413326, -0.00216155, 0.0045575, 0.910569)
+bones/6/rotation = Quaternion(0.650872, 0.00226233, -0.00194145, 0.759182)
+bones/7/rotation = Quaternion(0.969031, 0.156641, 0.114939, 0.152418)
+bones/7/scale = Vector3(0.997169, 1.04906, 0.992939)
+bones/8/rotation = Quaternion(-0.351406, -0.18609, 0.0653109, 0.915215)
+bones/9/rotation = Quaternion(0.378131, 0.00820728, -0.0172277, 0.925556)
+bones/10/rotation = Quaternion(0.648441, 0.0292183, 0.0237586, 0.760333)
 bones/12/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 bones/14/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 
@@ -227,6 +228,9 @@ bus = &"Sound"
 [node name="Unplant" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("12_amnpy")
 bus = &"Sound"
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("13_rysnd")
 
 [connection signal="no_health" from="HealthBehaviour" to="." method="_on_health_behaviour_no_health"]
 [connection signal="damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]

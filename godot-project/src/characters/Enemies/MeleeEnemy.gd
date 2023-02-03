@@ -25,7 +25,7 @@ func _ready():
 	$HealthBehaviour.set_max_health($HealthBehaviour.get_max_health() * size)
 	$HealthBehaviour.set_current_health($HealthBehaviour.get_max_health())
 	$AttackArea.damage = $AttackArea.damage * (size/2)
-	mass = size
+	mass = size * 2
 	
 	target = Global.get_player()
 
@@ -63,6 +63,7 @@ func _physics_process(delta):
 func get_damaged(amount):
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
+	
 	aggro()
 	alert_allies()
 

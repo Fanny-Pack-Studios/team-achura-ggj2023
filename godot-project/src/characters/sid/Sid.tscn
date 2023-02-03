@@ -101,7 +101,7 @@ graph_offset = Vector2(-83, 13.6652)
 radius = 0.224088
 height = 0.733386
 
-[node name="Sid" type="CharacterBody3D"]
+[node name="Sid" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 2
 script = ExtResource("1_l1tjl")

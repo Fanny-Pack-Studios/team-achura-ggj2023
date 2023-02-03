@@ -12,3 +12,6 @@ func get_damaged(amount, hitbox):
 		healthBehaviour.get_damaged(amount)
 		
 	emit_signal("damaged", amount, hitbox)
+	
+func aggro():
+	pass

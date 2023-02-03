@@ -22,6 +22,9 @@ func update_current_enemies():
 
 const SPAWN_RADIUS = 1.0
 
+func aggro():
+	pass
+
 func spawn_position():
 	var angle = randf_range(0, TAU)
 	return Vector3(cos(angle), 0, sin(angle)) * SPAWN_RADIUS

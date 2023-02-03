@@ -2,9 +2,9 @@ extends Node3D
 
 var direction: Vector3 = Vector3.FORWARD
 
-@export var speed = 5
+@export var speed = 10
 @export var ExplosionScene: PackedScene
-@export var life_time = 7.0
+@export var life_time = 1.0
 
 func _ready():
 	look_at(global_position + direction)

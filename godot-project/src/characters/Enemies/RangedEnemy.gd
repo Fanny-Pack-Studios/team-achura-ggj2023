@@ -2,8 +2,6 @@ extends Character
 
 @export var move_speed := 2.0
 
-@export var target: Node3D
-
 @export var health: int = 5
 
 @export var attack_range: float = 3
@@ -11,6 +9,12 @@ extends Character
 @export var aggroed_range: float = 20
 
 @export var bullet_scene: PackedScene
+
+var target: Node3D
+
+func _ready():
+	if get_tree().get_nodes_in_group("Player").size() > 0:
+		target = get_tree().get_nodes_in_group("Player")[0]
 
 func _target_position() -> Vector3:
 	return target.position

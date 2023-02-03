@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ds625tns8g6a"]
+[gd_scene load_steps=13 format=3 uid="uid://ds625tns8g6a"]
 
 [ext_resource type="PackedScene" uid="uid://ot005o7ult6h" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
 [ext_resource type="PackedScene" uid="uid://dn37q7ppf4y0l" path="res://src/levels/TestLevel.tscn" id="2_jacgm"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c7w7tvfjmemgc" path="res://src/characters/Enemies/MeleeEnemy.tscn" id="4_eq56t"]
 [ext_resource type="PackedScene" uid="uid://be8v1c686rjqf" path="res://src/characters/Enemies/RangedEnemy.tscn" id="5_7l4mq"]
 [ext_resource type="PackedScene" uid="uid://c1f4gg5is27aq" path="res://src/camera/HUD.tscn" id="6_m7xdt"]
+[ext_resource type="PackedScene" uid="uid://d1dhg42pqbuwe" path="res://src/characters/Enemies/EnemySpawner.tscn" id="7_bpjj4"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_tfxly"]
 
@@ -28,7 +29,7 @@ ssao_enabled = true
 [node name="Main" type="Node3D"]
 
 [node name="Sid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_p3mek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8613, 0, -46.0128)
 camera = NodePath("../CameraPivot/Camera3D")
 
 [node name="Skeleton3D" parent="Sid/Player/Sid_Bones" index="0"]
@@ -87,16 +88,56 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_h0cv8")
 
-[node name="MeleeEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_eq56t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14723, 0, -2.74645)
-target = NodePath("../Sid")
-size = 0.45
-
-[node name="RangedEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_7l4mq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.64364, 0, 4.43549)
-target = NodePath("../Sid")
-
 [node name="HUD" parent="." instance=ExtResource("6_m7xdt")]
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="MeleeEnemy" parent="Enemies" instance=ExtResource("4_eq56t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7058, 0, -23.6735)
+size = 0.6
+
+[node name="RangedEnemy" parent="Enemies" instance=ExtResource("5_7l4mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8307, 0, -7.40031)
+
+[node name="EnemySpawner" parent="Enemies" instance=ExtResource("7_bpjj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6962, 0, 17.5947)
+enemies_to_spawn = [ExtResource("4_eq56t")]
+max_enemies = 5
+
+[node name="EnemySpawner2" parent="Enemies" instance=ExtResource("7_bpjj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8478, 0, 0.440641)
+enemies_to_spawn = [ExtResource("5_7l4mq")]
+max_enemies = 3
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("4_eq56t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.92744, 0, 2.68095)
+
+[node name="RangedEnemy" parent="." instance=ExtResource("5_7l4mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.18939, -1.90735e-06, -14.4525)
+
+[node name="MeleeEnemy2" parent="." instance=ExtResource("4_eq56t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.4715, 0, -7.49857)
+
+[node name="RangedEnemy2" parent="." instance=ExtResource("5_7l4mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.736, 0, 7.75256)
+
+[node name="RangedEnemy3" parent="." instance=ExtResource("5_7l4mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2428, 0, 8.58044)
+
+[node name="RangedEnemy4" parent="." instance=ExtResource("5_7l4mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.3872, 0, 17.6656)
+
+[node name="MeleeEnemy3" parent="." instance=ExtResource("4_eq56t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.8834, -1.90735e-06, 14.614)
+size = 2.5
+
+[node name="RangedEnemy5" parent="." instance=ExtResource("5_7l4mq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.9324, 1.90735e-06, 17.8866)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("7_bpjj4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9104, 1.90735e-06, 30.6318)
+enemies_to_spawn = [ExtResource("5_7l4mq"), ExtResource("4_eq56t")]
+max_enemies = 5
 
 [connection signal="current_changed" from="Sid/HealthBehaviour" to="HUD/HPBar" method="set_current_hp"]
 [connection signal="damaged" from="Sid/HealthBehaviour" to="HUD/HPBar" method="damaged"]

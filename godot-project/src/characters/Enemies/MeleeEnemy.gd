@@ -2,12 +2,12 @@ extends Character
 
 @export var move_speed := 3.0
 
-@export var target: Node3D
-
 @export var aggro_range: float = 5
 @export var aggroed_range: float = 20
 
 @export var size: float = 1
+
+var target: Node3D
 
 var attack_range: float = 1.1
 
@@ -18,6 +18,7 @@ func _ready():
 	$HealthBehaviour.set_max_health($HealthBehaviour.get_max_health() * size)
 	$HealthBehaviour.set_current_health($HealthBehaviour.get_max_health())
 	$AttackArea.damage = $AttackArea.damage * (size/2)
+	target = get_tree().get_nodes_in_group("Player")[0]
 
 func _target_position() -> Vector3:
 	return target.position

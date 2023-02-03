@@ -12,7 +12,6 @@ func _ready():
 	current.volume_db = 0
 	
 func change_music(to: String):
-	print("Changing music to ", to)
 	var stream = get_node(to)
 	
 	if stream is AudioStreamPlayer and stream != current:
@@ -22,10 +21,8 @@ func change_music(to: String):
 		current = stream
 		
 func fade_out(track: AudioStreamPlayer):
-	print("Fading out ", track)
 	fade_with("fade_out_tween", track, -20.0)
 	await fade_out_tween.finished
-	print("Fade out finished")
 	track.stop()
 	
 func fade_in(track: AudioStreamPlayer):
@@ -38,7 +35,6 @@ func fade_with(fader_property: String, track: AudioStreamPlayer, to: float):
 		fader.kill()
 		
 	fader = get_tree().create_tween()
-	print("Calling tween with ", track, to)
 
 	fader.tween_property(track, "volume_db", to, fade_time).from_current()
 	

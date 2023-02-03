@@ -13,8 +13,7 @@ extends Character
 var target: Node3D
 
 func _ready():
-	if get_tree().get_nodes_in_group("Player").size() > 0:
-		target = get_tree().get_nodes_in_group("Player")[0]
+	target = Global.get_player()
 
 func _target_position() -> Vector3:
 	return target.position

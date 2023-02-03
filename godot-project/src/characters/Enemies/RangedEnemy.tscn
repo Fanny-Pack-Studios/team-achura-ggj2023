@@ -13,19 +13,19 @@
 [ext_resource type="PackedScene" uid="uid://p4vkilwto0u7" path="res://src/characters/Enemies/EnemiesEffectAnimationPlayer.tscn" id="11_w35pu"]
 [ext_resource type="PackedScene" uid="uid://c2lu4g4enrlv7" path="res://src/camera/EnemyHPBar.tscn" id="12_o5moy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lx1gx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27mst"]
 render_priority = 0
 shader = ExtResource("5_8rpfn")
 shader_parameter/albedo = Color(1, 0, 0, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_1bnqi"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_2wxsa"]
 radius = 0.55293
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0m2mu"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5x3k"]
 radius = 0.397783
 height = 1.75078
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jjs5g"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_4jqgj"]
 radius = 11.9566
 
 [node name="RangedEnemy" type="CharacterBody3D"]
@@ -39,7 +39,7 @@ mass = 2.0
 
 [node name="Sphere" parent="Bug" index="0"]
 material_override = ExtResource("4_yajuh")
-material_overlay = SubResource("ShaderMaterial_lx1gx")
+material_overlay = SubResource("ShaderMaterial_27mst")
 instance_shader_parameters/alpha = 0.0
 instance_shader_parameters/grow = 0.01
 
@@ -64,7 +64,7 @@ max_health = 30
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.530594, 0)
-shape = SubResource("SphereShape3D_1bnqi")
+shape = SubResource("SphereShape3D_2wxsa")
 
 [node name="HurtArea" type="Area3D" parent="."]
 collision_layer = 8
@@ -73,7 +73,7 @@ script = ExtResource("8_scyix")
 
 [node name="HurtAreaCollision" type="CollisionShape3D" parent="HurtArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.394707, 0)
-shape = SubResource("CapsuleShape3D_0m2mu")
+shape = SubResource("CapsuleShape3D_o5x3k")
 
 [node name="BulletSpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, -0.9)
@@ -90,7 +90,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AlertRange"]
-shape = SubResource("SphereShape3D_jjs5g")
+shape = SubResource("SphereShape3D_4jqgj")
 
 [connection signal="attack" from="AttackingBehaviour" to="." method="_on_attacking_behaviour_attack"]
 [connection signal="current_changed" from="HealthBehaviour" to="EnemyHPBar/HPBar" method="set_current_hp"]

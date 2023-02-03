@@ -18,7 +18,9 @@ func _ready():
 	$HealthBehaviour.set_max_health($HealthBehaviour.get_max_health() * size)
 	$HealthBehaviour.set_current_health($HealthBehaviour.get_max_health())
 	$AttackArea.damage = $AttackArea.damage * (size/2)
-	target = get_tree().get_nodes_in_group("Player")[0]
+	mass = size
+	
+	target = Global.get_player()
 
 func _target_position() -> Vector3:
 	return target.position

@@ -34,6 +34,7 @@ func spawn_enemy():
 	var enemy = enemies_to_spawn[enemy_to_spawn_idx].instantiate()
 	enemy.transform = self.transform
 	enemy.translate(spawn_position())
+	current_enemies.append(enemy)
 	get_parent().add_child(enemy)
 
 func _on_spawn_timer_timeout():

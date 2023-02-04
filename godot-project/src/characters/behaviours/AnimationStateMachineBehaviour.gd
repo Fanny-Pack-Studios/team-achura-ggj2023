@@ -3,6 +3,8 @@ extends Node
 
 @onready @export var animation_tree = $"../AnimationTree"
 
+signal state_changed
+
 func current_state():
 	return animation_state_machine().get_current_node()
 	
@@ -13,6 +15,7 @@ func change_state(new_state: StringName, on_state_entered: Callable = func (stat
 			animation_state_machine().start(new_state, true)
 		else:
 			animation_state_machine().travel(new_state)
+		emit_signal("state_changed", new_state)
 		
 	
 func animation_state_machine() -> AnimationNodeStateMachinePlayback:

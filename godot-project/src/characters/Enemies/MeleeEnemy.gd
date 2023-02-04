@@ -101,3 +101,9 @@ func _on_hurt_area_damaged(amount, hitbox: Hitbox):
 
 func _on_health_behaviour_no_health():
 	die()
+
+func _on_state_machine_state_changed(new_state):
+	if new_state == "Walk":
+		$WalkSounds.play_random()
+	else:
+		$WalkSounds.stop()

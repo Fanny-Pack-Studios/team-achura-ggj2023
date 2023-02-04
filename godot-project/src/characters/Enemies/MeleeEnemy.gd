@@ -63,7 +63,7 @@ func _physics_process(delta):
 func get_damaged(amount):
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
-	
+	$PainSounds.play_random()
 	aggro()
 	alert_allies()
 
@@ -79,6 +79,7 @@ func die():
 	for node in [$EnemyHPBar, $AccelerationBehaviour, $AttackingBehaviour, $HealthBehaviour, $HurtArea, $AttackArea, $AlertRange]:
 		node.queue_free()
 	$StateMachine.change_state("Die")
+	$DeathSounds.play_random()
 	$EffectsAnimationPlayer.queue("die")
 
 	while await $EffectsAnimationPlayer.animation_finished != "die":
@@ -91,6 +92,7 @@ func _on_attacking_behaviour_attack():
 	await get_tree().create_timer(attack_trigger_delay).timeout
 	if $StateMachine.current_state() == "Attack" and is_instance_valid(get_node_or_null("AttackArea")):
 		$AttackArea.trigger()
+		$EnemyAttackSound.play()
 
 func _on_hurt_area_damaged(amount, hitbox: Hitbox):
 	get_damaged(amount)

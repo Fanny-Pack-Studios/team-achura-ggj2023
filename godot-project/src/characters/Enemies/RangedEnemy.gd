@@ -54,6 +54,7 @@ func look_at_quat(quat):
 func get_damaged(amount):
 	$EffectsAnimationPlayer.stop()
 	$EffectsAnimationPlayer.play("Hurt")
+	$PainSounds.play_random()
 	aggro()
 	alert_allies()
 
@@ -70,7 +71,8 @@ func die():
 		node.queue_free()
 	$StateMachine.change_state("Die")
 	$EffectsAnimationPlayer.queue("Die")
-
+	$FlySound.stop()
+	$DeathSounds.play_random()
 	while await $EffectsAnimationPlayer.animation_finished != "Die":
 		pass
 		

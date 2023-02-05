@@ -76,7 +76,7 @@ radius = 1.0
 height = 1.0
 radius = 0.95
 
-[node name="EnemySpawner" type="Node3D"]
+[node name="EnemySpawner" type="Node3D" groups=["Enemies"]]
 script = ExtResource("1_8bosb")
 
 [node name="BugNest" parent="." instance=ExtResource("2_y4d5x")]

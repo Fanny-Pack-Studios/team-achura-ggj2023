@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds625tns8g6a"]
+[gd_scene load_steps=15 format=3 uid="uid://ds625tns8g6a"]
 
 [ext_resource type="Script" path="res://src/music/SidMusic.gd" id="1_oht4m"]
 [ext_resource type="PackedScene" uid="uid://ot005o7ult6h" path="res://src/characters/sid/Sid.tscn" id="1_p3mek"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://be8v1c686rjqf" path="res://src/characters/Enemies/RangedEnemy.tscn" id="5_7l4mq"]
 [ext_resource type="PackedScene" uid="uid://c1f4gg5is27aq" path="res://src/camera/HUD.tscn" id="6_m7xdt"]
 [ext_resource type="PackedScene" uid="uid://d1dhg42pqbuwe" path="res://src/characters/Enemies/EnemySpawner.tscn" id="7_bpjj4"]
+[ext_resource type="PackedScene" uid="uid://dbymhdj5iwxct" path="res://src/ui/WinLoseScreen.tscn" id="9_k1stj"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_tfxly"]
 
@@ -124,6 +125,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9104, 1.90735e-06, 30.631
 enemies_to_spawn = [ExtResource("5_7l4mq"), ExtResource("4_eq56t")]
 max_enemies = 4
 
+[node name="WinLoseScreen" parent="." instance=ExtResource("9_k1stj")]
+
+[connection signal="game_over" from="Sid" to="WinLoseScreen" method="show_lose_label"]
 [connection signal="planted" from="Sid" to="SidMusic" method="_on_sid_planted"]
 [connection signal="unplanted" from="Sid" to="SidMusic" method="_on_sid_unplanted"]
 [connection signal="current_changed" from="Sid/HealthBehaviour" to="HUD/HPBar" method="set_current_hp"]

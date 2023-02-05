@@ -1,4 +1,5 @@
 class_name DefaultProjectile
+
 extends Node3D
 
 var direction: Vector3 = Vector3.FORWARD

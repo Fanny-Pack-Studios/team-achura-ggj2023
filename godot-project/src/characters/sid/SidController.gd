@@ -26,6 +26,7 @@ const states_that_allow_movement = [IDLE_STATE, RUN_STATE]
 
 signal planted
 signal unplanted
+signal game_over
 
 func is_planting_cancellable():
 	return can_cancel_plant and $PlantCancelTimer.time_left > 0
@@ -130,6 +131,7 @@ func get_damaged(amount):
 	$Sounds/Hurt.play()
 
 func _on_health_behaviour_no_health():
+	emit_signal("game_over")
 	queue_free()
 
 func _on_hurt_box_damaged(amount, hitbox):

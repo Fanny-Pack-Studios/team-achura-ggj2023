@@ -8,7 +8,7 @@ script = ExtResource("1_xn1w2")
 character_to_follow_path = NodePath("../Sid")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -5.36442e-07, 0, -5.96046e-08, 1, 0, -4.76837e-07, 14.3313)
+transform = Transform3D(1, 0, 0, 0, 1, -5.36442e-07, 0, -5.96046e-08, 1, 0, -1.14441e-05, 39.1332)
 projection = 1
 current = true
 fov = 25.0

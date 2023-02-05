@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b3047atqu22m8"]
+
+[ext_resource type="FontFile" uid="uid://le2td3kp4cf6" path="res://assets/fonts/IndieFlower-Regular.ttf" id="1_k6615"]
+
+[resource]
+base_font = ExtResource("1_k6615")
+variation_embolden = 1.5

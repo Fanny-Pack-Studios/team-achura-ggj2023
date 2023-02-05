@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="Title.svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.64052329"
+     inkscape:cx="1049.1422"
+     inkscape:cy="-89.77035"
+     inkscape:window-width="2560"
+     inkscape:window-height="1351"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <filter
+       inkscape:menu-tooltip="3D warped, fibered wood texture"
+       inkscape:menu="Materials"
+       inkscape:label="3D Wood"
+       height="1.7827556"
+       y="-0.39137781"
+       width="1.1357653"
+       x="-0.067882629"
+       style="color-interpolation-filters:sRGB;"
+       id="filter48568">
+      <feGaussianBlur
+         result="result8"
+         stdDeviation="4"
+         id="feGaussianBlur48540" />
+      <feTurbulence
+         baseFrequency="0.025 0.2"
+         numOctaves="3"
+         type="fractalNoise"
+         result="result7"
+         seed="22"
+         id="feTurbulence48542" />
+      <feComposite
+         in2="result8"
+         operator="in"
+         in="SourceGraphic"
+         result="result6"
+         id="feComposite48544" />
+      <feDisplacementMap
+         in2="result6"
+         result="result4"
+         scale="50"
+         yChannelSelector="A"
+         xChannelSelector="A"
+         in="result7"
+         id="feDisplacementMap48546" />
+      <feFlood
+         flood-color="rgb(230,211,138)"
+         flood-opacity="1"
+         id="feFlood48548" />
+      <feComposite
+         in2="result4"
+         operator="atop"
+         result="result2"
+         id="feComposite48550" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="atop"
+         in="result2"
+         result="result9"
+         id="feComposite48552" />
+      <feGaussianBlur
+         result="result0"
+         in="result9"
+         stdDeviation="8"
+         id="feGaussianBlur48554" />
+      <feSpecularLighting
+         specularExponent="15"
+         specularConstant="0.7"
+         surfaceScale="5"
+         lighting-color="rgb(255,255,255)"
+         result="result1"
+         in="result0"
+         id="feSpecularLighting48558">
+        <feDistantLight
+           azimuth="235"
+           elevation="50"
+           id="feDistantLight48556" />
+      </feSpecularLighting>
+      <feComposite
+         operator="in"
+         result="result2"
+         in="result1"
+         in2="result9"
+         id="feComposite48560" />
+      <feComposite
+         k3="0.5"
+         k2="0.5"
+         operator="arithmetic"
+         result="result4"
+         in="result9"
+         in2="result2"
+         id="feComposite48562" />
+      <feConvolveMatrix
+         order="3 3"
+         kernelMatrix="2 0 0 0 2 0 0 0 -2 "
+         targetX="2"
+         targetY="2"
+         result="result10"
+         id="feConvolveMatrix48564" />
+      <feBlend
+         mode="multiply"
+         in="result10"
+         in2="result10"
+         id="feBlend48566" />
+    </filter>
+    <filter
+       inkscape:menu-tooltip="3D warped, fibered wood texture"
+       inkscape:menu="Materials"
+       inkscape:label="3D Wood"
+       height="1.9729558"
+       y="-0.4864779"
+       width="1.3398436"
+       x="-0.16992179"
+       style="color-interpolation-filters:sRGB;"
+       id="filter48598">
+      <feGaussianBlur
+         result="result8"
+         stdDeviation="4"
+         id="feGaussianBlur48570" />
+      <feTurbulence
+         baseFrequency="0.025 0.2"
+         numOctaves="3"
+         type="fractalNoise"
+         result="result7"
+         seed="22"
+         id="feTurbulence48572" />
+      <feComposite
+         in2="result8"
+         operator="in"
+         in="SourceGraphic"
+         result="result6"
+         id="feComposite48574" />
+      <feDisplacementMap
+         in2="result6"
+         result="result4"
+         scale="50"
+         yChannelSelector="A"
+         xChannelSelector="A"
+         in="result7"
+         id="feDisplacementMap48576" />
+      <feFlood
+         flood-color="rgb(230,211,138)"
+         flood-opacity="1"
+         id="feFlood48578" />
+      <feComposite
+         in2="result4"
+         operator="atop"
+         result="result2"
+         id="feComposite48580" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="atop"
+         in="result2"
+         result="result9"
+         id="feComposite48582" />
+      <feGaussianBlur
+         result="result0"
+         in="result9"
+         stdDeviation="8"
+         id="feGaussianBlur48584" />
+      <feSpecularLighting
+         specularExponent="15"
+         specularConstant="0.7"
+         surfaceScale="5"
+         lighting-color="rgb(255,255,255)"
+         result="result1"
+         in="result0"
+         id="feSpecularLighting48588">
+        <feDistantLight
+           azimuth="235"
+           elevation="50"
+           id="feDistantLight48586" />
+      </feSpecularLighting>
+      <feComposite
+         operator="in"
+         result="result2"
+         in="result1"
+         in2="result9"
+         id="feComposite48590" />
+      <feComposite
+         k3="0.5"
+         k2="0.5"
+         operator="arithmetic"
+         result="result4"
+         in="result9"
+         in2="result2"
+         id="feComposite48592" />
+      <feConvolveMatrix
+         order="3 3"
+         kernelMatrix="2 0 0 0 2 0 0 0 -2 "
+         targetX="2"
+         targetY="2"
+         result="result10"
+         id="feConvolveMatrix48594" />
+      <feBlend
+         mode="multiply"
+         in="result10"
+         in2="result10"
+         id="feBlend48596" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter54764"
+       x="-0.14160149"
+       y="-0.40539825"
+       width="1.283203"
+       height="1.8107965">
+      <feGaussianBlur
+         stdDeviation="10 10"
+         result="blur"
+         id="feGaussianBlur54762" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter54768"
+       x="-0.056568857"
+       y="-0.32614817"
+       width="1.1131377"
+       height="1.6522963">
+      <feGaussianBlur
+         stdDeviation="10 10"
+         result="blur"
+         id="feGaussianBlur54766" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:91.298px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.282;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter54764)"
+       x="17.213924"
+       y="-188.09836"
+       id="text48704"><tspan
+         sodipodi:role="line"
+         id="tspan48702"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.282;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         x="17.213924"
+         y="-188.09836">(UN)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:91.298px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.282;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter54768)"
+       x="-110.21486"
+       y="-88.134514"
+       id="text48708"><tspan
+         sodipodi:role="line"
+         id="tspan48706"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Alfa Slab One';-inkscape-font-specification:'Alfa Slab One';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.282;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+         x="-110.21486"
+         y="-88.134514">ROOTED</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:91.298px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.28246"
+       x="17.213924"
+       y="-188.09836"
+       id="text47314"><tspan
+         sodipodi:role="line"
+         id="tspan47312"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower';fill:#23ff11;fill-opacity:1;stroke:#186a00;stroke-width:2.28246;stroke-opacity:1"
+         x="17.213924"
+         y="-188.09836">(UN)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:91.298px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.28246"
+       x="-110.21486"
+       y="-88.134514"
+       id="text47318"><tspan
+         sodipodi:role="line"
+         id="tspan47316"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Alfa Slab One';-inkscape-font-specification:'Alfa Slab One';fill:#23ff11;fill-opacity:1;stroke:#186a00;stroke-width:2.28246;stroke-opacity:1"
+         x="-110.21486"
+         y="-88.134514">ROOTED</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:91.298px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.28246;filter:url(#filter48598)"
+       x="17.213924"
+       y="-188.09836"
+       id="text3092"
+       inkscape:export-filename="C:\Users\pabli\Develop\team-achura-ggj2023\asset-sources\Title.png"
+       inkscape:export-xdpi="31.629999"
+       inkscape:export-ydpi="31.629999"><tspan
+         sodipodi:role="line"
+         id="tspan3090"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Indie Flower';-inkscape-font-specification:'Indie Flower';fill:#23ff11;fill-opacity:1;stroke:#186a00;stroke-width:2.28246;stroke-opacity:1"
+         x="17.213924"
+         y="-188.09836">(UN)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:91.298px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.28246;filter:url(#filter48568)"
+       x="-110.21486"
+       y="-88.134514"
+       id="text37500"
+       inkscape:export-filename="C:\Users\pabli\Develop\team-achura-ggj2023\asset-sources\Title.png"
+       inkscape:export-xdpi="31.629999"
+       inkscape:export-ydpi="31.629999"><tspan
+         sodipodi:role="line"
+         id="tspan37498"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Alfa Slab One';-inkscape-font-specification:'Alfa Slab One';fill:#23ff11;fill-opacity:1;stroke:#186a00;stroke-width:2.28246;stroke-opacity:1"
+         x="-110.21486"
+         y="-88.134514">ROOTED</tspan></text>
+  </g>
+</svg>

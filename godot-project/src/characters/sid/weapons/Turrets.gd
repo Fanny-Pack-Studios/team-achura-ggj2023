@@ -4,7 +4,8 @@ extends Node3D
 var current_turret: Turret
 
 enum TurretType {
-	BasicTurret
+	BasicTurret,
+	LightningTurret
 }
 
 func activate(type: TurretType):

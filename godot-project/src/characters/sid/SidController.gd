@@ -86,7 +86,7 @@ func enter_state(new_state: StringName):
 			
 			if $StateMachine.current_state() == PLANT_STATE:
 				emit_signal("planted")
-				$Turrets.activate(Turrets.TurretType.BasicTurret)
+				$Turrets.activate(Turrets.TurretType.LightningTurret)
 			
 		UNPLANT_STATE:
 			$Sounds/Unplant.play()

@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmpkcfgwip320"]
+
+[ext_resource type="Script" path="res://src/characters/projectiles/ProjectileExplosion.gd" id="1_n4bfs"]
+[ext_resource type="Texture2D" uid="uid://c0x1d52mylfg6" path="res://assets/particles/spark_03.png" id="2_yqlbu"]
+
+[sub_resource type="Gradient" id="Gradient_ut2oe"]
+offsets = PackedFloat32Array(0, 0.704255, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p3vh2"]
+gradient = SubResource("Gradient_ut2oe")
+
+[sub_resource type="Curve" id="Curve_x1ey0"]
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.690082, 0, 0, Vector2(1, 1.50909), 2.1973, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0m25d"]
+curve = SubResource("Curve_x1ey0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0bvu"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angle_max = 360.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_0m25d")
+color_ramp = SubResource("GradientTexture1D_p3vh2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbj4g"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 2, 2, 1)
+albedo_texture = ExtResource("2_yqlbu")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_68sph"]
+material = SubResource("StandardMaterial3D_hbj4g")
+
+[node name="PlayerProjectileExplosion" type="Node3D"]
+script = ExtResource("1_n4bfs")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_c0bvu")
+draw_pass_1 = SubResource("QuadMesh_68sph")

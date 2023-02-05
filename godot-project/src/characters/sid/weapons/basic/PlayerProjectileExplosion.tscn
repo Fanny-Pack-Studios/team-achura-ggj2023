@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2ulr63w8i7fl"]
+
+[ext_resource type="Script" path="res://src/characters/projectiles/ProjectileExplosion.gd" id="1_if2sh"]
+[ext_resource type="Material" uid="uid://cj12r74evhm1i" path="res://assets/materials/PlayerProjectile_particles.tres" id="2_kn7q1"]
+
+[sub_resource type="Gradient" id="Gradient_ut2oe"]
+offsets = PackedFloat32Array(0, 0.704255, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p3vh2"]
+gradient = SubResource("Gradient_ut2oe")
+
+[sub_resource type="Curve" id="Curve_x1ey0"]
+_data = [Vector2(0, 1), 0.0, 0.690082, 0, 0, Vector2(1, 0.290909), -4.22129, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0m25d"]
+curve = SubResource("Curve_x1ey0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0bvu"]
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, -8, 0)
+initial_velocity_max = 5.0
+angular_velocity_max = 10.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_0m25d")
+color_ramp = SubResource("GradientTexture1D_p3vh2")
+
+[sub_resource type="SphereMesh" id="SphereMesh_nwocl"]
+material = ExtResource("2_kn7q1")
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 6
+
+[node name="PlayerProjectileExplosion" type="Node3D"]
+script = ExtResource("1_if2sh")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.9
+randomness = 0.1
+process_material = SubResource("ParticleProcessMaterial_c0bvu")
+draw_pass_1 = SubResource("SphereMesh_nwocl")

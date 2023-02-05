@@ -1,0 +1,110 @@
+[gd_scene load_steps=17 format=3 uid="uid://dxtculjuuf8ec"]
+
+[ext_resource type="PackedScene" uid="uid://dgfgyxgiu6l52" path="res://src/characters/projectiles/DefaultProjectile.tscn" id="1_ojit6"]
+[ext_resource type="Texture2D" uid="uid://bfhgjjxfup66x" path="res://assets/particles/spark_01.png" id="1_p8xxe"]
+[ext_resource type="PackedScene" uid="uid://bmpkcfgwip320" path="res://src/characters/sid/weapons/Lightning/LightningProjectileExplosion.tscn" id="2_ey486"]
+[ext_resource type="Script" path="res://src/characters/sid/weapons/Lightning/LightningProjectile.gd" id="2_l1837"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5643c"]
+height = 1.2
+radius = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pwxvm"]
+radius = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y08uv"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 1.0
+angle_max = 360.0
+scale_min = 0.5
+scale_max = 2.0
+anim_offset_max = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13o1o"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 2, 2, 1)
+albedo_texture = ExtResource("1_p8xxe")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ws5qy"]
+material = SubResource("StandardMaterial3D_13o1o")
+
+[sub_resource type="Gradient" id="Gradient_x4url"]
+offsets = PackedFloat32Array(0, 0.855626, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sucw0"]
+gradient = SubResource("Gradient_x4url")
+
+[sub_resource type="Curve" id="Curve_whpq4"]
+_data = [Vector2(0.0438247, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.736364), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wf3i0"]
+curve = SubResource("Curve_whpq4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n1fcg"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+angle_max = 360.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_wf3i0")
+color_ramp = SubResource("GradientTexture1D_sucw0")
+anim_offset_max = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_2fmoq"]
+material = SubResource("StandardMaterial3D_13o1o")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4xrf"]
+radius = 5.0
+
+[node name="LightningProjectile" instance=ExtResource("1_ojit6")]
+script = ExtResource("2_l1837")
+bounces = 4
+speed = 15
+ExplosionScene = ExtResource("2_ey486")
+life_time = 2.0
+
+[node name="Hitbox" parent="." index="0"]
+collision_layer = 4
+collision_mask = 24
+just_emit_signal = true
+damage = 15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.324858, 0)
+shape = SubResource("CylinderShape3D_5643c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TerrainColliderArea" index="0"]
+shape = SubResource("SphereShape3D_pwxvm")
+
+[node name="Sparks1" type="GPUParticles3D" parent="." index="2"]
+lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_y08uv")
+draw_pass_1 = SubResource("QuadMesh_ws5qy")
+
+[node name="Sparks2" type="GPUParticles3D" parent="." index="3"]
+amount = 20
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_n1fcg")
+draw_pass_1 = SubResource("QuadMesh_2fmoq")
+
+[node name="FindCloseTargetArea" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FindCloseTargetArea" index="0"]
+shape = SubResource("SphereShape3D_g4xrf")

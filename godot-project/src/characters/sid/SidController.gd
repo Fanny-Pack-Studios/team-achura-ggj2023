@@ -1,3 +1,4 @@
+class_name Sid
 extends Character
 
 @export var camera: Camera3D
@@ -86,12 +87,15 @@ func enter_state(new_state: StringName):
 			
 			if $StateMachine.current_state() == PLANT_STATE:
 				emit_signal("planted")
-				$Turrets.activate(Turrets.TurretType.LightningTurret)
+				$Turrets.activate(current_turret_type)
 			
 		UNPLANT_STATE:
 			$Sounds/Unplant.play()
 			
 			$UnplantAllowMovementTimer.start(time_frozen_when_unplanting)
+			
+			change_turret_type(Turrets.TurretType.BasicTurret)
+			
 			emit_signal("unplanted")
 			
 
@@ -130,3 +134,15 @@ func _on_health_behaviour_no_health():
 
 func _on_hurt_box_damaged(amount, hitbox):
 	get_damaged(amount)
+
+func change_turret_type(type: Turrets.TurretType):
+	current_turret_type = type
+	for child in $Powers.get_children():
+		var enabled = child.get("turretType") == type
+		child.visible = enabled
+		child.set_process(enabled)
+
+var current_turret_type: Turrets.TurretType = Turrets.TurretType.BasicTurret
+
+func add_lightning_power():
+	change_turret_type(Turrets.TurretType.LightningTurret)

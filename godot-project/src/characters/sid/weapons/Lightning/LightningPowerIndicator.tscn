@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6fcypqrs6a0l"]
+
+[ext_resource type="Script" path="res://src/characters/sid/weapons/Lightning/LightningPowerIndicator.gd" id="1_x4l30"]
+[ext_resource type="PackedScene" uid="uid://dtaurfh4mj2vd" path="res://src/characters/sid/weapons/Lightning/LightningBody.tscn" id="2_tm0o0"]
+
+[node name="LightningPowerIndicator" type="Node3D"]
+script = ExtResource("1_x4l30")
+
+[node name="BodyBase" parent="." instance=ExtResource("2_tm0o0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.156434, 0, -0.987688)

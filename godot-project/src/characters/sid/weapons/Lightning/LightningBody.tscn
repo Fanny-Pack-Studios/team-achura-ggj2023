@@ -1,0 +1,112 @@
+[gd_scene load_steps=18 format=3 uid="uid://dtaurfh4mj2vd"]
+
+[ext_resource type="Texture2D" uid="uid://bo6klh0cxyrx7" path="res://assets/particles/spark_06.png" id="1_7kfah"]
+[ext_resource type="Texture2D" uid="uid://cejjo2n0rt0oy" path="res://assets/particles/spark_05.png" id="2_twodh"]
+
+[sub_resource type="Gradient" id="Gradient_xdyfl"]
+offsets = PackedFloat32Array(0, 0.909554, 1)
+colors = PackedColorArray(1, 2, 2, 1, 1, 1.21569, 1.21569, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h8n5f"]
+gradient = SubResource("Gradient_xdyfl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2d6hl"]
+particle_flag_rotate_y = true
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+angle_max = 360.0
+color_ramp = SubResource("GradientTexture1D_h8n5f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qg12"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 2, 2, 1)
+albedo_texture = ExtResource("1_7kfah")
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_soymt"]
+material = SubResource("StandardMaterial3D_5qg12")
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhiay"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_twodh")
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ulj8u"]
+material = SubResource("StandardMaterial3D_bhiay")
+radius = 0.2
+height = 0.4
+radial_segments = 8
+rings = 8
+
+[sub_resource type="Gradient" id="Gradient_0mh2h"]
+offsets = PackedFloat32Array(0, 0.00127389, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wye5k"]
+gradient = SubResource("Gradient_0mh2h")
+
+[sub_resource type="Curve" id="Curve_gydrq"]
+_data = [Vector2(0.0438247, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.736364), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1d8fu"]
+curve = SubResource("Curve_gydrq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wny45"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.1
+angle_max = 360.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_1d8fu")
+color_ramp = SubResource("GradientTexture1D_wye5k")
+anim_offset_max = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fdkjq"]
+load_path = "res://.godot/imported/spark_01.png-7531c2d10f742617d6b6abe61e8db8f6.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljqac"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1.5, 1)
+albedo_texture = SubResource("CompressedTexture2D_fdkjq")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_iv2tc"]
+material = SubResource("StandardMaterial3D_ljqac")
+
+[node name="BodyBase" type="Node3D"]
+
+[node name="PickupBody" type="GPUParticles3D" parent="."]
+amount = 10
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_2d6hl")
+draw_pass_1 = SubResource("SphereMesh_soymt")
+
+[node name="PickupBody2" type="GPUParticles3D" parent="."]
+amount = 10
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_2d6hl")
+draw_pass_1 = SubResource("SphereMesh_ulj8u")
+
+[node name="Sparks2" type="GPUParticles3D" parent="."]
+amount = 20
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_wny45")
+draw_pass_1 = SubResource("QuadMesh_iv2tc")

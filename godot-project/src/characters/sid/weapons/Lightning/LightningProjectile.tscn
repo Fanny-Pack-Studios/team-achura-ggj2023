@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dxtculjuuf8ec"]
+[gd_scene load_steps=18 format=3 uid="uid://dxtculjuuf8ec"]
 
 [ext_resource type="PackedScene" uid="uid://dgfgyxgiu6l52" path="res://src/characters/projectiles/DefaultProjectile.tscn" id="1_ojit6"]
 [ext_resource type="Texture2D" uid="uid://bfhgjjxfup66x" path="res://assets/particles/spark_01.png" id="1_p8xxe"]
@@ -43,14 +43,14 @@ material = SubResource("StandardMaterial3D_13o1o")
 offsets = PackedFloat32Array(0, 0.855626, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sucw0"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r0hbd"]
 gradient = SubResource("Gradient_x4url")
 
 [sub_resource type="Curve" id="Curve_whpq4"]
 _data = [Vector2(0.0438247, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.736364), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_wf3i0"]
+[sub_resource type="CurveTexture" id="CurveTexture_lwcvn"]
 curve = SubResource("Curve_whpq4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n1fcg"]
@@ -61,12 +61,23 @@ initial_velocity_min = 0.1
 initial_velocity_max = 0.1
 angle_max = 360.0
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_wf3i0")
-color_ramp = SubResource("GradientTexture1D_sucw0")
+scale_curve = SubResource("CurveTexture_lwcvn")
+color_ramp = SubResource("GradientTexture1D_r0hbd")
 anim_offset_max = 1.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33ou4"]
+transparency = 1
+blend_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 2, 2, 1)
+albedo_texture = ExtResource("1_p8xxe")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="QuadMesh" id="QuadMesh_2fmoq"]
-material = SubResource("StandardMaterial3D_13o1o")
+material = SubResource("StandardMaterial3D_33ou4")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4xrf"]
 radius = 5.0

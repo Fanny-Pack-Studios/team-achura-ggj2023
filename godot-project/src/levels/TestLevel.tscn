@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn37q7ppf4y0l"]
+[gd_scene load_steps=3 format=3 uid="uid://dn37q7ppf4y0l"]
 
+[ext_resource type="PackedScene" uid="uid://ctiljlitp6e5e" path="res://src/characters/sid/weapons/Lightning/LightningPickup.tscn" id="2_x3f1y"]
 [ext_resource type="PackedScene" uid="uid://b711g0qwammm8" path="res://assets/gltf/TestLevel.gltf" id="4_kagtk"]
 
 [node name="TestLevel" type="Node3D"]
 
 [node name="TestLevel" parent="." instance=ExtResource("4_kagtk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30787, 0, -44.7843)
+
+[node name="LightningSeed" parent="." instance=ExtResource("2_x3f1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.069, 0, -6.94464)
+
+[node name="LightningSeed2" parent="." instance=ExtResource("2_x3f1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5761, 0, -10.6457)

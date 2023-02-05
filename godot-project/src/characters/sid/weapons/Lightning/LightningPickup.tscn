@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctiljlitp6e5e"]
+
+[ext_resource type="Script" path="res://src/characters/sid/weapons/Lightning/LightningPickup.gd" id="1_4p08y"]
+[ext_resource type="PackedScene" uid="uid://dtaurfh4mj2vd" path="res://src/characters/sid/weapons/Lightning/LightningBody.tscn" id="2_us3y0"]
+
+[sub_resource type="Animation" id="Animation_pr83p"]
+resource_name = "Float"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyBase:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.298886, -1, 0, 1, 0, 0.598701, -1, 0, 1, 0, 0.298886, -1, 0, 1, 0),
+"times": PackedFloat32Array(0, 1.9, 3.9)
+}
+
+[sub_resource type="Animation" id="Animation_awmeo"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodyBase:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2u7wc"]
+_data = {
+"Float": SubResource("Animation_pr83p"),
+"RESET": SubResource("Animation_awmeo")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xscac"]
+radius = 0.6
+
+[node name="LightningSeed" type="Node3D"]
+script = ExtResource("1_4p08y")
+
+[node name="BodyBase" parent="." instance=ExtResource("2_us3y0")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Float"
+libraries = {
+"": SubResource("AnimationLibrary_2u7wc")
+}
+
+[node name="PickupArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730755, 0)
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.120873, 0)
+shape = SubResource("SphereShape3D_xscac")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]

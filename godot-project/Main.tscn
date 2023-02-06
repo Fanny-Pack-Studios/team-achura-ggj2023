@@ -17,12 +17,12 @@
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_oknpw"]
 ground_color = Color(0.278431, 0.301961, 0.113725, 1)
 
-[sub_resource type="Sky" id="Sky_ijkg2"]
+[sub_resource type="Sky" id="Sky_1yvpf"]
 sky_material = SubResource("PhysicalSkyMaterial_oknpw")
 
 [sub_resource type="Environment" id="Environment_h0cv8"]
 background_mode = 1
-sky = SubResource("Sky_ijkg2")
+sky = SubResource("Sky_1yvpf")
 ambient_light_source = 2
 ambient_light_color = Color(0.294118, 0.203922, 0.152941, 1)
 ambient_light_energy = 2.0
@@ -38,24 +38,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8613, 0, -46.0128)
 camera = NodePath("../CameraPivot/Camera3D")
 
 [node name="Skeleton3D" parent="Sid/Player/Sid_Bones" index="0"]
-bones/0/position = Vector3(0.035562, -0.0104789, 0.000677368)
-bones/0/rotation = Quaternion(0.212616, 0.0199274, -0.091163, 0.97267)
-bones/0/scale = Vector3(1, 1, 1)
-bones/1/rotation = Quaternion(0.111922, 0.0469511, -0.383979, 0.91533)
-bones/1/scale = Vector3(1, 1, 1)
-bones/2/rotation = Quaternion(-0.290904, 0.183664, 0.177399, 0.922048)
-bones/3/rotation = Quaternion(0.971249, -0.113147, -0.100831, 0.183591)
-bones/3/scale = Vector3(0.999999, 0.999999, 1)
-bones/4/rotation = Quaternion(-0.183867, 0.186148, -0.0192149, 0.964973)
-bones/5/rotation = Quaternion(0.223781, -0.0174803, 0.0262851, 0.974128)
-bones/6/rotation = Quaternion(0.661645, -0.115709, -0.100019, 0.734053)
-bones/7/rotation = Quaternion(0.977873, 0.186545, -0.0660168, 0.0678783)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(-0.626451, -0.199483, 0.209869, 0.723685)
-bones/9/rotation = Quaternion(0.534863, -0.038391, 0.0774053, 0.840509)
-bones/10/rotation = Quaternion(0.699204, -0.0886561, -0.256873, 0.661264)
+bones/0/position = Vector3(0.0148057, -0.0211662, -0.00360938)
+bones/0/rotation = Quaternion(0.213332, 0.00958936, -0.0438686, 0.975947)
+bones/0/scale = Vector3(1.01617, 0.922617, 1.01617)
+bones/1/rotation = Quaternion(0.121207, 0.0184392, -0.154064, 0.980425)
+bones/1/scale = Vector3(0.994797, 1.06935, 0.990258)
+bones/2/rotation = Quaternion(-0.407875, 0.0139698, -0.329909, 0.851236)
+bones/3/rotation = Quaternion(0.972852, -0.193145, -0.0831061, 0.0966873)
+bones/3/scale = Vector3(1.00068, 1.06745, 0.986313)
+bones/4/rotation = Quaternion(-0.490833, 0.190998, -0.130046, 0.840054)
+bones/5/rotation = Quaternion(0.466655, 0.00978003, -0.020574, 0.884146)
+bones/6/rotation = Quaternion(0.648557, 0.0142718, -0.00635793, 0.761006)
+bones/7/rotation = Quaternion(0.964292, 0.252302, 0.0405533, 0.0695673)
+bones/7/scale = Vector3(1.01001, 1.0597, 0.985234)
+bones/8/rotation = Quaternion(-0.619072, -0.199268, 0.205394, 0.731338)
+bones/9/rotation = Quaternion(0.530914, -0.0367697, 0.0741081, 0.843378)
+bones/10/rotation = Quaternion(0.685662, -0.13037, -0.10774, 0.708)
 bones/12/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/13/position = Vector3(0.0680825, -0.135873, -0.663551)
+bones/13/position = Vector3(0.255781, -0.135873, -0.663551)
 bones/14/rotation = Quaternion(0, 0.707107, 0.707107, 0)
 
 [node name="AnimationTree" parent="Sid" index="2"]

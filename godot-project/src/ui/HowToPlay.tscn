@@ -1,0 +1,186 @@
+[gd_scene load_steps=18 format=3 uid="uid://kn5uocb5ixys"]
+
+[ext_resource type="Script" path="res://src/ui/HowToPlay.gd" id="1_g6lkv"]
+[ext_resource type="PackedScene" path="res://src/characters/sid/Sid.tscn" id="2_q3ncm"]
+[ext_resource type="PackedScene" uid="uid://ccinnq50c16ld" path="res://src/camera/CameraPivot.tscn" id="3_2vr7j"]
+[ext_resource type="PackedScene" uid="uid://ctiljlitp6e5e" path="res://src/characters/sid/weapons/Lightning/LightningPickup.tscn" id="4_cc2cl"]
+[ext_resource type="Theme" uid="uid://dbk3j1qhsqkdn" path="res://src/ui/ui_theme.tres" id="5_54d6v"]
+[ext_resource type="Texture2D" uid="uid://5rdmw7511t12" path="res://assets/ui/W_Key_Light.png" id="6_v571b"]
+[ext_resource type="Texture2D" uid="uid://eppu4f3022e2" path="res://assets/ui/A_Key_Light.png" id="7_oclxu"]
+[ext_resource type="Texture2D" uid="uid://dm6fon1gbb61r" path="res://assets/ui/S_Key_Light.png" id="8_i0mho"]
+[ext_resource type="Texture2D" uid="uid://bou2llmngmvqi" path="res://assets/ui/D_Key_Light.png" id="9_3p46l"]
+[ext_resource type="Texture2D" uid="uid://dljaqwwqe3jy7" path="res://assets/ui/Space_Key_Light.png" id="10_w5lbq"]
+[ext_resource type="Texture2D" uid="uid://dmj5ouc0fdnxd" path="res://assets/ui/Mouse_Left_Key_Light.png" id="11_qm7pm"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0lwho"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_l3cus"]
+ground_color = Color(0.278431, 0.301961, 0.113725, 1)
+
+[sub_resource type="Sky" id="Sky_ijkg2"]
+sky_material = SubResource("PhysicalSkyMaterial_l3cus")
+
+[sub_resource type="Environment" id="Environment_n3kq2"]
+background_mode = 1
+sky = SubResource("Sky_ijkg2")
+ambient_light_source = 2
+ambient_light_color = Color(0.294118, 0.203922, 0.152941, 1)
+ambient_light_energy = 2.0
+ssao_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b860f"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.145098, 0.145098, 0.145098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_v5wha"]
+material = SubResource("StandardMaterial3D_b860f")
+size = Vector2(10000, 10000)
+
+[node name="HowToPlayScene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0199926, 0, -0.136792)
+script = ExtResource("1_g6lkv")
+
+[node name="Sid" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("2_q3ncm")]
+camera = NodePath("../CameraPivot/Camera3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_0lwho")
+
+[node name="CameraPivot" parent="." instance=ExtResource("3_2vr7j")]
+transform = Transform3D(0.707107, 0.353553, -0.612372, 0, 0.866025, 0.5, 0.707107, -0.353553, 0.612372, 12.7072, -7.62939e-06, -45.5829)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573577, 7.15302, 1.36655, -1.01066)
+light_color = Color(0.960784, 0.941176, 0.847059, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n3kq2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_v5wha")
+
+[node name="LightningSeed" parent="." instance=ExtResource("4_cc2cl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95672, 0, 1.73084)
+
+[node name="TutorialText" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("5_54d6v")
+
+[node name="Label" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 569.0
+offset_top = 961.0
+offset_right = 734.0
+offset_bottom = 1028.0
+theme_override_font_sizes/font_size = 50
+text = "Move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 960.0
+offset_right = 1116.0
+offset_bottom = 1027.0
+theme_override_font_sizes/font_size = 50
+text = "Plant/Unplant
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="TutorialText"]
+layout_mode = 0
+offset_left = 1136.0
+offset_top = 963.0
+offset_right = 1420.0
+offset_bottom = 1030.0
+theme_override_font_sizes/font_size = 50
+text = "Shoot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="W" type="TextureRect" parent="TutorialText"]
+layout_mode = 2
+offset_left = 601.0
+offset_top = 776.0
+offset_right = 701.0
+offset_bottom = 876.0
+texture = ExtResource("6_v571b")
+
+[node name="A" type="TextureRect" parent="TutorialText"]
+layout_mode = 2
+offset_left = 531.0
+offset_top = 846.0
+offset_right = 631.0
+offset_bottom = 946.0
+texture = ExtResource("7_oclxu")
+
+[node name="S" type="TextureRect" parent="TutorialText"]
+layout_mode = 2
+offset_left = 601.0
+offset_top = 846.0
+offset_right = 701.0
+offset_bottom = 946.0
+texture = ExtResource("8_i0mho")
+
+[node name="D" type="TextureRect" parent="TutorialText"]
+layout_mode = 2
+offset_left = 669.0
+offset_top = 846.0
+offset_right = 769.0
+offset_bottom = 946.0
+texture = ExtResource("9_3p46l")
+
+[node name="PlantUnplant" type="TextureRect" parent="TutorialText"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 22.4
+anchor_top = 19.4
+anchor_right = 26.0
+anchor_bottom = 23.2
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_w5lbq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Shoot" type="TextureRect" parent="TutorialText"]
+layout_mode = 0
+offset_left = 1227.0
+offset_top = 796.0
+offset_right = 1327.0
+offset_bottom = 896.0
+texture = ExtResource("11_qm7pm")
+
+[node name="Button" type="Button" parent="TutorialText"]
+layout_mode = 2
+offset_left = 40.0
+offset_top = 967.0
+offset_right = 240.0
+offset_bottom = 1047.0
+text = "Go back"
+
+[node name="Button2" type="Button" parent="TutorialText"]
+layout_mode = 0
+offset_left = 1664.0
+offset_top = 960.0
+offset_right = 1864.0
+offset_bottom = 1040.0
+text = "Play"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialText"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="TutorialText/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="TutorialText/Button2" to="." method="_on_button_2_pressed"]

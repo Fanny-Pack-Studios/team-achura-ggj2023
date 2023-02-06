@@ -78,6 +78,22 @@ grow_vertical = 2
 size_flags_horizontal = 4
 text = "Play"
 
+[node name="HowToPlay" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 135.0
+offset_right = 152.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "How to play"
+
 [node name="ButtonCredits" type="Button" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
@@ -86,9 +102,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -148.0
-offset_top = 137.0
+offset_top = 244.0
 offset_right = 152.0
-offset_bottom = 217.0
+offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -96,4 +112,5 @@ text = "Credits
 "
 
 [connection signal="pressed" from="Control/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="Control/HowToPlay" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="Control/ButtonCredits" to="." method="_on_button_credits_pressed"]

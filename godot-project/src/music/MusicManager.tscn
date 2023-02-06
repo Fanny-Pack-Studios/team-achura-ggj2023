@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ibr1ug68gum0"]
+[gd_scene load_steps=6 format=3 uid="uid://ibr1ug68gum0"]
 
 [ext_resource type="AudioStream" uid="uid://3000ir7xrjtl" path="res://assets/audio/Music/Sid_music_120.wav" id="1_5gfno"]
 [ext_resource type="Script" path="res://src/music/MusicManager.gd" id="1_5i01w"]
 [ext_resource type="AudioStream" uid="uid://ck1v77o3bpskd" path="res://assets/audio/Music/Turret_music_120.wav" id="2_cgent"]
+[ext_resource type="AudioStream" uid="uid://bd4uid51t6626" path="res://assets/audio/Music/stinger_win.wav" id="4_yukmn"]
+[ext_resource type="AudioStream" uid="uid://bdhjsiti04tat" path="res://assets/audio/Music/stinger_defeat.wav" id="5_7430s"]
 
 [node name="MusicManager" type="Node"]
 script = ExtResource("1_5i01w")
@@ -16,3 +18,11 @@ bus = &"Music"
 stream = ExtResource("2_cgent")
 volume_db = -40.0
 bus = &"Music"
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yukmn")
+bus = &"Stingers"
+
+[node name="Defeat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7430s")
+bus = &"Stingers"

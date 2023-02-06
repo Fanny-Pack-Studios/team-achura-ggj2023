@@ -19,11 +19,14 @@ func _ready():
 func _physics_process(delta):
 	global_translate(direction * speed * delta)
 
-func explode():
+func add_explosion():
 	if ExplosionScene:
 		var explosion = ExplosionScene.instantiate()
 		explosion.transform = self.transform
 		get_parent().add_child(explosion)
+
+func explode():
+	add_explosion()
 	queue_free()
 	
 func impact_terrain(terrain_body):

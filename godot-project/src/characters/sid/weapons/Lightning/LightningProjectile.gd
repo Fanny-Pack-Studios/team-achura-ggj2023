@@ -31,6 +31,7 @@ func impact_damageable(damageable):
 		else:
 			var angle = randf_range(0, TAU)
 			direction = Vector3(cos(angle), 0, sin(angle))
+		add_explosion()
 	else:
 		explode()
 	

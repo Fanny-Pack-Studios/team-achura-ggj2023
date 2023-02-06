@@ -1,6 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://ot005o7ult6h"]
+[gd_scene load_steps=38 format=3]
 
-[ext_resource type="Script" path="res://src/characters/sid/SidController.gd" id="1_l1tjl"]
+[ext_resource type="Script" path="res://src/characters/sid/Sid.gd" id="1_l1tjl"]
 [ext_resource type="PackedScene" uid="uid://gtl1gkkdci18" path="res://src/characters/sid/SidAppearance.tscn" id="2_feyuo"]
 [ext_resource type="Script" path="res://src/characters/behaviours/AccelerationBehaviour.gd" id="3_4ta14"]
 [ext_resource type="Script" path="res://src/characters/sid/weapons/Turrets.gd" id="4_tvbpj"]

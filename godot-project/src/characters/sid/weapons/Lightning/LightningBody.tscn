@@ -110,3 +110,6 @@ amount = 20
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_wny45")
 draw_pass_1 = SubResource("QuadMesh_iv2tc")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0, 1, 1, 1)

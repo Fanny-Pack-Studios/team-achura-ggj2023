@@ -10,4 +10,5 @@ func play_random():
 	current = stream
 
 func stop():
-	current.stop()
+	if current:
+		current.stop()
